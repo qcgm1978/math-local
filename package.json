@@ -166,6 +166,7 @@
     "watch": "gulp watch",
     "docs": "gulp docs",
     "test": "node --inspect ./node_modules/jest/bin/jest.js --runInBand  --watch",
+    "mac": "sudo node --inspect node_modules/jest/bin/jest --runInBand  --watch",
     "jest": "npm i -S jest source-map-support ts-jest  typescript",
     "mocha": "mocha test --recursive",
     "coverage": "istanbul cover _mocha -- test --recursive; echo \"\nCoverage report is available at ./coverage/lcov-report/index.html\"",
