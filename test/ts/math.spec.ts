@@ -14,3 +14,6 @@ describe(`http://mathjs.org/docs/reference/functions/random.html`, () => {
 
     });
 });
+it(`The probability density of the normal distribution is`, () => {
+    // math.eval(`{\displaystyle f(x\mid \mu ,\sigma ^{2})={\frac {1}{\sqrt {2\pi \sigma ^{2}}}}e^{-{\frac {(x-\mu )^{2}}{2\sigma ^{2}}}}}`).toEqual()
+});
