@@ -90,43 +90,27 @@
     "matrix",
     "unit"
   ],
-  "watch": {
-    "test": {
-      "run_node": {
-        "patterns": [
-          "node/js/**/*.js"
-        ]
-      },
-      "js": {
-        "patterns": [
-          "jasmine-www/**/*.js",
-          "jasmine-tests/**/*.js"
-        ]
-      }
-    }
-  },
   "dependencies": {
     "complex.js": "2.0.4",
     "decimal.js": "9.0.1",
     "escape-latex": "1.0.0",
     "fraction.js": "4.0.4",
     "javascript-natural-sort": "0.7.1",
-    "jest": "^22.4.3",
     "seed-random": "2.2.0",
-    "source-map-support": "^0.5.4",
+    "source-map-support": "^0.5.9",
     "tiny-emitter": "2.0.2",
-    "ts-jest": "^22.4.4",
+    "ts-jest": "^22.4.6",
     "typed-function": "1.0.3",
-    "typescript": "^2.8.3"
+    "typescript": "^2.9.2"
   },
   "devDependencies": {
     "benchmark": "2.1.4",
     "expr-eval": "1.2.1",
     "glob": "7.1.2",
-    "gulp": "3.9.1",
+    "gulp": "^4.0.0",
     "gulp-util": "3.0.8",
     "istanbul": "0.4.5",
-    "jest": "^22.4.3",
+    "jest": "^22.4.4",
     "jsep": "0.3.3",
     "math-expression-evaluator": "1.2.17",
     "mkdirp": "0.5.1",
@@ -151,7 +135,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "test/.*.spec.ts",
+    "testRegex": "test/.*.spec.js",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -165,7 +149,7 @@
     "build": "gulp",
     "watch": "gulp watch",
     "docs": "gulp docs",
-    "test": "node --inspect ./node_modules/jest/bin/jest.js --runInBand  --watch",
+    "test": "node --inspect ./node_modules/jest/bin/jest.js --runInBand  --watch --env node",
     "mac": "sudo node --inspect node_modules/jest/bin/jest --runInBand  --watch",
     "jest": "npm i -S jest source-map-support ts-jest  typescript",
     "mocha": "mocha test --recursive",
