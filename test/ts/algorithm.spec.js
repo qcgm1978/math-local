@@ -1,3 +1,4 @@
+const math = require('../../dist/math.js');
 const obj = {
     "arr": [
         [
@@ -145,11 +146,37 @@ const trancingSudoku = (table) => {
     }, { arr: [], ind: 0 })
 }
 test('solve a puzzle by placing the digit "1" in the first cell ', () => {
-    expect(trancingSudoku(obj.arr)).toEqual({
-        arr: [[1]],
-        ind: 0
-    });
+    // expect(trancingSudoku(obj.arr)).toEqual({
+    //     arr: [[1]],
+    //     ind: 0
+    // });
 });
 test(`checking if it is allowed to be there`, () => {
-    const arr = trancingSudoku([['']]);
+    // const arr = trancingSudoku([['']]);
+})
+const setEquality = (x) => {
+    const arr = Array.from({ length: 9 }, (item, i) => i + 1);
+    const operators = ['+', '-', ''];
+    const arr1 = arr.reduce((accumulator, item, index) => {
+        const accum = operators.reduce((accum, it) => {
+            accum.push(it + item);
+            return accum;
+        }, []);
+        accumulator.push(accum)
+    }, [])
+    return arr1;
+}
+test(`在1 2 3 4 5 6 7 8 9=x等号左边的空格中填入+ -或者不填，使得等式成立。若不填则将连续若干个数看作一个数（如1 2 + 3 + 4 ... + 9中的1 2看作12）`, () => {
+    // expect(setEquality()).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9])
+});
+test(`https://www.maa.org/sites/default/files/pdf/cmj_ftp/CMJ/November%202010/5%20Capsules/1%20Richmond/10-027_Richmond.pdf`, () => {
+    var px = '5x^3+2x^2+7';
+    expect(math.eval(px.replace(/x/g, '*1'))).toBe(14);
+    expect(math.eval(px.replace(/x/g, '*14'))).toBe(14119);
+    expect((14119).toString(14)).toBe('5207');
+    expect(math.rationalize(px, {}, true).coefficients.reverse().join('')).toEqual('5207');
+    var px = '5x^3+2x^2+7';
+    const p1 = math.eval(px.replace(/x/g, '*1'));
+    const pa = math.eval(px.replace(/x/g, `*${p1}`));
+    expect((pa).toString(p1)).toBe(math.rationalize(px, {}, true).coefficients.reverse().join('')).toBe('5207')
 })
