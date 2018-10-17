@@ -179,4 +179,29 @@ test(`https://www.maa.org/sites/default/files/pdf/cmj_ftp/CMJ/November%202010/5%
     const p1 = math.eval(px.replace(/x/g, '*1'));
     const pa = math.eval(px.replace(/x/g, `*${p1}`));
     expect((pa).toString(p1)).toBe(math.rationalize(px, {}, true).coefficients.reverse().join('')).toBe('5207')
-})
+});
+describe(`BOSS Zhuo`, () => {
+    it(`no the max prime number`, () => {
+        const getPrimeNum = (num) => {
+            let arr = [];
+            for (let m = 2; m <= num; m++) {
+                let isPrime = true;
+                for (let i = 2; i <= math.floor(math.sqrt(m)); i++) {
+                    if (!(m % i)) {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                isPrime && arr.push(m);
+            }
+            return arr;
+        }
+        let primeNumArr = getPrimeNum(10);
+        expect(primeNumArr).toEqual([2, 3, 5, 7]);
+        const product = primeNumArr.reduce((a, b) => a * b, 1);
+        expect(product).toBe(210);
+        const maxPrimeNum = primeNumArr.pop()
+        const largerNum = product + 1;
+        expect(largerNum).toBeGreaterThan(maxPrimeNum)
+    });
+});

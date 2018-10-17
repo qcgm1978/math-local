@@ -133,6 +133,7 @@
   },
   "main": "./index",
   "jest": {
+    "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
