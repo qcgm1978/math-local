@@ -205,3 +205,45 @@ describe(`BOSS Zhuo`, () => {
         expect(largerNum).toBeGreaterThan(maxPrimeNum)
     });
 });
+describe(`Mathematical Reasoning`, () => {
+    const convertDecimal = (arr, base = 10) => {
+        return arr instanceof Array ? arr.reduce((a, b, index) => {
+            return a - '' + b * math.pow(base, (arr.length - index - 1))
+        }, 0) : +(arr).toString(base);
+    }
+    it(`The mathematical abstraction we make leads to the definition of base-b expansion.`, () => {
+
+        const d10 = 245;
+        expect(d10 + '').toBe('245');
+        expect('245'.split('')).toEqual(['2', '4', '5'])
+        const arr = ['2', '4', '5'];
+        const sumByBase = convertDecimal(arr)
+        expect(sumByBase).toBe(245);
+        const d2 = (d10).toString(2);
+        expect(d2).toBe("11110101");
+        const arr2 = "11110101".split('')
+        const sumByBaseBinary = convertDecimal(arr2, 2)
+        expect(sumByBaseBinary).toBe(245);
+        const d8 = (d10).toString(8);
+        expect(d8).toBe("365");
+        const arr8 = "365".split('')
+        const sumByBaseOctal = convertDecimal(arr8, 8)
+        expect(sumByBaseOctal).toBe(245)
+        expect(convertDecimal(['1', '0', '2', '3'])).toBe(1023)
+        expect(convertDecimal('1111111111'.split(''), 2)).toBe(1023);
+        expect(convertDecimal([28, 15], 36)).toBe(1023)
+    });
+    it(`1023 = 1111111111(2) = 1101220(3) = 1777(8) = 1023(10) = 3FF(16) = SF(36)`, () => {
+        const convertNumSystems = (num, base) => {
+            return parseInt(num, base)
+        }
+        const d10 = 1023, d2 = 1111111111, d3 = 1101220, d8 = 1777, d16 = '3FF', d36 = 'SF';
+        expect(convertDecimal(1023, 2)).toBe(d2);
+        expect(convertNumSystems(d2, 2))
+            .toBe(convertNumSystems(d3, 3))
+            .toBe(convertNumSystems(d8, 8))
+            .toBe(convertNumSystems(d16, 16))
+            .toBe(convertNumSystems(d36, 36))
+            .toBe(d10)
+    });
+});
