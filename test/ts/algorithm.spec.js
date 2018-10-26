@@ -205,12 +205,25 @@ describe(`BOSS Zhuo`, () => {
         expect(largerNum).toBeGreaterThan(maxPrimeNum)
     });
 });
-describe(`Mathematical Reasoning`, () => {
-    const convertDecimal = (arr, base = 10) => {
-        return arr instanceof Array ? arr.reduce((a, b, index) => {
-            return a - '' + b * math.pow(base, (arr.length - index - 1))
-        }, 0) : +(arr).toString(base);
+const convertDecimal = (arr, base = 10) => {
+    return arr instanceof Array ? arr.reduce((a, b, index) => {
+        return a - '' + b * math.pow(base, (arr.length - index - 1))
+    }, 0) : +(arr).toString(base);
+}
+const calKnuthNotation = expression => {
+    const arr = expression.split(/↑+/);
+    const arrowNum = /↑+/.exec(expression)[0].length;
+    let ret = 0;
+    if (arrowNum === 1) {
+        ret = math.pow(arr[0], arr[1])
+    } else if (arrowNum === 2) {
+        ret = math.pow(arr[0], calKnuthNotation(`${arr[0]}↑${arr[1]}`))
+    } else if (arrowNum === 3) {
+
     }
+    return ret;
+}
+describe(`Mathematical Reasoning`, () => {
     it(`The mathematical abstraction we make leads to the definition of base-b expansion.`, () => {
 
         const d10 = 245;
@@ -231,7 +244,13 @@ describe(`Mathematical Reasoning`, () => {
         expect(sumByBaseOctal).toBe(245)
         expect(convertDecimal(['1', '0', '2', '3'])).toBe(1023)
         expect(convertDecimal('1111111111'.split(''), 2)).toBe(1023);
-        expect(convertDecimal([28, 15], 36)).toBe(1023)
+        expect(convertDecimal([28, 15], 36)).toBe(1023);
+        expect(calKnuthNotation('2↑↑4')).toBe(65536)
+
+    });
+    it(`triple arrow is iterated tetration (pentation)`, () => {
+        // expect(calKnuthNotation('2↑↑↑3')).toBe(65536)
+
     });
     it(`1023 = 1111111111(2) = 1101220(3) = 1777(8) = 1023(10) = 3FF(16) = SF(36)`, () => {
         const convertNumSystems = (num, base) => {
@@ -246,4 +265,32 @@ describe(`Mathematical Reasoning`, () => {
             .toBe(convertNumSystems(d36, 36))
             .toBe(d10)
     });
+    it(`the harmonic series is diverging`, () => {
+        const str = new Array(9).fill('').reduce((accumulator, item, index) => {
+            return accumulator + ` + 1 / ${(index + 2)}`
+        }, 1)
+        const str1 = new Array(9).fill('').reduce((accumulator, item, index) => {
+            const pow = math.log(index + 2, 2)
+            return accumulator + ` + 1 / ${(pow === parseInt(pow && pow > 1) ? index : math.pow(2, math.ceil(pow)))}`
+        }, 1)
+        expect(str).toBe("1 + 1 / 2 + 1 / 3 + 1 / 4 + 1 / 5 + 1 / 6 + 1 / 7 + 1 / 8 + 1 / 9 + 1 / 10")
+        expect(math.log10(10)).toBe(1)
+        expect(math.log(8, 2)).toBe(3)
+        expect(str1).toBe("1 + 1 / 2 + 1 / 4 + 1 / 4 + 1 / 8 + 1 / 8 + 1 / 8 + 1 / 8 + 1 / 16 + 1 / 16")
+        expect((math.eval(str1) - 0).toFixed(2)).toBe('2.63')
+        expect((math.eval(str) - 0).toFixed(2) - 0).toBe(2.93).toBeGreaterThan((math.eval(str1) - 0))
+
+    });
+    it(`1-1/2+1/3-1/4+1/5-1/6+……=?`, () => {
+
+    });
+});
+
+describe(`A single arrow means exponentiation (iterated multiplication), more than one arrow means iterating the operation associated with one less arrow.`, () => {
+    it(`single arrow is iterated multiplication (exponentiation) `, () => {
+        expect(calKnuthNotation('2↑4')).toBe(16)
+    });
+
+});
+it(`double arrow is iterated exponentiation (tetration) `, () => {
 });
