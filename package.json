@@ -124,7 +124,7 @@
     "numericjs": "1.2.6",
     "pad-right": "0.2.2",
     "q": "1.5.1",
-    "sylvester": "0.0.21",
+    "sylvester": "^0.0.21",
     "tar": "4.4.0",
     "uglify-js": "3.3.11",
     "underscore": "1.8.3",
@@ -133,6 +133,7 @@
   },
   "main": "./index",
   "jest": {
+    "port": "9330",
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
     "transform": {
