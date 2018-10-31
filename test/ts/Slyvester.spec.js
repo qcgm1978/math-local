@@ -36,3 +36,32 @@ describe(`multiplication by a scalar λ →x, λ ∈ R is also a geometric vecto
             expect(v.multiply(k)).toEqual({ "elements": [60, 20, 90] })
         });
 });
+describe(`Matrix Addition and Multiplication`, () => {
+    const M = $M([
+        [8, 3, 9],
+        [2, 0, 7],
+        [1, 9, 3]
+    ]);
+    const M1 = $M([
+        [80, 3, 9],
+        [2, 0, 7],
+        [1, 9, 30]
+    ]);
+    const M2 = $M([
+        [80, 3, 9, 0],
+        [2, 0, 7, 0],
+        [1, 9, 30, 0]
+    ]);
+    describe(`The sum of two matrices A ∈ Rm×n , B ∈ Rm×n is defined as the element- wise sum`, () => {
+        it(`Matrix.create(elements) 0.1.0
+Creates and returns a new Matrix instance from the array elements. elements should be a nested array: the top level array is the rows, and each row is an array of elements.
+Instance variables: elements – a nested array containing the matrix’s elements `, () => {
+                expect(M.elements).toEqual([[8, 3, 9], [2, 0, 7], [1, 9, 3]])
+            });
+        it(`add(matrix) 0.1.0
+Returns the matrix sum of the receiver and matrix. Thus, A.add(B) is equivalent to A + B. Returns null if the matrices are different sizes.`, () => {
+                expect(M.add(M1).elements).toEqual([[88, 6, 18], [4, 0, 14], [2, 18, 33]])
+                expect(M.add(M2)).toBeNull()
+            });
+    })
+});
