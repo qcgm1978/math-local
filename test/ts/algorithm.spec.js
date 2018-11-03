@@ -145,6 +145,28 @@ const trancingSudoku = (table) => {
         return accumulator;
     }, { arr: [], ind: 0 })
 }
+test(`Secretary problem`, () => {
+    const getStart = (num) => {
+        const actual = num * probability
+        const ceil = math.ceil(actual)
+        return ceil === actual ? ceil + 1 : ceil
+    }
+    const probability = (1 / math.E).toFixed(3)
+    expect(probability * 100 + '%').toBe('36.8%')
+    let n = 3
+    let start = getStart(n)
+    expect(start).toBe(2)
+    n = 4
+    expect(getStart(n)).toBe(2)
+    n = 5
+    expect(getStart(n)).toBe(2)
+    n = 6
+    expect(getStart(n)).toBe(3)
+    n = 100
+    expect(getStart(n)).toBe(37)
+    n = 1000
+    expect(getStart(n)).toBe(369)
+})
 test('solve a puzzle by placing the digit "1" in the first cell ', () => {
     // expect(trancingSudoku(obj.arr)).toEqual({
     //     arr: [[1]],
