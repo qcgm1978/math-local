@@ -162,6 +162,8 @@ test(`Secretary problem`, () => {
     expect(getStart(n)).toBe(2)
     n = 6
     expect(getStart(n)).toBe(3)
+    n = 10
+    expect(getStart(n)).toBe(4)
     n = 100
     expect(getStart(n)).toBe(37)
     n = 1000
