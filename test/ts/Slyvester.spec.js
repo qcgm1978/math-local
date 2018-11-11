@@ -6,6 +6,7 @@ it(`there exist a series of shorthand functions for creating objects in Sylveste
     expect(Line.create).toBe($L)
     expect(Matrix.create).toBe($M)
     expect(Plane.create).toBe($P)
+
 });
 it(`By default, Sylvester.precision is set to 1e-6`, () => {
     expect(Sylvester.precision).toBe(1e-6)

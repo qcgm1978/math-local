@@ -153,7 +153,7 @@
     "build": "gulp",
     "watch": "gulp watch",
     "docs": "gulp docs",
-    "test": "node --inspect ./node_modules/jest/bin/jest.js --runInBand  --watch --env node",
+    "test": "node --inspect=127.0.0.1:7000 ./node_modules/jest/bin/jest.js --runInBand  --watch --env node",
     "mac": "sudo node --inspect node_modules/jest/bin/jest --runInBand  --watch",
     "jest": "npm i -S jest source-map-support ts-jest  typescript",
     "mocha": "mocha test --recursive",
