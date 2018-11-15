@@ -1,4 +1,28 @@
 const math = require('../../dist/math.js');
+it(`The RSA algorithm involves four steps: key generation, key distribution, encryption and decryption.`, () => {
+    const m = 2, e = 3, d = 4
+    const scope = { m, e, d }
+    const product = math.eval('(m^e)^d', scope)
+    expect(product).toBe(4096).toBe(Math.pow(Math.pow(m, e), d))
+    const minus = product - m
+    expect(minus).toBe(4094)
+    const n = 2
+    expect(minus % n).toBe(0)
+    const publicKey = { n, e }, message = m
+    const exponent = math.pow(message, publicKey.e)
+    expect(exponent).toBe(8)
+    const result = (product - message) / publicKey.n
+    expect(result).toBe(2047)
+    const decry = result * publicKey.n + message
+    expect(decry).toBe(product).toBe(4096)
+    expect(d).toBe(math.log(decry, exponent)).toBe(4)
+    const expon1 = Math.log(4096), expon2 = Math.log(8)
+    expect(Math.round(Math.pow(Math.E, expon1))).toBe(4096)
+    expect(Math.round(Math.pow(Math.E, expon2))).toBe(8)
+    const str = 'e^x/e^y', str1 = 'e^(x-y)', scopeExpon = { x: e, y: d, e: Math.E }
+    expect(math.eval(str, scopeExpon)).toBe(math.eval(str1, scopeExpon))
+    
+});
 const obj = {
     "arr": [
         [
