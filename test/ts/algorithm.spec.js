@@ -1,4 +1,43 @@
+const performance = require('perf_hooks').performance;
+const util = require('util');
+const debug = util.debuglog('performance');
 const math = require('../../dist/math.js');
+
+it(`the run-times of function1 as O(
+n^2), function2 as O(n) and function3 as O(1).`, () => {
+        foo1(10)
+        function foo1(n) {
+
+            performance.mark('Beginning sanity check');
+            let a = 0
+            for (i = 0; i < n; i += 1) {
+                for (j = 0; j < n; j += 1) {
+                    a += 1
+                }
+            }
+            performance.mark('Ending sanity checks');
+            performance.measure('Inputs validation', 'Beginning sanity check', 'Ending sanity checks');
+            const measurements = performance.getEntriesByType('measure');
+            measurements.forEach(measurement => {
+                // I'm going to make the logs colour-coded, in this case I'm using Green
+                debug('\x1b[32m%s\x1b[0m', measurement.name + ' ' + measurement.duration);
+            })
+            return a
+
+        }
+
+        function foo2(n) {
+            a = 0
+            for (i = 0; i < n; i += 1) {
+                a += n
+            }
+            return a
+        }
+
+        function foo3(n) {
+            return n * n
+        }
+    });
 it(`The RSA algorithm involves four steps: key generation, key distribution, encryption and decryption.`, () => {
     const m = 2, e = 3, d = 4
     const scope = { m, e, d }
@@ -21,7 +60,7 @@ it(`The RSA algorithm involves four steps: key generation, key distribution, enc
     expect(Math.round(Math.pow(Math.E, expon2))).toBe(8)
     const str = 'e^x/e^y', str1 = 'e^(x-y)', scopeExpon = { x: e, y: d, e: Math.E }
     expect(math.eval(str, scopeExpon)).toBe(math.eval(str1, scopeExpon))
-    
+
 });
 const obj = {
     "arr": [
