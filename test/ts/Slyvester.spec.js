@@ -1,5 +1,30 @@
 // http://sylvester.jcoglan.com/docs.html
 const { Vector, Matrix, Line, Plane, Sylvester } = require('Sylvester')
+const tf = require('@tensorflow/tfjs');
+
+it(`A transformation of an block using the matrix() function is done by multiplying the matrix with each of the corner-coordinates of the block which will give the corners of the new object when the transform-origin is set to 0 0`, () => {
+    const iniCoordinates = [[0, 0], [200, 0], [200, 80], [0, 80]]
+    const cssMatrix = 'matrix(0.9, -0.05, -0.375, 1.375, 220, 20)'
+    const cssNumber = /\((.+)\)/.exec(cssMatrix)[1].split(',').map(item => +item)
+    expect(cssNumber).toEqual([0.9, -0.05, -0.375, 1.375, 220, 20])
+    const matrixStyle = cssNumber.reduce((accumulator, item, index) => {
+        index % 2 ? accumulator[1].push(item) : accumulator[0].push(item)
+        return accumulator
+    }, [[], []])
+    const thirdLine = [0, 0, 1]
+    matrixStyle.push(thirdLine)
+    expect(matrixStyle).toEqual([[0.9, -0.375, 220], [-0.05, 1.375, 20], [0, 0, 1]])
+    const matrix = Matrix.create(matrixStyle)
+    expect(matrix.elements).toEqual(matrixStyle)
+    expect(matrix.dimensions()).toEqual({ rows: 3, cols: 3 })
+    const targetPos = iniCoordinates.map(item => {
+        const arr = Vector.create(item).transpose().elements
+        arr.push([1])
+        const vector = Vector.create(arr)
+        return matrix.x(vector).elements.slice(0, 2)
+    })
+    expect(targetPos).toEqual([[220, 20], [400, 10], [370, 120], [190, 130]])
+});
 it(`there exist a series of shorthand functions for creating objects in Sylvester`, () => {
     expect(Vector && Matrix && Line && Plane && $V && $M && $L && $P).toBeTruthy()
     expect(Vector.create).toBe($V)

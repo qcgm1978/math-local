@@ -2,10 +2,26 @@ const performance = require('perf_hooks').performance;
 const util = require('util');
 const debug = util.debuglog('performance');
 const math = require('../../dist/math.js');
-
+it(`method of completing the square`, () => {
+    const area = 55
+    const longMinusShort = 6
+    const truncatedSide = longMinusShort / 2
+    const areaCompleted = area + math.pow(longMinusShort - truncatedSide, 2)
+    expect(areaCompleted).toBe(64)
+    const shortSide = math.sqrt(areaCompleted) - truncatedSide;
+    const equation = 'area=shortSide*(shortSide+6)=shortSide^2+6*shortSide'
+    const equationGeneralForm = '1*shortSide^2+6*shortSide+(-area)=0'
+    const quadraticFormula = 'shortSide=(-b+sqrt(b*b-4*a*c))/2'
+    const scope = { a: 1, b: 6, c: -area }
+    math.eval(quadraticFormula, scope)
+    expect(shortSide).toBe(scope.shortSide).toBe(5)
+    const longSide = shortSide + longMinusShort
+    expect(longSide).toBe(11)
+    expect(longSide * shortSide).toBe(area)
+});
 it(`the run-times of function1 as O(
 n^2), function2 as O(n) and function3 as O(1).`, () => {
-        foo1(10)
+        // foo1(10)
         function foo1(n) {
 
             performance.mark('Beginning sanity check');
