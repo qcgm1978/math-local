@@ -1,4 +1,22 @@
-import * as math from 'mathjs'
+const math = require('mathjs')
+const isEqual = require('../../lib/expression/isEqual.js')
+it(`isEqual`, () => {
+    math.import({
+        isEqual
+    })
+    expect(math.isEqual).toBeInstanceOf(Function)
+    expect(math.isEqual('a^2+b^2c^2')).toBeFalsy()
+    expect(math.isEqual('a^2+b^2=c^2', {
+        a: 3,
+        b: 4,
+        c: 5
+    })).toBeTruthy()
+    expect(math.isEqual('a^2+b^2=c^2', {
+        a: 3,
+        b: 4,
+        c: 6
+    })).toBeFalsy()
+});
 describe(`https://en.wikipedia.org/wiki/Black-body_radiation`, () => {
     it(`{\displaystyle B_{\nu }(T)={\frac {2h\nu ^{3}}{c^{2}}}{\frac {1}{e^{\frac {h\nu }{kT}}-1}},}`, () => {
         expect(math.eval(`B_(T)=2*h*v ^3/c^2*1/(e^(h*v/(k*T))-1)`)).toEqual(expect.any(Function))
