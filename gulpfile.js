@@ -104,7 +104,6 @@ gulp.task('bundle-only', function (cb) {
     }
 
     gutil.log('bundled ' + MATH_JS);
-
     cb();
   });
 });
