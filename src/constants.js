@@ -62,6 +62,10 @@ function factory (type, config, load, typed, math) {
 
   // meta information
   setConstant(math, 'version', require('./version'))
+  const more = require('./constant-more')
+
+  setConstant(math, 'more', more.more)
+  setConstant(math, 'phy', more.phy)
 }
 
 // create a constant in both math and mathWithTransform

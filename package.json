@@ -117,6 +117,7 @@
     "@babel/plugin-transform-object-assign": "7.0.0",
     "@babel/preset-env": "7.1.0",
     "@babel/register": "7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "8.0.4",
     "benchmark": "2.1.4",
     "expr-eval": "1.2.2",
@@ -164,7 +165,24 @@
     "examples",
     "CONTRIBUTING.md"
   ],
+  "jest": {
+    "testURL": "http://localhost",
+    "setupTestFrameworkScriptFile": "jest-chain",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "test/.*.spec.(ts|js)",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "scripts": {
+    "jestD": "node --inspect=127.0.0.1:7010 ./node_modules/jest/bin/jest.js --runInBand --watch --env node",
     "build": "gulp",
     "build-and-test": "npm run build && npm run test:src && npm run test:dist && npm run lint",
     "compile": "gulp compile",
