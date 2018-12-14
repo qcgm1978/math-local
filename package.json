@@ -172,7 +172,7 @@
     "docs": "gulp docs",
     "lint": "standard --env=mocha --env=worker",
     "test": "npm run test:src && npm run lint",
-    "test:src": "mocha test test-node --recursive --require @babel/register",
+    "test:src": "mocha test test-node --watch --recursive --require @babel/register",
     "test:dist": "mocha test-dist --recursive",
     "test:browser": "karma start ./browser-test-config/local-karma.js",
     "test:browserstack": "karma start ./browser-test-config/browserstack-karma.js",
