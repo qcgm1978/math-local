@@ -2,15 +2,15 @@
 
 # Function qr
 
-Calculate the Matrix QR decomposition. Matrix `A` is decomposed in 
-two matrices (`Q`, `R`) where `Q` is an 
+Calculate the Matrix QR decomposition. Matrix `A` is decomposed in
+two matrices (`Q`, `R`) where `Q` is an
 orthogonal matrix and `R` is an upper triangular matrix.
 
 
 ## Syntax
 
 ```js
-math.qr(A);
+math.qr(A)
 ```
 
 ### Parameters
@@ -29,13 +29,13 @@ Type | Description
 ## Examples
 
 ```js
-var m = [
+const m = [
   [1, -1,  4],
   [1,  4, -2],
   [1,  4,  2],
   [1,  -1, 0]
-];
-var result = math.qr(m);
+]
+const result = math.qr(m)
 // r = {
 //   Q: [
 //     [0.5, -0.5,   0.5],
@@ -55,4 +55,5 @@ var result = math.qr(m);
 
 ## See also
 
-[lu](lu.md)
+[lup](lup.md),
+[lusolve](lusolve.md)

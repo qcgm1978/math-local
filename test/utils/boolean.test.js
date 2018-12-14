@@ -1,23 +1,16 @@
 // test boolean utils
-var assert = require('assert'),
-    approx = require('../../tools/approx'),
-    boolean = require('../../lib/utils/boolean');
+const assert = require('assert')
+const boolean = require('../../src/utils/boolean')
 
-describe ('boolean', function () {
-
-  it('isBoolean', function() {
-    assert.equal(boolean.isBoolean(true), true);
-    assert.equal(boolean.isBoolean(false), true);
-    assert.equal(boolean.isBoolean(Boolean(false)), true);
-    assert.equal(boolean.isBoolean('hi'), false);
-    assert.equal(boolean.isBoolean(23), false);
-    assert.equal(boolean.isBoolean([]), false);
-    assert.equal(boolean.isBoolean({}), false);
-    assert.equal(boolean.isBoolean(new Date()), false);
-
-    // we don't support non primitive Boolean anymore
-    assert.equal(boolean.isBoolean(new Boolean(true)), false);
-    assert.equal(boolean.isBoolean(new Boolean(false)), false);
-  });
-
-});
+describe('boolean', function () {
+  it('isBoolean', function () {
+    assert.strictEqual(boolean.isBoolean(true), true)
+    assert.strictEqual(boolean.isBoolean(false), true)
+    assert.strictEqual(boolean.isBoolean(Boolean(false)), true)
+    assert.strictEqual(boolean.isBoolean('hi'), false)
+    assert.strictEqual(boolean.isBoolean(23), false)
+    assert.strictEqual(boolean.isBoolean([]), false)
+    assert.strictEqual(boolean.isBoolean({}), false)
+    assert.strictEqual(boolean.isBoolean(new Date()), false)
+  })
+})

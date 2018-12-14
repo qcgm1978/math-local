@@ -1,5 +1,222 @@
 # History
 
+# 2018-10-30, version 5.2.3
+
+- Fixed #1293: non-unicode characters in `escape-latex` giving issues in some
+  specific cases. Thanks @dangmai.
+- Fixed incorrect LaTeX output of function `bitNot`, see #1299. Thanks @FSMaxB.
+- Fixed #1304: function `pow` not supporting inputs `pow(Unit, BigNumber)`.
+- Upgraded dependencies (`escape-latex@1.2.0`)
+
+# 2018-10-23, version 5.2.2
+
+- Fixed #1286: Fixed unit base recognition and formatting for
+  user-defined units. Thanks @ericman314.
+
+
+# 2018-10-18, version 5.2.1
+
+- Fixed unit `rod` being defined as `5.02921` instead of `5.0292`.
+  Thanks @ericman314.
+- Upgraded dependencies (`fraction.js@4.0.10`)
+- Upgraded devDependencies (`@babel/core@7.1.2`, `nyc@13.1.0`,
+  `webpack@4.21.0`).
+
+
+# 2018-10-05, version 5.2.0
+
+- Implemented support for chained conditionals like `10 < x <= 50`.
+  Thanks @ericman314.
+- Add an example showing a proof of concept of using `BigInt` in mathjs.
+- Fixed #1269: Bugfix for BigNumber divided by unit. Thanks @ericman314.
+- Fixed #1240: allow units having just a value and no unit.
+  Thanks @ericman314.
+
+
+## 2018-09-09, version 5.1.2
+
+- Fixed a typo in the docs of `parse`. Thanks @mathiasvr.
+- Fixed #1222: a typo in the docs of `subset`.
+- Fixed #1236: `quantileSeq` has inconsistent return.
+- Fixed #1237: norm sometimes returning a complex number instead of
+  number.
+- Upgraded dependencies (`fraction.js@4.0.9`)
+- Upgraded devDependencies (`babel@7`, `karma-webpack@3.0.4`,
+  `nyc@13.0.1`, `standard@12.0.0`, `uglify-js@3.4.9`, `webpack@4.17.2`)
+
+
+## 2018-08-21, version 5.1.1
+
+- Function `isNumeric` now recognizes more types.
+- Fixed #1214: functions `sqrt`, `max`, `min`, `var`, `std`, `mode`, `mad`,
+  `median`, and `partitionSelect` not neatly handling `NaN` inputs. In some
+  cases (`median`, `mad`, and `partitionSelect`) this resulted in an infinite
+  loop.
+- Upgraded dependencies (`escape-latex@1.1.1`)
+- Upgraded devDependencies (`webpack@4.17.0`)
+
+
+## 2018-08-12, version 5.1.0
+
+- Implemented support for strings enclosed in single quotes.
+  Thanks @jean-emmanuel.
+- Implemented function `getMatrixDataType`. Thanks @JasonShin.
+- Implemented new `options` argument in `simplify`. Thanks @paulobuchsbaum.
+- Bug fixes in `rationalize`, see #1173. Thanks @paulobuchsbaum.
+
+
+## 2018-07-22, version 5.0.4
+
+- Strongly improved the performance of functions `factorial` for numbers.
+  This improves performance of functions `gamma`, `permutation`, and
+  `combination` too. See #1170. Thanks @honeybar.
+- Strongly improved the performance of function `reshape`, thanks to a 
+  friend of @honeybar.
+
+
+## 2018-07-14, version 5.0.3
+
+- Fixed many functions (for example `add` and `subtract`) not working
+  with matrices having a `datatype` defined.
+- Fixed #1147: bug in `format` with `engineering` notation in outputting
+  the correct number of significant figures. Thanks @ericman314.
+- Fixed #1162: transform functions not being cleaned up when overriding
+  it by importing a factory function with the same name.
+- Fixed broken links in the documentation. Thanks @stropitek.
+- Refactored the code of `parse` into a functional approach.
+  Thanks @harrysarson.
+- Changed `decimal.js` import to ES6. Thanks @weinshel.
+
+
+## 2018-07-07, version 5.0.2
+
+- Fixed #1136: rocket trajectory example broken (since v4.0.0).
+- Fixed #1137: `simplify` unnecessarily replacing implicit multiplication with
+  explicit multiplication.
+- Fixed #1146: `rationalize` throwing exceptions for some input with decimals.
+  Thanks @maruta.
+- Fixed #1088: function arguments not being passed to `rawArgs` functions.
+- Fixed advanced example `add_new_datatypes`.
+- Fixed mathjs core constants not working without complex numbers.
+  Thanks @ChristopherChudzicki.
+- Fixed a broken link in the documentation on units. Thanks @stropitek.
+- Upgraded dependencies (`typed-function@1.0.4`, `complex.js@2.0.11`).
+- Upgraded devDependencies (`babel-loader@7.1.5 `, `uglify-js@3.4.3`,
+  `expr-eval@1.2.2`, `webpack@4.15.1`).
+
+
+## 2018-07-01, version 5.0.1
+
+- Improved error messaging when converting units. Thanks @gap777.
+- Upgraded devDependencies (`kerma`, `uglify-js`, `webpack`).
+
+
+## 2018-06-16, version 5.0.0
+
+!!! BE CAREFUL: BREAKING CHANGES !!!
+
+- Implemented complex conjugate transpose `math.ctranspose`. See #1097.
+  Thanks @jackschmidt.
+- Changed the behavior of `A'` (transpose) in the expression parser to
+  calculate the complex conjugate transpose. See #1097. Thanks @jackschmidt.
+- Added support for `complex({abs: 1, arg: 1})`, and improved the docs on
+  complex numbers. Thanks @ssaket.
+- Renamed `eye` to `identity`, see #1054.
+- Math.js code can now contain ES6. The ES6 source code is moved from `lib`
+  to `src`, and `lib` now contains the compiled ES5 code.
+- Upgraded dependencies:
+  - `decimal.js` from `9.0.1` to `10.0.1`
+  - Upgraded dev dependencies
+- Changed code style to https://standardjs.com/, run linter on `npm test`.
+  See #1110.
+- Dropped support for bower. Use npm or an other package manages instead.
+- Dropped support for (non-primitive) instances of `Number`, `Boolean`, and
+  `String` from functions `clone` and `typeof`.
+- Dropped official support for IE9 (probably still works, but it's not tested).
+- Fixed #851: More consistent behavior of sqrt, nthRoot, and pow.
+  Thanks @dakotablair.
+- Fixed #1103: Calling `toTex` on node that contains `derivative` causing
+  an exception. Thanks @joelhoover.
+
+
+## 2018-06-02, version 4.4.2
+
+- Drastically improved the performance of `det`. Thanks @ericman314.
+- Fixed #1065, #1121: Fixed wrong documentation of function
+  `compareNatural` and clarified the behavior for strings.
+- Fixed #1122 a regression in function `inv` (since `v4.4.1`).
+  Thanks @ericman314.
+
+
+## 2018-05-29, version 4.4.1
+
+- Fixed #1109: a bug in `inv` when dealing with values close to zero.
+  Thanks @ericman314.
+
+
+## 2018-05-28, version 4.4.0
+
+- Implemented functions `equalText` and `compareText`. See #1085.
+
+
+## 2018-05-21, version 4.3.0
+
+- Implemented matrix exponential `math.expm`. Thanks @ericman314.
+- Fixed #1101: math.js bundle not working when loading in a WebWorker.
+- Upgraded dependencies
+  - `complex.js` from `v2.0.2` to `v2.0.10`.
+  - `fraction.js` from `v4.0.4` to `v4.0.8`.
+- Upgraded devDependencies (`mocha`, `uglify-js`, `webpack`).
+
+
+## 2018-05-05, version 4.2.2
+
+- Fixed calculating the Frobenius norm of complex matrices correctly,
+  see #1098. Thanks @jackschmidt.
+- Fixed #1076: cannot use mathjs in React VR by updating to
+  `escape-latex@1.0.3`.
+
+
+## 2018-05-02, version 4.2.1
+
+- Fixed `dist/math.js` being minified.
+
+
+## 2018-05-02, version 4.2.0
+
+- Implemented function `math.sqrtm`. Thanks @ferrolho.
+- Implemented functions `math.log2`, `math.log1p`, and `math.expm1`.
+  Thanks @BigFav and @harrysarson.
+- Fixed some unit tests broken on nodejs v10.
+- Upgraded development dependencies.
+- Dropped integration testing on nodejs v4.
+
+
+## 2018-04-18, version 4.1.2
+
+- Fixed #1082: implemented support for unit plurals `decades`, `centuries`,
+  and `millennia`.
+- Fixed #1083: units `decade` and `watt` having a wrong name when stringifying.
+  Thanks @ericman314.
+
+
+## 2018-04-11, version 4.1.1
+
+- Fixed #1063: derivative not working when resolving a variable with unary
+  minus like `math.derivative('-x', 'x')`.
+
+
+## 2018-04-08, version 4.1.0
+
+- Extended function `math.print` with support for arrays and matrices.
+  Thanks @jean-emmanuel.
+- Fixed #1077: Serialization/deserialization to JSON with reviver not being
+  supported by nodes.
+- Fixed #1016: Extended `math.typeof` with support for `ResultSet` and nodes
+  like `SymbolNode`.
+- Fixed #1072: Added support for long and short prefixes for the unit `bar`
+  (i.e. `millibar` and `mbar`).
+
 
 ## 2018-03-17, version 4.0.1
 
@@ -119,7 +336,7 @@ Non breaking changes:
 
 - Upgraded to `typed-function@0.10.7` (bug-fix release).
 - Fixed option `implicit` not being copied from an `OperatorNode`
-  when applying function `map`. Thanks @HarraySarson.
+  when applying function `map`. Thanks @HarrySarson.
 - Fixed #995: spaces and underscores not property being escaped
   in `toTex()`. Thanks @FSMaxB.
 
