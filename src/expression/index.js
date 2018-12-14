@@ -9,5 +9,6 @@ module.exports = [
 
   require('./Help'),
   require('./parse'),
-  require('./Parser')
+  require('./Parser'),
+  require('./eval'),
 ]
