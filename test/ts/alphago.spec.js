@@ -9,5 +9,6 @@ it(`v \approx \mathbb { E } [ z | s ]`, () => {
     expect(String.fromCodePoint(172)).toBe("¬")
     expect(String.fromCodePoint(8776)).toBe("≈");
     const str = 'v \approx \mathbb { E } [ z | s ]';
-    expect(math.evalTex(str.replace('\\', '\\\\'))).toBe(1);
+    expect(math.evalTex(str)).toBe('v ≈ E [ z | s ]');
+    expect(math.evalTex('n \leq N')).toBe('n ≤ N');
 });
