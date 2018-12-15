@@ -182,14 +182,14 @@
     ]
   },
   "scripts": {
-    "jestD": "node --inspect=127.0.0.1:7010 ./node_modules/jest/bin/jest.js --runInBand --watch --env node",
+    "test": "node --inspect=127.0.0.1:7010 ./node_modules/jest/bin/jest.js --runInBand --watch --env node",
     "build": "gulp",
     "build-and-test": "npm run build && npm run test:src && npm run test:dist && npm run lint",
     "compile": "gulp compile",
     "watch": "gulp watch",
     "docs": "gulp docs",
     "lint": "standard --env=mocha --env=worker",
-    "test": "npm run test:src && npm run lint",
+    "mocha": "npm run test:src && npm run lint",
     "test:src": "mocha test test-node --watch --recursive --require @babel/register",
     "test:dist": "mocha test-dist --recursive",
     "test:browser": "karma start ./browser-test-config/local-karma.js",

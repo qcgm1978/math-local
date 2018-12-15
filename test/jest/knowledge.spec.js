@@ -1,4 +1,5 @@
 const math = require('../../dist/math.js');
+
 it(`JS doesn't have pointers.
 
 Objects are passed around by passing a copy of a reference. The programmer cannot access any C-like "value" representing the address of an object.
