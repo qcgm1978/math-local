@@ -1,4 +1,10 @@
 const _ = require('lodash')
+it(`2 ways to repeat strings in JavaScript 🎉`, () => {
+    expect('🎉'.repeat(3)).toBe(Array(3).fill('🎉').join('')).toBe('🎉🎉🎉')
+});
+it(`Why can’t programmers tell the difference between Halloween & Christmas?`, () => {
+    expect(parseInt(31, 8)).toBe(parseInt(25, 10)).toBe(25)
+});
 describe(`5 Tips to Write Better Conditionals in JavaScript`, () => {
 
     it('1. Use Array.includes for Multiple Criteria', () => {
