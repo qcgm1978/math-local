@@ -1,4 +1,27 @@
 const _ = require('lodash')
+it(`Use the || operator to set a default value. Remember 0 is a falsy value. So the default value will kick in when it gets to 0.`, () => {
+    const generator = function* gen() {
+        var i = 3
+        while (true) {
+            yield i--
+        }
+    }
+    const generator1 = generator()
+    for (let time = 3; time >= 0; --time) {
+        expect(time).toBe(generator1.next().value)
+        if (time === 0) {
+            expect(time).toBeFalsy()
+        }
+    }
+});
+it(`4 ways to combine strings in JavaScript 🤩`, () => {
+    const h = 'hello', s = '🤩'
+    expect(h + ' ' + s)
+        .toBe('hello 🤩')
+        .toBe(`${h} ${s}`)
+        .toBe(h.concat(' ').concat(s))
+        .toBe([h, s].join(' '))
+});
 it(`2 ways to repeat strings in JavaScript 🎉`, () => {
     expect('🎉'.repeat(3)).toBe(Array(3).fill('🎉').join('')).toBe('🎉🎉🎉')
 });
