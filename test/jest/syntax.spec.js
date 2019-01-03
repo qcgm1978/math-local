@@ -1,4 +1,21 @@
 const _ = require('lodash')
+it(`Tip: Get the unique values of an array in JavaScript.`, () => {
+    const arr = ['Dan', 'Sarah', 'Sophie', 'Sarah']
+    const uniqueArray = arr => [...new Set(arr)]
+    const uniqueArray2 = arr => Array.from(new Set(arr))
+    const seen = new Set()
+    const uniqueArray3 = arr => arr.filter(x => {
+        if (seen.has(x)) {
+            return false;
+        }
+        seen.add(x)
+        return true
+    })
+    expect(uniqueArray(arr))
+        .toEqual(uniqueArray2(arr))
+        .toEqual(uniqueArray3(arr))
+        .toEqual(['Dan', 'Sarah', 'Sophie'])
+});
 it(`Use the || operator to set a default value. Remember 0 is a falsy value. So the default value will kick in when it gets to 0.`, () => {
     const generator = function* gen() {
         var i = 3
