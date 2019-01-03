@@ -182,6 +182,7 @@
     ]
   },
   "scripts": {
+    "crawler": "nodemon --inspect test/jest/image-crawler.js",
     "test": "node --inspect=127.0.0.1:7010 ./node_modules/jest/bin/jest.js --runInBand --watch --env node",
     "build": "gulp",
     "build-and-test": "npm run build && npm run test:src && npm run test:dist && npm run lint",
