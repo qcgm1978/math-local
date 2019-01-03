@@ -1,8 +1,8 @@
 var getImageUrls = require('get-image-urls');
 var fs = require('fs');
 request = require('request');
-
-var download = async function ({ uri, filename, callback, path }) {
+const { removeDirForce } = require('./recursiveRemoveFiles')
+var download = ({ uri, filename, callback, path }) => {
     return new Promise((resolve, reject) => {
 
         request.head(uri, function (err, res, body) {
@@ -25,14 +25,15 @@ var download = async function ({ uri, filename, callback, path }) {
 
 
 const getImages = () => {
-    getImageUrls('https://www.ximalaya.com/my/subscribed', function (err, images) {
-        debugger
+    getImageUrls('https://pic.sogou.com/pics?ie=utf8&p=40230504&interV=kKIOkrELjboMmLkElbkTkKIKmbELjbgMmLkEk7sTkKIMkrELjboImLkEkL8TkKIRmLkEk78TkKILkY==_1326368174&query=%E5%AD%A6%E8%80%85&', function (err, images) {
         if (!err) {
             console.log('Images found', images.length);
             // console.log(images);
             const title = 'image-crawler'
             const dir = `/Users/qcgm1978/Movies/bilibili/${title}`
-            if (!fs.existsSync(dir)) {
+            if (fs.existsSync(dir)) {
+                removeDirForce(dir)
+            } else {
                 fs.mkdirSync(dir);
             }
             fs.writeFile(`${dir}/img`, JSON.stringify(images), function (err) {
