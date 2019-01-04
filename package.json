@@ -109,6 +109,7 @@
     "fraction.js": "4.0.10",
     "javascript-natural-sort": "0.7.1",
     "mathjs": "^5.4.0",
+    "mockjs": "https://github.com/qcgm1978/Mock.git",
     "seed-random": "2.2.0",
     "tiny-emitter": "2.0.2",
     "typed-function": "1.1.0"
