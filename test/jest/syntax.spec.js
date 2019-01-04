@@ -1,4 +1,15 @@
 const _ = require('lodash')
+it(`Using an inline function that modifies the matched characters`,()=>{
+    function styleHyphenFormat(propertyName) {
+        function upperToHyphenLower(match, offset, string) {
+            return (offset > 0 ? '-' : '') + match.toLowerCase();
+        }
+        return propertyName.replace(/[A-Z]/g, upperToHyphenLower);
+    }
+    expect(styleHyphenFormat('borderTop')).toBe('border-top')
+    expect(styleHyphenFormat('borderTop: Fifteen')).toBe('border-top: -fifteen')
+    expect(styleHyphenFormat('BorderTop: Fifteen')).toBe('border-top: -fifteen')
+});
 it(`The Set object lets you store unique values of any type, whether primitive values or object references.`, () => {
     const set1 = new Set([1, 2, 3, 4, 5]);
 
