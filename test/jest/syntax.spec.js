@@ -1,4 +1,64 @@
 const _ = require('lodash')
+it(`The Set object lets you store unique values of any type, whether primitive values or object references.`, () => {
+    const set1 = new Set([1, 2, 3, 4, 5]);
+
+    expect(set1.has(1)).toBeTruthy()
+    // expected output: true
+
+    expect(set1.has(5)).toBeTruthy()
+    // expected output: true
+
+    expect(set1.has(6)).not.toBeTruthy()
+    var mySet = new Set();
+
+    mySet.add(1); // Set [ 1 ]
+    mySet.add(5); // Set [ 1, 5 ]
+    mySet.add(5); // Set [ 1, 5 ]
+    mySet.add('some text'); // Set [ 1, 5, 'some text' ]
+    expect(mySet).toEqual(new Set([1, 5, "some text"]))
+    var o = { a: 1, b: 2 };
+    mySet.add(o);
+
+    mySet.add({ a: 1, b: 2 }); // o is referencing a different object so this is okay
+
+    expect(mySet.has(1)).toBeTruthy() // true
+    expect(mySet.has(3)).toBe(false); // false, 3 has not been added to the set
+    expect(mySet.has(5)).toBe(true);              // true
+    expect(mySet.has(Math.sqrt(25))).toBeTruthy();  // true
+    expect(mySet.has('Some Text'.toLowerCase())).toBeTruthy(); // true
+    expect(mySet.has(o)).toBe(true); // true
+
+    expect(mySet.size).toBe(5); // 5
+
+    mySet.delete(5); // removes 5 from the set
+    expect(mySet.has(5)).toBe(false);    // false, 5 has been removed
+
+    expect(mySet.size).toBe(4); // 4, we just removed one value
+    expect(mySet).toEqual(new Set([1, 'some text', { a: 1, b: 2 }, { a: 1, b: 2 },])).not.toEqual(new Set(['some text', 1, { a: 1, b: 2 }, { a: 1, b: 2 },]))
+});
+it(`Relation with Array objects`, () => {
+    var myArray = ['value1', 'value2', 'value3'];
+
+    // Use the regular Set constructor to transform an Array into a Set
+    var mySet = new Set(myArray);
+
+    expect(mySet.has('value1')).toBeTruthy() // returns true
+
+    // Use the spread operator to transform a set into an Array.
+    expect([...mySet]).toEqual(['value1', 'value2', 'value3'])
+});
+it(`Set Relation with Strings`, () => {
+    const text = 'India';
+
+    var mySet = new Set(text);
+    expect(mySet).toEqual(new Set(['I', 'n', 'd', 'i', 'a']))
+    expect(mySet.size).toBe(5)
+});
+it(`Remove duplicate elements from the array`, () => {
+    const numbers = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5]
+
+    expect(([...new Set(numbers)])).toEqual([2, 3, 4, 5, 6, 7, 32])
+});
 it(`Tip: Get the unique values of an array in JavaScript.`, () => {
     const arr = ['Dan', 'Sarah', 'Sophie', 'Sarah']
     const uniqueArray = arr => [...new Set(arr)]
