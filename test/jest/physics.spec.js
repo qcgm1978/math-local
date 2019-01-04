@@ -1,4 +1,12 @@
 const math = require('../../dist/math')
+it(`The surface area of a sphere of radius r is:
+
+{\displaystyle A=4\pi r^{2}.} A=4\pi r^{2}.`, () => {
+        // expect(math.isEqual('A=4*math.PI*r^2', {
+        //     r: 1,
+        //     A: 12.56
+        // })).toBeTruthy()
+    });
 it(`Math.js contains the following constants.`, () => {
     var names = []
     for (let i in math) {

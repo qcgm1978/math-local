@@ -211,6 +211,6 @@ const constant = {
     NOT_A_NUMBER: NaN,
 }
 module.exports = {
-    more : constant,
-phy :gls_const
+    more: constant,
+    phy: gls_const
 }

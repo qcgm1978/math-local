@@ -27,6 +27,11 @@ it(`isEqual`, () => {
         b: 4,
         c: 6
     })).toBeFalsy()
+    expect(math.isEqual('A=4*math.PI*r^2', {
+        r: 1,
+        A: 12.57,
+        precision:2
+    })).toBeTruthy()
 });
 describe(`https://en.wikipedia.org/wiki/Black-body_radiation`, () => {
     it(`{\displaystyle B_{\nu }(T)={\frac {2h\nu ^{3}}{c^{2}}}{\frac {1}{e^{\frac {h\nu }{kT}}-1}},}`, () => {
