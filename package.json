@@ -123,11 +123,15 @@
     "babel-loader": "8.0.4",
     "benchmark": "2.1.4",
     "expr-eval": "1.2.2",
+    "express": "^4.16.4",
     "glob": "7.1.3",
     "gulp": "3.9.1",
     "gulp-babel": "8.0.0",
     "gulp-util": "3.0.8",
     "istanbul": "0.4.5",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "jest-puppeteer": "^3.7.0",
     "jsep": "0.3.4",
     "karma": "3.1.1",
     "karma-browserstack-launcher": "1.3.0",
@@ -146,6 +150,7 @@
     "numericjs": "1.2.6",
     "nyc": "13.1.0",
     "pad-right": "0.2.2",
+    "puppeteer": "^1.11.0",
     "q": "1.5.1",
     "standard": "12.0.1",
     "sylvester": "0.0.21",
@@ -153,6 +158,7 @@
     "uglify-js": "3.4.9",
     "underscore": "1.9.1",
     "webpack": "4.23.1",
+    "webpack-dev-middleware": "^3.5.0",
     "zeros": "1.0.0"
   },
   "main": "./index",
@@ -168,6 +174,10 @@
     "CONTRIBUTING.md"
   ],
   "jest": {
+    "preset": "jest-puppeteer",
+    "globals": {
+      "PATH": "http://localhost:4444"
+    },
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
     "transform": {
@@ -184,8 +194,9 @@
     ]
   },
   "scripts": {
+    "serve": "node test/server.js",
     "crawler": "nodemon  --inspect test/jest/image-crawler.js",
-    "test": "node --inspect=127.0.0.1:7010 ./node_modules/jest/bin/jest.js --runInBand --watch --env node",
+    "test": "jest --watch",
     "build": "gulp",
     "build-and-test": "npm run build && npm run test:src && npm run test:dist && npm run lint",
     "compile": "gulp compile",
