@@ -3,18 +3,12 @@ describe('foo', () => {
     beforeAll(async () => {
         await page.goto(PATH, { waitUntil: 'load' })
     })
-    // test('should return bar', async () => {
-    //     const foo = await page.evaluate(() => {
-    //         console.log('foo');
-    //         return foo();
-    //     })
-    //     expect(foo).toBe('bar')
-    // })
     test(`The URL.createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter. The URL lifetime is tied to the document in the window on which it was created. The new object URL represents the specified File object or Blob object.   `, async () => {
         const foo = await page.evaluate(() => {
             return URL
         })
         expect(foo.createObjectURL).toBeDefined()
+        expect(_ => foo.createObjectURL('../../img/mathjs.png')).toThrow()
         // expect(URL.createObjectURL).toBeInstanceOf(Function)
     });
 })
