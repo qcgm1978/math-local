@@ -108,6 +108,8 @@
     "escape-latex": "1.2.0",
     "fraction.js": "4.0.10",
     "javascript-natural-sort": "0.7.1",
+    "mathjs": "^5.4.0",
+    "mockjs": "^0.1.11",
     "seed-random": "2.2.0",
     "tiny-emitter": "2.0.2",
     "typed-function": "1.1.0"
@@ -117,6 +119,7 @@
     "@babel/plugin-transform-object-assign": "7.0.0",
     "@babel/preset-env": "7.1.0",
     "@babel/register": "7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "8.0.4",
     "benchmark": "2.1.4",
     "expr-eval": "1.2.2",
@@ -164,15 +167,33 @@
     "examples",
     "CONTRIBUTING.md"
   ],
+  "jest": {
+    "testURL": "http://localhost",
+    "setupTestFrameworkScriptFile": "jest-chain",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "test/.*.spec.(ts|js)",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "scripts": {
+    "crawler": "nodemon  --inspect test/jest/image-crawler.js",
+    "test": "node --inspect=127.0.0.1:7010 ./node_modules/jest/bin/jest.js --runInBand --watch --env node",
     "build": "gulp",
     "build-and-test": "npm run build && npm run test:src && npm run test:dist && npm run lint",
     "compile": "gulp compile",
     "watch": "gulp watch",
     "docs": "gulp docs",
     "lint": "standard --env=mocha --env=worker",
-    "test": "npm run test:src && npm run lint",
-    "test:src": "mocha test test-node --recursive --require @babel/register",
+    "mocha": "npm run test:src && npm run lint",
+    "test:src": "mocha test test-node --watch --recursive --require @babel/register",
     "test:dist": "mocha test-dist --recursive",
     "test:browser": "karma start ./browser-test-config/local-karma.js",
     "test:browserstack": "karma start ./browser-test-config/browserstack-karma.js",
