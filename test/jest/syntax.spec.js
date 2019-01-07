@@ -1,16 +1,52 @@
 const _ = require('lodash')
+it(`A higher order function is a function that takes another function as a parameter.`, () => {
+    const uppercaseNames = ['milu', 'rantanplan'].map(name => name.toUpperCase())
+    expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN'])
+    const filteredNames = ['milu', 'rantanplan'].filter(name => name.length === 4)
+    expect(filteredNames).toEqual(['milu'])
+    let sumOfLengths = 0
+    for (let name of ['milu', 'rantanplan']) {
+        sumOfLengths += name.length
+    }
+    expect(sumOfLengths)
+        .toBe(['milu', 'rantanplan'].reduce((accumulator, item) => item.length + accumulator, 0))
+        .toBe(['milu', 'rantanplan'].map(item => item.length).reduce((acc, item) => acc + item))
+        .toBe(14)
+    expect(['milu', 'rantanplan'].reduce((accumulator, item) => {
+        accumulator.totalLength += item.length
+        accumulator.arr.push(accumulator.totalLength)
+        return accumulator
+    }, {
+            totalLength: 0,
+            arr: [0]
+        }).arr).toEqual([0, 4, 14])
+    const items = ['functional', 'programming', 'rules']
+
+    const process = item => item.length
+
+    let hash = {}
+    for (let item of items) {
+        hash[item] = process(item)
+    }
+    expect(hash)
+        .toEqual(['functional', 'programming', 'rules'].reduce((acc, item) => ({
+            ...acc,
+            [item]: item.length
+        }), {}))
+        .toEqual({ functional: 10, programming: 11, rules: 5 })
+});
 describe('foo', () => {
-    beforeAll(async () => {
-        await page.goto(PATH, { waitUntil: 'load' })
-    })
-    test(`The URL.createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter. The URL lifetime is tied to the document in the window on which it was created. The new object URL represents the specified File object or Blob object.   `, async () => {
-        const foo = await page.evaluate(() => {
-            return URL
-        })
-        expect(foo.createObjectURL).toBeDefined()
-        expect(_ => foo.createObjectURL('../../img/mathjs.png')).toThrow()
-        // expect(URL.createObjectURL).toBeInstanceOf(Function)
-    });
+    // beforeAll(async () => {
+    //     await page.goto(PATH, { waitUntil: 'load' })
+    // })
+    // test(`The URL.createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter. The URL lifetime is tied to the document in the window on which it was created. The new object URL represents the specified File object or Blob object.   `, async () => {
+    //     const foo = await page.evaluate(() => {
+    //         return URL
+    //     })
+    //     expect(foo.createObjectURL).toBeDefined()
+    //     expect(_ => foo.createObjectURL('../../img/mathjs.png')).toThrow()
+    //     // expect(URL.createObjectURL).toBeInstanceOf(Function)
+    // });
 })
 
 it(`Tip: Get the unique values of an array in JavaScript.`, () => {
