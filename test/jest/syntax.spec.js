@@ -4,7 +4,7 @@ it(`A higher order function is a function that takes another function as a param
     expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN'])
     const filteredNames = ['milu', 'rantanplan'].filter(name => name.length === 4)
     expect(filteredNames).toEqual(['milu'])
-    let sumOfLengths = 0
+    let sumOfLengths = 0;
     for (let name of ['milu', 'rantanplan']) {
         sumOfLengths += name.length
     }
