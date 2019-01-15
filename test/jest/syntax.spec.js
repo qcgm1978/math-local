@@ -61,9 +61,13 @@ it(`Tip: Get the unique values of an array in JavaScript.`, () => {
         seen.add(x)
         return true
     })
+    const uniqueArray4 = arr => Array.from(arr.reduce((seen, x) =>
+        seen.has(x) ? seen : seen.add(x)
+        , new Set()))
     expect(uniqueArray(arr))
         .toEqual(uniqueArray2(arr))
         .toEqual(uniqueArray3(arr))
+        .toEqual(uniqueArray4(arr))
         .toEqual(['Dan', 'Sarah', 'Sophie'])
 });
 it(`Use the || operator to set a default value. Remember 0 is a falsy value. So the default value will kick in when it gets to 0.`, () => {
