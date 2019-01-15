@@ -1,4 +1,27 @@
 const _ = require('lodash')
+const generateNewMatches = require('./matchers')
+generateNewMatches()
+test('numeric ranges', () => {
+    expect(100).toBeWithinRange(90, 110);
+    expect(101).not.toBeWithinRange(0, 100);
+    expect({ apples: 6, bananas: 3 }).toEqual({
+        apples: expect.toBeWithinRange(1, 10),
+        bananas: expect.not.toBeWithinRange(11, 20),
+    });
+})
+it(`The add() method appends a new element with a specified value to the end of a Set object.`, () => {
+    const set1 = new Set();
+
+    set1.add(42);
+    set1.add(42);
+    set1.add(13);
+
+    for (let item of set1) {
+        expect(item).toBelongTo([42, 13])
+        // expected output: 42
+        // expected output: 13
+    }
+});
 it(`A higher order function is a function that takes another function as a parameter.`, () => {
     const uppercaseNames = ['milu', 'rantanplan'].map(name => name.toUpperCase())
     expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN'])
@@ -64,10 +87,14 @@ it(`Tip: Get the unique values of an array in JavaScript.`, () => {
     const uniqueArray4 = arr => Array.from(arr.reduce((seen, x) =>
         seen.has(x) ? seen : seen.add(x)
         , new Set()))
+    const uniqueArray5 = arr => Array.from(arr.reduce((seen, x) =>
+        seen.includes(x) ? seen : seen.concat([x])
+        , []))
     expect(uniqueArray(arr))
         .toEqual(uniqueArray2(arr))
         .toEqual(uniqueArray3(arr))
         .toEqual(uniqueArray4(arr))
+        .toEqual(uniqueArray5(arr))
         .toEqual(['Dan', 'Sarah', 'Sophie'])
 });
 it(`Use the || operator to set a default value. Remember 0 is a falsy value. So the default value will kick in when it gets to 0.`, () => {
