@@ -1,6 +1,134 @@
 const _ = require('lodash')
 const generateNewMatches = require('./matchers')
 generateNewMatches()
+const jsPointer = require('js-pointer');
+describe(`pointer`, () => {
+    it(`Within a function, one may change the contents of a passed object via that reference, but you cannot modify the reference that the caller had because your reference is only a copy`, () => {
+        var foo = { 'bar': 1 };
+
+        function tryToMungeReference(obj) {
+            obj = { 'bar': 2 };  // won't change caller's object
+        }
+
+        function mungeContents(obj) {
+            obj.bar = 2;       // changes _contents_ of caller's object
+        }
+
+        tryToMungeReference(foo);
+        expect(foo.bar).toBe(1)   // true - foo still references original object
+
+        mungeContents(foo);
+        expect(foo.bar).toBe(2)  // true - object referenced by foo has been modified
+        let obj = { bar: { a: 1 }, }
+        mungeContents(obj)
+        expect(obj.bar).toBe(2)
+        const changeObj = obj => {
+            obj.a = { a: 'a' }
+        }
+        let a = { a: { a: 1 } }
+        changeObj(a)
+        expect(a).toEqual({ a: { a: 'a' } })
+    });
+    it(` objects are pointers.`, () => {
+
+        const object2 = { a: 2 }
+        //this will make object1 point to the memory location that object2 is pointing at
+        const object1 = object2;
+        expect(object1).not.toBe({ ...object2 })
+        //this will make object2 point to the memory location that object1 is pointing at 
+        const myfunc = (object2) => object2
+        const myfunc2 = (object2) => ({ ...object2 })
+        expect(myfunc(object1)).toEqual(myfunc2(object1)).not.toBe(myfunc2(object1)).toBe(object1).toBe(object2)
+    });
+    it(`spec compliant implementation of the JSON Pointer`, () => {
+
+        let object = { one: { two: 3 } }
+        object1 = { one: { two: 3 } }
+        expect(jsPointer.get(object, '/one/two')).toBe(3)
+        expect(object).toEqual({ one: { two: 3 } }).not.toBe({ one: { two: 3 } }).not.toBe(object1)
+        object = { one: { two: [3] } }
+        expect(jsPointer.get(object, '/one/two/0')).toBe(3)
+        object = { one: { two: [{ three: 4 }] } }
+        expect(jsPointer.get(object, '/one/two/0/three')).toBe(4)
+    })
+    it(`    Since the only thing you're using the pointer for is to dereference it to access another variable, you can just encapsulate it in a property.`, () => {
+
+        function createPointer(read, write) {
+            return { get value() { return read(); }, set value(v) { return write(v); } };
+        }
+        // To create a pointer, pass the accessor methods which read and write the variable being pointed to.
+
+        var i;
+        var p = createPointer(function () { return i; }, function (v) { i = v; });
+        // p is now a "pointer" to i
+        // To dereference a pointer, access its value.In other words, where in C you would write * p here you write p.value.
+
+        i = "initial";
+        expect(p.value).toBe('initial'); // alerts "initial"
+        p.value = "update";
+        expect(i).toBe('update'); // alerts "update"
+        p.value += "2";
+        expect(i).toBe('update2'); // alerts "update2"
+        // You can create multiple pointers to the same variable.
+
+        var q = createPointer(function () { return i; }, function (v) { i = v; });
+        // q is also a "pointer" to i
+        expect(q.value).toBe('update2'); // alerts "update2"
+        q.value = "written from q";
+        expect(p.value).toBe("written from q"); // alerts "written from q"
+        // You can change what a pointer points to by simply overwriting the pointer variable with another pointer.
+
+        var j = "other";
+        q = createPointer(function () { return j; }, function (v) { j = v; });
+        // q is now a "pointer" to j
+        // You can swap two variables through pointers.
+
+        function swap(x, y) {
+            var t = x.value;
+            x.value = y.value;
+            y.value = t;
+        }
+        // Let's swap the values of i and j by using their pointers.
+
+        swap(p, q);
+        expect(i).toBe('other'); // alerts "other"
+        expect(j).toBe("written from q"); // alerts 
+        // You can create pointers to local variables.
+
+        function example() {
+            var myVar = "myVar as local variable from example";
+            var r = createPointer(function () { return myVar; }, function (v) { myVar = v; });
+            swap(p, r);
+            expect(i).toBe("myVar as local variable from example"); // alerts "myVar as local variable from example"
+            expect(myVar).toBe('other'); // alerts "other"
+        }
+        example();
+        // Through the magic of closures, this gives you a way to simulate malloc.
+
+        function malloc() {
+            var i;
+            return createPointer(function () { return i; }, function (v) { i = v; });
+        }
+        var p = malloc(); // p points to a variable we just allocated from the heap
+        p.value = 2; // write a 2 into it
+        // Your magic trick works too:
+
+        var flowers = new Misdirection(
+            createPointer(function () { return flowers; }, function (v) { flowers = v; }));
+        flowers.abracadabra();
+        expect(flowers + '').toBe("Eh... what's up doc?");
+
+        function Misdirection(flowers) {
+            this.abracadabra = function () {
+                flowers.value = new Rabbit;
+            };
+        }
+
+        function Rabbit() {
+            this.toString = function () { return "Eh... what's up doc?" };
+        }
+    });
+})
 test('numeric ranges', () => {
     expect(100).toBeWithinRange(90, 110);
     expect(101).not.toBeWithinRange(0, 100);
@@ -18,9 +146,12 @@ it(`The add() method appends a new element with a specified value to the end of 
 
     for (let item of set1) {
         expect(item).toBelongTo([42, 13])
-        // expected output: 42
-        // expected output: 13
     }
+    var mySet = new Set();
+
+    mySet.add(1);
+    mySet.add(5).add('some text'); // chainable
+    expect(mySet).toEqual(new Set([1, 5, 'some text']))
 });
 it(`A higher order function is a function that takes another function as a parameter.`, () => {
     const uppercaseNames = ['milu', 'rantanplan'].map(name => name.toUpperCase())
