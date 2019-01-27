@@ -1,4 +1,14 @@
-// const $ = require('jquery')
+it(``, done => {
+    function* delegate() {
+        const a = tf.data.array([1, 2, 3, 4, 5, 6, 7, 8]).batch(4);
+        await a.forEach(e => {
+            expect(e).toEqual()
+            done()
+        });
+        done()
+    }
+    delegate()
+})
 it(`Tuple types allow you to express an array where the type of a fixed number of elements is known, but need not be the same`, () => {
     // Declare a tuple type
     let x: [string, number];
