@@ -110,17 +110,17 @@
     "escape-latex": "1.2.0",
     "fraction.js": "4.0.10",
     "gatemanjs": "^1.0.2",
+    "gsl-const": "^1.0.2",
     "javascript-natural-sort": "0.7.1",
     "js-pointer": "^3.0.1",
     "mathjs": "^5.4.0",
     "mockjs": "^0.1.11",
-    "gsl-const": "^1.0.2",
     "perf_hooks": "^0.0.1",
     "seed-random": "2.2.0",
     "source-map-support": "^0.5.9",
     "tiny-emitter": "2.0.2",
-    "xstate": "^4.2.3",
-    "unicode-math": "^0.2.0"
+    "unicode-math": "^0.2.0",
+    "xstate": "^4.2.3"
   },
   "devDependencies": {
     "@babel/core": "7.1.2",
