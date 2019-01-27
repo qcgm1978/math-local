@@ -1,7 +1,7 @@
 const _ = require('lodash')
 it(`A higher order function is a function that takes another function as a parameter.`, () => {
     const uppercaseNames = ['milu', 'rantanplan'].map(name => name.toUpperCase())
-    expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN'])
+    expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN']);
     const filteredNames = ['milu', 'rantanplan'].filter(name => name.length === 4)
     expect(filteredNames).toEqual(['milu'])
     let sumOfLengths = 0;
