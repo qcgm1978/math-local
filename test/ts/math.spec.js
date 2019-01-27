@@ -1,9 +1,9 @@
 const math = require('mathjs')
 const isEqual = require('../../lib/expression/isEqual.js')
 it(`isEqual`, () => {
-    math.import({
-        isEqual
-    })
+    // math.import({
+    //     isEqual
+    // })
     expect(math.isEqual).toBeInstanceOf(Function)
     expect(math.isEqual('a^2+b^2c^2')).toBeFalsy()
     expect(math.isEqual('a^2+b^2=c^2', {
