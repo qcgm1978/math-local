@@ -7,7 +7,7 @@ const EPSILON = 0.0001
  * @param {*} value
  * @returns {boolean}
  */
-function isNumber (value) {
+function isNumber(value) {
   return (value instanceof Number || typeof value === 'number')
 }
 
@@ -18,7 +18,7 @@ function isNumber (value) {
  * @param {Number | BigNumber | Complex | Fraction} b
  * @param {Number} [epsilon]
  */
-exports.equal = function equal (a, b, epsilon) {
+exports.equal = function equal(a, b, epsilon) {
   if (epsilon === undefined) {
     epsilon = EPSILON
   }
@@ -64,7 +64,7 @@ exports.equal = function equal (a, b, epsilon) {
  * @param {*} a
  * @param {*} b
  */
-exports.deepEqual = function deepEqual (a, b) {
+exports.deepEqual = function deepEqual(a, b) {
   let prop, i, len
 
   if (Array.isArray(a) && Array.isArray(b)) {
@@ -90,3 +90,6 @@ exports.deepEqual = function deepEqual (a, b) {
     exports.equal(a, b)
   }
 }
+exports.ok = assert.ok 
+exports.fail = assert.fail
+exports.notEqual = assert.notEqual
