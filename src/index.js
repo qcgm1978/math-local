@@ -8,6 +8,7 @@ module.exports = [
   // load ./expression *after* ./function since we need to
   // attach transforms to functions that are imported there
   require('./expression'), // expression parsing
+  require('./isEqual'), // equal expression
 
   require('./json'), // serialization utility (math.json.reviver)
   require('./error') // errors

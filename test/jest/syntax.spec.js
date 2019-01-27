@@ -132,10 +132,10 @@ describe(`pointer`, () => {
 test('numeric ranges', () => {
     expect(100).toBeWithinRange(90, 110);
     expect(101).not.toBeWithinRange(0, 100);
-    expect({ apples: 6, bananas: 3 }).toEqual({
-        apples: expect.toBeWithinRange(1, 10),
-        bananas: expect.not.toBeWithinRange(11, 20),
-    });
+    // expect({ apples: 6, bananas: 3 }).toEqual({
+    //     apples: expect.toBeWithinRange(1, 10),
+    //     bananas: expect.not.toBeWithinRange(11, 20),
+    // });
 })
 it(`The add() method appends a new element with a specified value to the end of a Set object.`, () => {
     const set1 = new Set();
@@ -155,7 +155,7 @@ it(`The add() method appends a new element with a specified value to the end of 
 });
 it(`A higher order function is a function that takes another function as a parameter.`, () => {
     const uppercaseNames = ['milu', 'rantanplan'].map(name => name.toUpperCase())
-    expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN'])
+    expect(uppercaseNames).toEqual(['MILU', 'RANTANPLAN']);
     const filteredNames = ['milu', 'rantanplan'].filter(name => name.length === 4)
     expect(filteredNames).toEqual(['milu'])
     let sumOfLengths = 0;

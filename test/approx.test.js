@@ -1,8 +1,20 @@
 // test approx itself...
 const assert = require('assert')
 const approx = require('../tools/approx')
-
+const math = require('../dist/math')
 describe('approx', function () {
+  it(`isEqual`, () => {
+    approx.ok(math.isEqual('a^2+b^2=c^2', {
+      a: 3,
+      b: 4,
+      c: 5
+    }))
+    approx.notEqual(math.isEqual('a^2+b^2=c^2', {
+      a: 3,
+      b: 4,
+      c: 6
+    }))
+  });
   it('should test equality of positive values', function () {
     approx.equal(1 / 3, 0.33333333)
     approx.equal(2, 2.000001)
@@ -55,18 +67,18 @@ describe('approx', function () {
       a: [1, 2, 3],
       b: [{ c: 4, d: 5 }]
     }, {
-      a: [1.000001, 1.99999999, 3.000005],
-      b: [{ c: 3.999999981, d: 5.0000023 }]
-    })
+        a: [1.000001, 1.99999999, 3.000005],
+        b: [{ c: 3.999999981, d: 5.0000023 }]
+      })
 
     assert.throws(function () {
       approx.deepEqual({
         a: [1, 2, 3],
         b: [{ c: 4, d: 5 }]
       }, {
-        a: [1.000001, 1.99999999, 3.000005],
-        b: [{ c: 3.1, d: 5.0000023 }]
-      })
+          a: [1.000001, 1.99999999, 3.000005],
+          b: [{ c: 3.1, d: 5.0000023 }]
+        })
     }, assert.AssertionError)
 
     assert.throws(function () {
@@ -74,9 +86,9 @@ describe('approx', function () {
         a: [1, 2, 3],
         b: [{ c: 4, d: 5 }]
       }, {
-        a: [1.001, 1.99999999, 3.000005],
-        b: [{ c: 3, d: 5.0000023 }]
-      })
+          a: [1.001, 1.99999999, 3.000005],
+          b: [{ c: 3, d: 5.0000023 }]
+        })
     }, assert.AssertionError)
   })
 })

@@ -41,10 +41,22 @@
 
 Parameters Deep learning (also known as deep structured learning or hierarchical learning) is part of a broader family of machine learning methods based on learning data representations, as opposed to task-specific algorithms.
 
-function add(x, y) { // x and y are parameters
-  return x + y;
-}
+const a = tf.data.array([1, 2, 3, 4, 5, 6, 7, 8]).batch(4);
+    await a.forEach(e => {
+        expect(e.shape).toEqual([4])
+        done()
+    })
 
-Arguments are variables passed down to a function in place of parameters.
+task-specific algorithms: In mathematics and computer science, an algorithm (/ˈælɡərɪðəm/ (About this soundlisten)) is an unambiguous specification of how to solve a class of problems.
 
-add(2, 3); // arguments
+ const arr = [1, 2, 3, 4, 5, 6, 7, 8]
+    const len = arr.length / 4
+    expect(arr.reduce((acc, item, i) => {
+        if (i % len) {
+
+            acc[acc.length - 1].push(item)
+        } else {
+            acc.push([item])
+        }
+        return acc
+    }, [])).toEqual([[1, 2], [3, 4], [5, 6], [7, 8]])
