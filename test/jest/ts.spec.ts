@@ -1,13 +1,17 @@
-it(``, done => {
-    function* delegate() {
-        const a = tf.data.array([1, 2, 3, 4, 5, 6, 7, 8]).batch(4);
-        await a.forEach(e => {
-            expect(e).toEqual()
-            done()
-        });
+const tf = require('@tensorflow/tfjs-node');
+it(``, async function (done) {
+    // function* delegate() {
+    //     setTimeout(() => {
+
+    const a = tf.data.array([1, 2, 3, 4, 5, 6, 7, 8]).batch(4);
+    await a.forEach(e => {
+        expect(e.shape).toEqual([4])
         done()
-    }
-    delegate()
+    });
+    //     done()
+    // }, 100);
+    // }
+    // delegate()
 })
 it(`Tuple types allow you to express an array where the type of a fixed number of elements is known, but need not be the same`, () => {
     // Declare a tuple type
