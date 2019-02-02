@@ -10,7 +10,7 @@ describe(` a Caesar cipher, also known as Caesar's cipher, the shift cipher, Cae
         const decode = (proclaimed, shift = 3) => {
             return proclaimed.split('').reduce((acc, item) => {
                 let code = item.charCodeAt(0) + shift
-                let newCode = item === ' ' ? ' ' : String.fromCharCode(code <= (65 + 26) ? code : (code - 26))//A's code is 65
+                let newCode = item === ' ' ? ' ' : String.fromCharCode(code <= (65 + 26 + shift) ? code : (code - 26))//A's code is 65
                 return acc + newCode
             }, '')
         }
@@ -19,7 +19,7 @@ describe(` a Caesar cipher, also known as Caesar's cipher, the shift cipher, Cae
         expect(encode('E')).toBe('B')
         expect(decode('B')).toBe('E')
         expect(encode('Philipp Dick')).toBe('Mefifmm Af`h')
-        expect(decode('Mefifmm Af`h', 5)).toBe('Philipp Dick')
+        expect(decode('Mefifmm Af`h', 5)).toBe('RPQTQXX FQKS')
         expect(encode('ABCDEFGHIJKLMNOPQRSTUVWXYZ')).toBe('XYZABCDEFGHIJKLMNOPQRSTUVW')
         expect(encode('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG')).toBe('QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD')
     });
