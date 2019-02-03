@@ -24,3 +24,31 @@ describe(` a Caesar cipher, also known as Caesar's cipher, the shift cipher, Cae
         expect(encode('THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG')).toBe('QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD')
     });
 });
+describe(`In cryptography, a substitution cipher is a method of encrypting by which units of plaintext are replaced with ciphertext, according to a fixed system; the "units" may be single letters (the most common), pairs of letters, triplets of letters, mixtures of the above, and so forth. The receiver deciphers the text by performing the inverse substitution.`, () => {
+    it(`Substitution of single letters separately—simple substitution—can be demonstrated by writing out the alphabet in some order to represent the substitution`, () => {
+        const message = 'flee at once. we are discovered!'
+        const substituteCipher = (proclaimed, encode = true) => {
+            const PlaintextAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            const CiphertextAlphabet = 'ZEBRASCDFGHIJKLMNOPQTUVWXY'
+            const [a, b] = encode ? [PlaintextAlphabet, CiphertextAlphabet] : [CiphertextAlphabet, PlaintextAlphabet]
+            return proclaimed.toUpperCase().split('').reduce((acc, item) => {
+                let code = b.includes(item) ? b.charAt(a.indexOf(item), 1) : item
+                return acc + code
+            }, '')
+        }
+        expect(substituteCipher(message)).toBe('SIAA ZQ LKBA. VA ZOA RFPBLUAOAR!')
+        expect(substituteCipher('SIAA ZQ LKBA. VA ZOA RFPBLUAOAR!', false)).toBe(message.toUpperCase())
+    })
+    it(`In lists and catalogues for salespeople, a very simple encryption is sometimes used to replace numeric digits by letters.`, () => {
+        const substituteCipher = (proclaimed, encode = true) => {
+            const PlaintextAlphabet = '1234567890'
+            const CiphertextAlphabet = 'MAKEPROFIT'
+            const [a, b] = encode ? [PlaintextAlphabet, CiphertextAlphabet] : [CiphertextAlphabet, PlaintextAlphabet]
+            return proclaimed.toUpperCase().split('').reduce((acc, item) => {
+                let code = a.includes(item) ? b.charAt(a.indexOf(item), 1) : item
+                return acc + code
+            }, '')
+        }
+        expect(substituteCipher('MAT', false)).toBe('120')
+    });
+});
