@@ -1,3 +1,4 @@
+const math = require('../../dist/math')
 it(`Salary`, () => {
     const notTaxIncome = 5000
     const taxRate = [
@@ -28,4 +29,15 @@ it(`Salary`, () => {
         return tax
     }
     expect(getTax({ income, security })).toBe(1190)
+});
+it(`Cyclomatic complexity measures the number of linearly independent paths through a program’s source code. This rule allows setting a cyclomatic complexity threshold.`, () => {
+    const edge = 30, node = 23, component = 1, cyclomaticComplexity = 'edge - node + 2 * component', maxPaths = 9, EulerFormulaFaces = 'E-V+2'
+    expect(math.eval(EulerFormulaFaces, {
+        E: edge,
+        V: node
+    })).toBe(math.eval(cyclomaticComplexity, {
+        edge,
+        node,
+        component
+    })).toBe(9).toBeLessThanOrEqual(maxPaths)
 });
