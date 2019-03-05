@@ -1,7 +1,12 @@
 const tf = require("@tensorflow/tfjs");
 require("@tensorflow/tfjs-node");
-
-describe(``, () => {
+describe(`some common Tensor transformations for reshaping and type-casting.`, () => {
+  it(`Casts a tf.Tensor to a new dtype.`, () => {
+    const x = tf.tensor1d([1.5, 2.5, 3]);
+    expect(Array.from(tf.cast(x, "int32").dataSync())).toEqual([1, 2, 3]);
+  });
+});
+describe(`tensor.relu`, () => {
   it(`The ArrayBuffer object is used to represent a generic, fixed-length raw binary data buffer. `, () => {
     const buffer = new ArrayBuffer(8);
 
