@@ -1,27 +1,21 @@
-const tf = require('@tensorflow/tfjs-node');
-// it(`But what about concepts? Yeah, most of them are impossible to be "found" in a very short time and require a significant amount of learning effort.`, async function (done) {
-// const a = tf.data.array([1, 2, 3, 4, 5, 6, 7, 8]).batch(4);
-// await a.forEach(e => {
-//     expect(e.shape).toEqual([4])
-//     done()
-// })
-// const arr = [1, 2, 3, 4, 5, 6, 7, 8]
-// const len = arr.length / 4
-// expect(arr.reduce((acc, item, i) => {
-//     if (i % len) {
+const tf = require('@tensorflow/tfjs');
+require('@tensorflow/tfjs-node');
+it(`Add TensorFlow.js to your project using yarn or npm`, done => {
+    // Define a model for linear regression.
+    const model = tf.sequential();
+    model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
 
-//         acc[acc.length - 1].push(item)
-//     } else {
-//         acc.push([item])
-//     }
-//     return acc
-// }, [])).toEqual([[1, 2], [3, 4], [5, 6], [7, 8]])
-// })
-it(`Computes the softmax normalized vector given the logits.`, () => {
-    const a = tf.tensor1d([1, 2, 3]);
-    expect(a.dataSync())
+    // Prepare the model for training: Specify the loss and the optimizer.
+    model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
 
-        .toEqual(new Float32Array([1, 2, 3]))
-    expect(a.softmax().toString()).toEqual()  // or tf.softmax(a)
-    // a.softmax().print();  // or tf.softmax(a)
+    // Generate some synthetic data for training.
+    const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
+    const ys = tf.tensor2d([1, 3, 5, 7], [4, 1]);
+
+    // Train the model using the data.
+    model.fit(xs, ys).then(() => {
+        // Use the model to do inference on a data point the model hasn't seen before:
+        expcet(model.predict(tf.tensor2d([5], [1, 1]))).toEqual();
+        done()
+    });
 });

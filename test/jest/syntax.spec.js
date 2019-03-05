@@ -2,6 +2,121 @@ const _ = require('lodash')
 const generateNewMatches = require('./matchers')
 generateNewMatches()
 const jsPointer = require('js-pointer');
+it(`Difference between Spread vs Concat`, () => {
+    function combineArray(array1, array2) {
+        return [...array1, ...array2];
+    }
+    function combineArrayByConcat(array1, array2) {
+        return [].concat(array1, array2);
+    }
+    const isArray = [1, 2, 3];
+    const notArray = 'random';
+    expect(combineArray(isArray, notArray)).toEqual([1, 2, 3, "r", "a", "n", "d", "o", "m"])
+    expect(combineArrayByConcat(isArray, notArray)).toEqual([1, 2, 3, "random"])
+});
+it(`push, it manipulates or changes the existing array. It does NOT create a new array`, () => {
+    const cars = ['🚗', '🚙'];
+    const trucks = ['🚚', '🚛'];
+    const combined = cars.push(...trucks);
+    expect(combined).toBe(4)
+    // ☝when you use push, it returns the LENGTH of the combined array
+    expect(cars).toEqual(['🚗', '🚙', '🚚', '🚛'])
+    expect(trucks).toEqual(['🚚', '🚛'])
+    cars.push(trucks)
+    expect(cars).toEqual(['🚗', '🚙', '🚚', '🚛', ['🚚', '🚛']])
+    cars.push(...trucks)
+    expect(cars).toEqual(['🚗', '🚙', '🚚', '🚛', ['🚚', '🚛'], '🚚', '🚛'])
+    // ✅ cars: [ '🚗', '🚙', '🚚', '🚛' ]
+});
+describe(`The async function declaration defines an asynchronous function, which returns an AsyncFunction object. An asynchronous function is a function which operates asynchronously via the event loop, using an implicit Promise to return its result. But the syntax and structure of your code using async functions is much more like using standard synchronous functions.`, () => {
+    it(`callback hell`, done => {
+
+        const a = 0, getData = callback => callback(a), getMoreData = (foo, callback) => setTimeout(_ => callback(++foo), 10)
+        getData(a => {
+            getMoreData(a, b => {
+                getMoreData(b, c => {
+                    getMoreData(c, d => {
+                        getMoreData(d, e => {
+                            expect(e).toBe(4)
+                            done()
+                        })
+                    })
+                })
+            })
+        })
+    });
+    it(`Promise`, done => {
+
+        const a = 0, getData = foo => new Promise(resolve => resolve(foo)), getMoreData = foo => new Promise(resolve => setTimeout(_ => resolve(++foo), 10))
+        getData(a)
+            .then(a => getMoreData(a))
+            .then(b => getMoreData(b))
+            .then(c => getMoreData(c))
+            .then(d => getMoreData(d))
+            .then(e => {
+                expect(e).toBe(4)
+                done()
+            })
+    });
+    it(`Promise without param`, done => {
+
+        const getData = _ => new Promise(resolve => resolve(a)), getMoreData = foo => new Promise(resolve => setTimeout(_ => resolve(++foo), 10))
+        let a = 0
+        getData()
+            .then(getMoreData)
+            .then(getMoreData)
+            .then(getMoreData)
+            .then(getMoreData)
+            .then(e => {
+                expect(e).toBe(4)
+                done()
+            })
+    });
+    it(`The async function keyword can be used to define async functions inside expressions.`, done => {
+
+        const getData = _ => new Promise(resolve => resolve(a)), getMoreData = foo => new Promise(resolve => setTimeout(_ => resolve(++foo), 10));
+        let a = 0;
+        (async () => {
+            const a = await getData()
+            const b = await getMoreData(a)
+            const c = await getMoreData(b)
+            const d = await getMoreData(c)
+            const e = await getMoreData(d)
+            expect(e).toBe(4)
+            done()
+        })()
+    });
+    it(`In real situations, the promise may take some time before it rejects. So await will wait, and then throw an error.
+
+We can catch that error using try..catch, the same way as a regular throw:`, done => {
+            const getData = _ => new Promise(resolve => resolve(0)), getMoreData = foo => new Promise(resolve => setTimeout(_ => resolve(++foo), 10));
+            (async () => {
+                try {
+                    const a = await getData()
+                    const b = await getMoreData(a)
+                    const c = await getMoreData(b)
+                    const d = await getMoreData(c)
+                    const e = await getMoreData(d)
+                    expect(e).toBe(4)
+                    throw new Error(0)
+                } catch (err) {
+                    expect(err.message).toBe('0')
+                }
+            })();
+            (async () => {
+                try {
+                    const a = await getData()
+                    const b = await getMoreData(a)
+                    expect(b).toBe(1)
+                    throw new Error(0)
+                } catch (err) {
+                    expect(err.message).toBe('0')
+                    done()
+
+                }
+            })()
+        });
+});
 describe(`pointer`, () => {
     it(`Within a function, one may change the contents of a passed object via that reference, but you cannot modify the reference that the caller had because your reference is only a copy`, () => {
         var foo = { 'bar': 1 };
