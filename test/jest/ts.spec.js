@@ -1,5 +1,114 @@
 const tf = require("@tensorflow/tfjs");
 require("@tensorflow/tfjs-node");
+const BinarySearchTree = require("./binary-tree");
+const isBrowser = new Function(
+  "try {return this===window;}catch(e){ return false;}"
+);
+it(`tf.Tensor can be created from an array with the tf.tensor() method:`, () => {
+  // Create a rank-2 tensor (matrix) matrix tensor from a multidimensional array.
+  const a = tf.tensor([[1, 2], [3, 4]]);
+  expect(a.shape).toEqual([2, 2]);
+  expect(a.dataSync()).toEqual(new Float32Array([1, 2, 3, 4]));
+
+  // Or you can create a tensor from a flat array and specify a shape.
+  const shape = [2, 2];
+  const b = tf.tensor([1, 2, 3, 4], shape);
+  expect(b.shape).toEqual([2, 2]);
+  expect(b.dataSync()).toEqual(new Float32Array([1, 2, 3, 4]));
+});
+it(`Creates a Tensor with evenly spaced numbers.`, () => {
+  expect(tf.linspace(0, 9, 10).dataSync()).toEqual(
+    new Float32Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+  );
+});
+it(`Creates a Tensor from Images.`, () => {
+  if (isBrowser()) {
+    //Currently tf.fromPixels is not supported in Node
+    const image = new ImageData(1, 1);
+    image.data[0] = 100;
+    image.data[1] = 150;
+    image.data[2] = 200;
+    image.data[3] = 255;
+    expect(tf.fromPixels(image).dataSync()).toEqual();
+  }
+});
+it(`Creates a Buffer Tensor.`, () => {
+  // Create a buffer and set values at particular indices.
+  const buffer = tf.buffer([2, 2]);
+  buffer.set(3, 0, 0);
+  buffer.set(5, 1, 0); // Convert the buffer back to a tensor. buffer.toTensor()
+  const bufferTensor = buffer.toTensor();
+  expect(bufferTensor.dataSync()).toEqual(new Float32Array([3, 0, 5, 0]));
+  expect(bufferTensor.shape).toEqual([2, 2]);
+});
+it(` tf.tensor ( values , shape? , dtype? )`, () => {
+  // Pass an array of values to create a vector.
+  expect(tf.tensor([1, 2, 3, 4]).dataSync()).toEqual(
+    new Float32Array([1, 2, 3, 4])
+  );
+  // Pass a flat array and specify a shape yourself.
+  expect(tf.tensor([1, 2, 3, 4], [2, 2]).dataSync()).toEqual(
+    new Float32Array([1, 2, 3, 4])
+  );
+  expect(tf.tensor([1, 2, 3, 4], [2, 2]).shape).toEqual([2, 2]);
+});
+it(`tf.layers.rnn (args) function`, () => {
+  const rnn = tf.layers.rnn;
+  expect(rnn).toBeInstanceOf(Function);
+  expect(rnn).toThrow();
+  const denseLayer = tf.layers.dense({
+    units: 1,
+    kernelInitializer: "zeros",
+    useBias: false
+  });
+  expect(rnn.bind(denseLayer)).toThrow();
+});
+it(`binary tree`, () => {
+  let BSTtest = new BinarySearchTree();
+
+  //tests
+
+  BSTtest.insertNumberNode(10);
+
+  BSTtest.insertNumberNode(7);
+
+  BSTtest.insertNumberNode(14);
+
+  BSTtest.insertNumberNode(5);
+
+  BSTtest.insertNumberNode(13);
+
+  BSTtest.insertNumberNode(8);
+
+  BSTtest.insertNumberNode(18);
+
+  BSTtest.insertNumberNode(15);
+
+  BSTtest.insertNumberNode(6);
+
+  BSTtest;
+  expect(BSTtest.root).toEqual({
+    data: 10,
+    left: {
+      data: 7,
+      left: {
+        data: 5,
+        left: null,
+        right: { data: 6, left: null, right: null }
+      },
+      right: { data: 8, left: null, right: null }
+    },
+    right: {
+      data: 14,
+      left: { data: 13, left: null, right: null },
+      right: {
+        data: 18,
+        left: { data: 15, left: null, right: null },
+        right: null
+      }
+    }
+  });
+});
 describe(`some common Tensor transformations for reshaping and type-casting.`, () => {
   it(`Casts a tf.Tensor to a new dtype.`, () => {
     const x = tf.tensor1d([1.5, 2.5, 3]);
