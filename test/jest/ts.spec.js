@@ -4,6 +4,12 @@ const BinarySearchTree = require("./binary-tree");
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(`By default, tf.Tensors will have a float32 dtype. tf.Tensors can also be created with bool, int32, complex64, and string dtypes:`, () => {
+  const a = tf.tensor([[1, 2], [3, 4]], [2, 2], "int32");
+  expect(a.shape).toEqual([2, 2]);
+  expect(a.dtype).toBe("int32");
+  expect(a.rankType).toBe("2");
+});
 it(`tf.Tensor can be created from an array with the tf.tensor() method:`, () => {
   // Create a rank-2 tensor (matrix) matrix tensor from a multidimensional array.
   const a = tf.tensor([[1, 2], [3, 4]]);
