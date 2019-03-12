@@ -4,6 +4,11 @@ const BinarySearchTree = require("./binary-tree");
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(`computing x2 of all elements in a tf.Tensor`, () => {
+  const x = tf.tensor([1, 2, 3, 4]);
+  const y = x.square(); // equivalent to tf.square(x)
+  expect(y.arraySync()).toEqual([1, 4, 9, 16]);
+});
 it(`get the values from a tf.Tensor using the Tensor.array() or Tensor.data() methods`, done => {
   const a = tf.tensor([[1, 2], [3, 4]]);
   // Returns the multi dimensional array of values.
