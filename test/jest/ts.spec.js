@@ -4,6 +4,33 @@ const BinarySearchTree = require("./binary-tree");
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(`get the values from a tf.Tensor using the Tensor.array() or Tensor.data() methods`, done => {
+  const a = tf.tensor([[1, 2], [3, 4]]);
+  // Returns the multi dimensional array of values.
+  expect(a.arraySync()).toEqual([[1, 2], [3, 4]]);
+  // Returns the flattened data that backs the tensor.
+  expect(a.dataSync()).toEqual(new Float32Array([1, 2, 3, 4]));
+  // Returns the multi dimensional array of values.
+  a.array().then(array => {
+    expect(array).toEqual([[1, 2], [3, 4]]);
+  });
+  // Returns the flattened data that backs the tensor.
+  a.data().then(data => {
+    expect(data).toEqual(new Float32Array([1, 2, 3, 4]));
+    done();
+  });
+});
+it(` there can be multiple shapes with the same size, it's often useful to be able to reshape a tf.Tensor to another shape with the same size. This can be achieved with the reshape() method:`, () => {
+  const a = tf.tensor([[1, 2], [3, 4]]);
+  expect(a.shape).toEqual([2, 2]);
+
+  const b = a.reshape([4, 1]);
+  expect(b.shape).toEqual([4, 1]);
+  expect(b.dataSync()).toEqual(a.dataSync());
+  expect(Array.from(b.dataSync()))
+    .toEqual(Array.from(a.dataSync()))
+    .toEqual([1, 2, 3, 4]);
+});
 it(`By default, tf.Tensors will have a float32 dtype. tf.Tensors can also be created with bool, int32, complex64, and string dtypes:`, () => {
   const a = tf.tensor([[1, 2], [3, 4]], [2, 2], "int32");
   expect(a.shape).toEqual([2, 2]);
