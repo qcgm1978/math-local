@@ -2,6 +2,33 @@ const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
 const jsPointer = require("js-pointer");
+it(`作为对象的方法调用，该对象即为调用上下文，this指向该对象`, () => {
+  var q = "window";
+  var func = function() {
+    expect(this.q).toMatch(/obj|anotherObj/);
+  };
+
+  var obj = {
+    q: "obj",
+    func: func,
+    anotherObj: {
+      q: "anotherObj",
+      func: func
+    }
+  };
+
+  obj.func(); //obj
+  obj.anotherObj.func();
+});
+it(`作为函数调用，this指向全局对象`, () => {
+  var q = "window";
+  var func = function() {
+    expect(this.q).toBe();
+    expect(this.process.title).toBe("node");
+  };
+
+  func();
+});
 describe(`There are 2 types of array cloning: shallow & deep`, () => {
   it(`Shallow copies only cover the 1st level of the array and the rest are referenced. If you want a true copy of nested arrays, you’ll need a deep clone`, () => {
     const numbers = [1, [2], [3, [4]], 5];
