@@ -4,6 +4,11 @@ const BinarySearchTree = require("./binary-tree");
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(` get the number of Tensors tracked by TensorFlow.js:`, () => {
+  expect(tf.memory().numTensors).toBe(0);
+  const a = tf.tensor([[1, 2], [3, 4]]);
+  expect(tf.memory().numTensors).toBe(1);
+});
 it(`tf.tidy() method which cleans up all tf.Tensors that are not returned by a function after executing it, similar to the way local variables are cleaned up when a function is executed`, () => {
   const a = tf.tensor([[1, 2], [3, 4]]);
   const y = tf.tidy(() => {
