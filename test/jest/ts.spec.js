@@ -4,6 +4,19 @@ const BinarySearchTree = require("./binary-tree");
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(`tf.tidy() method which cleans up all tf.Tensors that are not returned by a function after executing it, similar to the way local variables are cleaned up when a function is executed`, () => {
+  const a = tf.tensor([[1, 2], [3, 4]]);
+  const y = tf.tidy(() => {
+    const result = a
+      .square()
+      .log()
+      .neg();
+    return result;
+  });
+  expect(y.dtype)
+    .toBe(a.dtype)
+    .toBe("float32");
+});
 it(`To destroy the memory of a tf.Tensor, you can use the dispose()method or tf.dispose():`, () => {
   const a = tf.tensor([[1, 2], [3, 4]]);
   const b = tf.tensor([[1, 2], [3, 4]]);
