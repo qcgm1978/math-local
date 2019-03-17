@@ -4,6 +4,22 @@ const BinarySearchTree = require("./binary-tree");
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(`To destroy the memory of a tf.Tensor, you can use the dispose()method or tf.dispose():`, () => {
+  const a = tf.tensor([[1, 2], [3, 4]]);
+  const b = tf.tensor([[1, 2], [3, 4]]);
+  a.dispose();
+  tf.dispose(b);
+  expect(a.dataSync).toThrow();
+  expect(b.dataSync).toThrow();
+});
+it(` adding elements of two tf.Tensors element-wise`, () => {
+  const a = tf.tensor([1, 2, 3, 4]);
+  const b = tf.tensor([10, 20, 30, 40]);
+  const y = a.add(b); // equivalent to tf.add(a, b)
+  expect(y.arraySync())
+    .toEqual(tf.add(a, b).arraySync())
+    .toEqual([11, 22, 33, 44]);
+});
 it(`computing x2 of all elements in a tf.Tensor`, () => {
   const x = tf.tensor([1, 2, 3, 4]);
   const y = x.square(); // equivalent to tf.square(x)
