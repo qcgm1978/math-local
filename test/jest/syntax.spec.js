@@ -2,6 +2,35 @@ const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
 const jsPointer = require("js-pointer");
+it(`通过函数的call/apply方法间接调用, call/apply方法的第一个参数是调用上下文，在函数体内，通过this获得对它的引用`, () => {
+  var q = "window";
+
+  function func() {
+    expect(this.q).toStringAndMatch(/undefined|obj/);
+  }
+
+  var obj = {
+    q: "obj"
+  };
+
+  func.apply(); //window
+  func.call(); //window
+
+  func.apply(obj); //obj
+  func.call(obj);
+});
+it(`作为构造函数调用，构造函数试图初始化这个新创建的对象，并将这个对象作为其调用上下文，this 指向这个新创建的对象`, () => {
+  var q = "window";
+
+  function Func() {
+    this.q = "instance prop";
+    expect(this.q).toBe("instance prop");
+  }
+
+  var obj = new Func(); //Func
+
+  expect(this.q).toBeUndefined();
+});
 it(`作为对象的方法调用，该对象即为调用上下文，this指向该对象`, () => {
   var q = "window";
   var func = function() {
