@@ -2,6 +2,33 @@ const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
 const jsPointer = require("js-pointer");
+it(`\w any character that is A-Z, a-z, or 0-9`, () => {
+  let hideWords = function(string) {
+    return string.replace(/\w/g, "#");
+  };
+
+  let exampleSentence = "A ~ a ~ 0 ~";
+
+  expect(hideWords(exampleSentence)).toBe("# ~ # ~ # ~");
+});
+it(`prefer the || operator`, () => {
+  let isHappyHour = "🍺";
+  // Logical Operator
+  let isHappyHour1 = isHappyHour || "🍵"; // '🍺'
+  // Ternary
+  let isHappyHour2 = isHappyHour ? isHappyHour : "🍵"; // '🍺'
+  // If/Else
+  if (isHappyHour) {
+    isHappyHour3 = isHappyHour;
+  } else {
+    isHappyHour3 = "🍵";
+  }
+  expect(isHappyHour)
+    .toBe(isHappyHour1)
+    .toBe(isHappyHour2)
+    .toBe(isHappyHour3)
+    .toBe("🍺");
+});
 it(`通过函数的call/apply方法间接调用, call/apply方法的第一个参数是调用上下文，在函数体内，通过this获得对它的引用`, () => {
   var q = "window";
 
