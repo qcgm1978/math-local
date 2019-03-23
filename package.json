@@ -160,7 +160,7 @@
   },
   "main": "./index",
   "jest": {
-    "port": "9330",
+    "port": "9331",
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
     "transform": {
