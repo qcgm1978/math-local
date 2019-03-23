@@ -36,4 +36,8 @@ it(`This notation with |∣ and \rangle⟩ is called the ket notation, and thing
     vector
   });
   expect(mathEqual).toBeTruthy();
+  const matrix = Matrix.create([[1], [0]]);
+  expect(quantum.isQubitState(matrix))
+    .toBe(quantum.isQubitState(QuantumCompute.qubitState))
+    .toBeTruthy();
 });
