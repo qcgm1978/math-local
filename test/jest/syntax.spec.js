@@ -2,6 +2,18 @@ const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
 const jsPointer = require("js-pointer");
+it(`The ECMAScript Internationalization API provides a convenient mechanism for formatting human-readable numbers. For example, these formats are intended for the U.S., Germany, and India:`, () => {
+  const USnumber = "12,345,678.9";
+  const GermanNum = "12.345.678,9";
+  const IndiaNum = "1,23,45,678.9";
+  if (process.argv0 !== "node") {
+    //browser not support the following
+
+    expect(new Intl.NumberFormat("en").format(12345678.9)).toBe(USnumber);
+    expect(new Intl.NumberFormat("de").format(12345678.9)).toBe(GermanNum);
+    expect(new Intl.NumberFormat("en-IN").format(12345678.9)).toBe(IndiaNum);
+  }
+});
 it(`\w any character that is A-Z, a-z, or 0-9`, () => {
   let hideWords = function(string) {
     return string.replace(/\w/g, "#");
@@ -80,7 +92,7 @@ it(`作为函数调用，this指向全局对象`, () => {
   var q = "window";
   var func = function() {
     expect(this.q).toBe();
-    expect(this.process.title).toBe("node");
+    expect(this.process.title).toMatch(/node|\/usr\/local\/bin\/node/);
   };
 
   func();
