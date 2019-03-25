@@ -41,3 +41,6 @@ it(`This notation with |∣ and \rangle⟩ is called the ket notation, and thing
     .toBe(quantum.isQubitState(QuantumCompute.qubitState))
     .toBeTruthy();
 });
+it(` the state 0.6|0\rangle+0.8|1\rangle0.6∣0⟩+0.8∣1⟩ is just 0.60.6 times the |0\rangle∣0⟩ vector, plus 0.80.8 times the |1\rangle∣1⟩ vector`, () => {
+  const expression = "0.6∣0⟩+0.8∣1⟩";
+});

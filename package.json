@@ -178,6 +178,8 @@
     ]
   },
   "scripts": {
+    "dev": "parcel index.html",
+    "build-parcel": "parcel build index.html",
     "serve": "node test/server.js",
     "crawler": "nodemon  --inspect test/jest/image-crawler.js",
     "test": "jest --watch",
