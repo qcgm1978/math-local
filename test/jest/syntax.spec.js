@@ -2,6 +2,33 @@ const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
 const jsPointer = require("js-pointer");
+it(`The Math.log() function returns the natural logarithm (base e) of a number`, () => {
+  expect(Math.E.toFixed(2)).toBe("2.72");
+  const num = Math.log(Math.E);
+  const num2 = (2 * Math.log(Math.E)) / 2;
+  expect(num).toBe(1);
+  expect(num2).toBe(1);
+  const num1 = Math.log(0.1220095068291097);
+  expect(num1.toFixed(1)).toBe("-2.1");
+});
+it(`The Float32Array typed array represents an array of 32-bit floating point numbers (corresponding to the C float data type) in the platform byte order. `, () => {
+  var float32 = new Float32Array(2);
+  float32[0] = 42;
+  expect(float32[0]).toBe(42); // 42
+  expect(float32.length).toBe(2); // 2
+  expect(float32.BYTES_PER_ELEMENT).toBe(4);
+});
+it(`The Math.random() function returns a floating-point, pseudo-random number in the range 0–1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range`, () => {
+  const num = Math.random();
+  expect(num)
+    .toBeGreaterThanOrEqual(0)
+    .toBeLessThan(1);
+  expect(num.toString().length).toBeWithinRange(17, 19);
+});
+it(`If the only argument passed to the Array constructor is an integer between 0 and 232-1 (inclusive), this returns a new JavaScript array with its length property set to that number `, () => {
+  const arr = new Array(5);
+  expect(arr).toEqual([undefined, undefined, undefined, undefined, undefined]);
+});
 it(`The ECMAScript Internationalization API provides a convenient mechanism for formatting human-readable numbers. For example, these formats are intended for the U.S., Germany, and India:`, () => {
   const USnumber = "12,345,678.9";
   const GermanNum = "12.345.678,9";

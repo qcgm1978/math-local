@@ -16,6 +16,20 @@ module.exports = _ =>
         };
       }
     },
+    toMatchEvery(received, match) {
+      const pass = received.every(item => match(item));
+      if (pass) {
+        return {
+          message: () => `expected ${received} satisfies ${match}`,
+          pass: true
+        };
+      } else {
+        return {
+          message: () => `${received} not satisfies ${match}`,
+          pass: false
+        };
+      }
+    },
     toBelongTo(received, arr) {
       const pass = arr.includes(received);
       if (pass) {

@@ -1,13 +1,21 @@
 const tf = require("@tensorflow/tfjs");
 require("@tensorflow/tfjs-node");
 const BinarySearchTree = require("./binary-tree");
+const generateNewMatches = require("./matchers");
+generateNewMatches();
 const isBrowser = new Function(
   "try {return this===window;}catch(e){ return false;}"
 );
+it(`Creates a tf.Tensor with values sampled from a normal distribution.`, () => {
+  const GaussRandom = tf.randomNormal([2, 2]);
+  expect(GaussRandom.dataSync()).toMatchEvery(item =>
+    expect(item).toBeWithinRange(-3, 2)
+  );
+});
 it(` get the number of Tensors tracked by TensorFlow.js:`, () => {
-  expect(tf.memory().numTensors).toBe(0);
+  expect(tf.memory().numTensors).toBeGreaterThanOrEqual(0);
   const a = tf.tensor([[1, 2], [3, 4]]);
-  expect(tf.memory().numTensors).toBe(1);
+  expect(tf.memory().numTensors).toBeGreaterThanOrEqual(2);
 });
 it(`tf.tidy() method which cleans up all tf.Tensors that are not returned by a function after executing it, similar to the way local variables are cleaned up when a function is executed`, () => {
   const a = tf.tensor([[1, 2], [3, 4]]);
