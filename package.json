@@ -166,7 +166,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testEnvironment": "jsdom",
+    "testEnvironment": "node",
     "testRegex": "test/.*.spec.(ts|js)",
     "moduleFileExtensions": [
       "ts",

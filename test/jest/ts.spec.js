@@ -96,6 +96,9 @@ it(`Creates a Tensor with evenly spaced numbers.`, () => {
 it(`Creates a Tensor from Images.`, () => {
   if (isBrowser()) {
     //Currently tf.fromPixels is not supported in Node
+    if (typeof ImageData === "undefined") {
+      return;
+    }
     const image = new ImageData(1, 1);
     image.data[0] = 100;
     image.data[1] = 150;
