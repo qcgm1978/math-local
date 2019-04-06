@@ -1,8 +1,9 @@
-import * as mobilenet from '@tensorflow-models/mobilenet';
+// import * as mobilenet from '@tensorflow-models/mobilenet';
+import mobilenet from './mobilenet';
 let model = null
 async function run(img: HTMLImageElement) {
     // Load the MobileNetV2 model.
-    model = model || await mobilenet.load(2, 1.0);
+    model = model || await mobilenet(img);
 
     // Classify the image.
     if (!img.width) {
@@ -24,7 +25,7 @@ window.onload = (e) => {
         const para = document.getElementById('beauty')
         para.textContent += predictions.map(item => `\n${item.className}: probability(${item.probability.toFixed(2)})`);
     });
-// input func
+    // input func
     var input = document.querySelector('input');
     var preview = document.querySelector('.preview');
 
@@ -54,11 +55,11 @@ window.onload = (e) => {
                     listItem.appendChild(image);
                     image.onload = function () {
                         run(image).then(predictions => {
-                            
+
                             para.textContent += predictions.map(item => `\n${item.className}: probability(${item.probability.toFixed(2)})`);
                             listItem.appendChild(para);
                         })
-                        
+
                     }
                 } else {
                     para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';

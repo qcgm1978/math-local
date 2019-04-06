@@ -69,18 +69,7 @@ it(`If the only argument passed to the Array constructor is an integer between 0
   const arr = new Array(5);
   expect(arr).toEqual([undefined, undefined, undefined, undefined, undefined]);
 });
-it(`The ECMAScript Internationalization API provides a convenient mechanism for formatting human-readable numbers. For example, these formats are intended for the U.S., Germany, and India:`, () => {
-  const USnumber = "12,345,678.9";
-  const GermanNum = "12.345.678,9";
-  const IndiaNum = "1,23,45,678.9";
-  if (process.argv0 !== "node") {
-    //browser not support the following
 
-    expect(new Intl.NumberFormat("en").format(12345678.9)).toBe(USnumber);
-    expect(new Intl.NumberFormat("de").format(12345678.9)).toBe(GermanNum);
-    expect(new Intl.NumberFormat("en-IN").format(12345678.9)).toBe(IndiaNum);
-  }
-});
 it(`\w any character that is A-Z, a-z, or 0-9`, () => {
   let hideWords = function (string) {
     return string.replace(/\w/g, "#");

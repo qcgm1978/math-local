@@ -1,5 +1,5 @@
 // http://sylvester.jcoglan.com/docs.html
-const { Vector, Matrix, Line, Plane, Sylvester } = require("Sylvester");
+const { Vector, Matrix, Line, Plane, Sylvester } = require("sylvester");
 // const tf = require('@tensorflow/tfjs');
 
 it(`A transformation of an block using the matrix() function is done by multiplying the matrix with each of the corner-coordinates of the block which will give the corners of the new object when the transform-origin is set to 0 0`, () => {

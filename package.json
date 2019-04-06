@@ -118,6 +118,7 @@
     "perf_hooks": "^0.0.1",
     "seed-random": "2.2.0",
     "source-map-support": "^0.5.9",
+    "sylvester": "https://github.com/jcoglan/sylvester.git",
     "tiny-emitter": "2.0.2",
     "unicode-math": "^0.2.0",
     "xstate": "^4.2.3"
