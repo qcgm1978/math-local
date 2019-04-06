@@ -1,25 +1,34 @@
 import * as mobilenet from '@tensorflow-models/mobilenet';
-
+let model = null
 async function run(img: HTMLImageElement) {
-    debugger;
     // Load the MobileNetV2 model.
-    const model = await mobilenet.load(2, 1.0);
+    model = model || await mobilenet.load(2, 1.0);
 
     // Classify the image.
+    if (!img.width) {
+        img.setAttribute('height', 300)
+        img.setAttribute('width', 300)
+    }
+    if (img.width > document.body.clientWidth) {
+        img.setAttribute('width', document.body.clientWidth)
+    }
     const predictions = await model.classify(img);
     console.log('Predictions');
-    console.log(predictions);
+    return (predictions);
 }
 
 // Ensure to load the image.
 window.onload = (e) => {
     const img = document.getElementById('img') as HTMLImageElement;
-    run(img);
-
+    run(img).then(predictions => {
+        const para = document.getElementById('beauty')
+        para.textContent += predictions.map(item => `\n${item.className}: probability(${item.probability.toFixed(2)})`);
+    });
+// input func
     var input = document.querySelector('input');
     var preview = document.querySelector('.preview');
 
-    input.style.opacity = 0;
+    // input.style.opacity = 0;
     input.addEventListener('change', updateImageDisplay);
     function updateImageDisplay() {
         while (preview.firstChild) {
@@ -43,8 +52,14 @@ window.onload = (e) => {
                     image.src = window.URL.createObjectURL(curFiles[i]);
 
                     listItem.appendChild(image);
-                    listItem.appendChild(para);
-                    run(image);
+                    image.onload = function () {
+                        run(image).then(predictions => {
+                            
+                            para.textContent += predictions.map(item => `\n${item.className}: probability(${item.probability.toFixed(2)})`);
+                            listItem.appendChild(para);
+                        })
+                        
+                    }
                 } else {
                     para.textContent = 'File name ' + curFiles[i].name + ': Not a valid file type. Update your selection.';
                     listItem.appendChild(para);
