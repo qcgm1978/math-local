@@ -165,10 +165,10 @@
     "port": "9331",
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
+    "preset": "jest-puppeteer",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testEnvironment": "node",
     "testRegex": "test/jest/.*.spec.(ts|js)",
     "moduleFileExtensions": [
       "ts",
