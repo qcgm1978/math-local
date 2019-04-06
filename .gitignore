@@ -10,3 +10,4 @@ docs
 lib/
 .cache/
 dist/
+.DS_Store

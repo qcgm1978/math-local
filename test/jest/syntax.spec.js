@@ -1,7 +1,47 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
-// const jsPointer = require("js-pointer");
+it(`extension methods are, they allow us to tack on methods to existing classes without extending the class directly`, () => {
+  function Dog(name) {
+    this.name = name;
+  }
+
+  var dog1 = new Dog('Gabby');
+  expect(dog1 + '').toBe("[object Object]")
+  Dog.prototype.toString = function dogToString() {
+    return '' + this.name;
+  }
+
+  expect(dog1 + '').toBe(dog1.toString()).toBe('Gabby');
+});
+it(`macros allow us to modify the language directly by adding rules to the abstract syntax tree`, () => {
+  var de = false; // true when debugging
+  function bug(msg) { return true }
+  expect(de && bug("hello world")).toBeFalsy()
+});
+it(`automatic properties are just shorthand for getters and setters in object oriented programming languages.`, () => {
+  let handler = {}
+  let p = handler
+  p.a = 1
+  p.b = undefined
+  expect(p.a).toBe(1)
+  expect(p.b).toBeUndefined()
+  handler = {
+    get: function (obj, prop) {
+      return prop in obj ?
+        obj[prop] :
+        42;
+    }
+  };
+
+  p = new Proxy({}, handler);
+  p.a = 1;
+  p.b = undefined;
+  expect(p.a).toBe(1)
+  expect(p.b).toBeUndefined()
+  expect('c' in p).toBeFalsy()
+  expect(p.c).toBe(42)
+});
 it(`The Math.log() function returns the natural logarithm (base e) of a number`, () => {
   expect(Math.E.toFixed(2)).toBe("2.72");
   const num = Math.log(Math.E);
@@ -42,7 +82,7 @@ it(`The ECMAScript Internationalization API provides a convenient mechanism for 
   }
 });
 it(`\w any character that is A-Z, a-z, or 0-9`, () => {
-  let hideWords = function(string) {
+  let hideWords = function (string) {
     return string.replace(/\w/g, "#");
   };
 
@@ -99,7 +139,7 @@ it(`作为构造函数调用，构造函数试图初始化这个新创建的对�
 });
 it(`作为对象的方法调用，该对象即为调用上下文，this指向该对象`, () => {
   var q = "window";
-  var func = function() {
+  var func = function () {
     expect(this.q).toMatch(/obj|anotherObj/);
   };
 
@@ -117,7 +157,7 @@ it(`作为对象的方法调用，该对象即为调用上下文，this指向该
 });
 it(`作为函数调用，this指向全局对象`, () => {
   var q = "window";
-  var func = function() {
+  var func = function () {
     expect(this.q).toBe();
     expect(this.process.title).toMatch(/node|\/usr\/local\/bin\/node/);
   };
@@ -280,34 +320,34 @@ describe(`The async function declaration defines an asynchronous function, which
   it(`In real situations, the promise may take some time before it rejects. So await will wait, and then throw an error.
 
 We can catch that error using try..catch, the same way as a regular throw:`, done => {
-    const getData = _ => new Promise(resolve => resolve(0)),
-      getMoreData = foo =>
-        new Promise(resolve => setTimeout(_ => resolve(++foo), 10));
-    (async () => {
-      try {
-        const a = await getData();
-        const b = await getMoreData(a);
-        const c = await getMoreData(b);
-        const d = await getMoreData(c);
-        const e = await getMoreData(d);
-        expect(e).toBe(4);
-        throw new Error(0);
-      } catch (err) {
-        expect(err.message).toBe("0");
-      }
-    })();
-    (async () => {
-      try {
-        const a = await getData();
-        const b = await getMoreData(a);
-        expect(b).toBe(1);
-        throw new Error(0);
-      } catch (err) {
-        expect(err.message).toBe("0");
-        done();
-      }
-    })();
-  });
+      const getData = _ => new Promise(resolve => resolve(0)),
+        getMoreData = foo =>
+          new Promise(resolve => setTimeout(_ => resolve(++foo), 10));
+      (async () => {
+        try {
+          const a = await getData();
+          const b = await getMoreData(a);
+          const c = await getMoreData(b);
+          const d = await getMoreData(c);
+          const e = await getMoreData(d);
+          expect(e).toBe(4);
+          throw new Error(0);
+        } catch (err) {
+          expect(err.message).toBe("0");
+        }
+      })();
+      (async () => {
+        try {
+          const a = await getData();
+          const b = await getMoreData(a);
+          expect(b).toBe(1);
+          throw new Error(0);
+        } catch (err) {
+          expect(err.message).toBe("0");
+          done();
+        }
+      })();
+    });
 });
 describe(`pointer`, () => {
   it(`Within a function, one may change the contents of a passed object via that reference, but you cannot modify the reference that the caller had because your reference is only a copy`, () => {
@@ -378,10 +418,10 @@ describe(`pointer`, () => {
 
     var i;
     var p = createPointer(
-      function() {
+      function () {
         return i;
       },
-      function(v) {
+      function (v) {
         i = v;
       }
     );
@@ -397,10 +437,10 @@ describe(`pointer`, () => {
     // You can create multiple pointers to the same variable.
 
     var q = createPointer(
-      function() {
+      function () {
         return i;
       },
-      function(v) {
+      function (v) {
         i = v;
       }
     );
@@ -412,10 +452,10 @@ describe(`pointer`, () => {
 
     var j = "other";
     q = createPointer(
-      function() {
+      function () {
         return j;
       },
-      function(v) {
+      function (v) {
         j = v;
       }
     );
@@ -437,10 +477,10 @@ describe(`pointer`, () => {
     function example() {
       var myVar = "myVar as local variable from example";
       var r = createPointer(
-        function() {
+        function () {
           return myVar;
         },
-        function(v) {
+        function (v) {
           myVar = v;
         }
       );
@@ -454,10 +494,10 @@ describe(`pointer`, () => {
     function malloc() {
       var i;
       return createPointer(
-        function() {
+        function () {
           return i;
         },
-        function(v) {
+        function (v) {
           i = v;
         }
       );
@@ -468,10 +508,10 @@ describe(`pointer`, () => {
 
     var flowers = new Misdirection(
       createPointer(
-        function() {
+        function () {
           return flowers;
         },
-        function(v) {
+        function (v) {
           flowers = v;
         }
       )
@@ -480,13 +520,13 @@ describe(`pointer`, () => {
     expect(flowers + "").toBe("Eh... what's up doc?");
 
     function Misdirection(flowers) {
-      this.abracadabra = function() {
+      this.abracadabra = function () {
         flowers.value = new Rabbit();
       };
     }
 
     function Rabbit() {
-      this.toString = function() {
+      this.toString = function () {
         return "Eh... what's up doc?";
       };
     }
