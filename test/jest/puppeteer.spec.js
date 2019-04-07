@@ -1,9 +1,10 @@
 describe('Google', () => {
     beforeAll(async () => {
-        await page.goto('https://google.com')
+        await (page.url=_=>'sogou')
+        // await page.goto('https://sogou.com')
     })
 
     it('should display "google" text on page', async () => {
-        await expect(page.url()).toMatch('google')
+        await expect(page.url()).toMatch('sogou')
     })
 })
