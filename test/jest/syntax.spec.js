@@ -1,8 +1,15 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
-it(`Use "Math.trunc()" to truncate a floating point number and return its integer part. This function doesn't do any rounding, it simply removes all the digits following the decimal. Now you have a whole number, yay 🎊`,()=>{
-  const number=80.6
+it(`Every odd integer is the difference of 2 squares`, () => {
+  const num = Math.trunc(Math.random() * 10)
+  expect(num).toBeGreaterThan(0).toBeLessThan(10)
+  const odd = 2 * num + 1
+  const squaresDifference = (num + 1) ** 2 - num ** 2
+  expect(odd).toBe(squaresDifference)
+});
+it(`Use "Math.trunc()" to truncate a floating point number and return its integer part. This function doesn't do any rounding, it simply removes all the digits following the decimal. Now you have a whole number, yay 🎊`, () => {
+  const number = 80.6
   expect(Math.trunc(number)).toBe(80)
 });
 it(`extension methods are, they allow us to tack on methods to existing classes without extending the class directly`, () => {
