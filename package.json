@@ -138,6 +138,7 @@
     "istanbul": "0.4.5",
     "jest": "^22.4.4",
     "jest-chain": "^1.0.4",
+    "jest-puppeteer": "^4.1.0",
     "jsep": "0.3.3",
     "math-expression-evaluator": "1.2.17",
     "mkdirp": "0.5.1",
