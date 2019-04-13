@@ -1,6 +1,41 @@
 // 通过require获取两个node内置模块
 const http = require("http");
 const nUrl = require("url");
+it(`Get local IP address in node.js`, () => {
+  var os = require('os');
+  var ifaces = os.networkInterfaces();
+
+  Object.keys(ifaces).forEach(function (ifname) {
+    var alias = 0;
+
+    ifaces[ifname].forEach(function (iface) {
+      if ('IPv4' !== iface.family || iface.internal !== false) {
+        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+        return;
+      }
+
+      if (alias >= 1) {
+        // this single interface has multiple ipv4 addresses
+        console.log(ifname + ':' + alias, iface.address);
+      } else {
+        // this interface has only one ipv4 adress
+        expect(ifname).toBe("en0")
+        expect(iface.address).toBe("192.168.16.94");
+        var geoip = require('geoip-lite');
+
+        let ip = iface.address;
+        let geo = geoip.lookup(ip);
+
+        expect(geo).toBeNull()
+        ip = "207.97.227.239";
+        geo = geoip.lookup(ip);
+
+        expect(geo.ll).toEqual([37.751, -97.822]);
+      }
+      ++alias;
+    });
+  });
+});
 it(`实现一个简单的Server`, () => {
   // index.js
   // '127.0.0.1'表明只有本机可访问，'0.0.0.0'表示所有人可访问
