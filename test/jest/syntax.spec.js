@@ -107,7 +107,7 @@ it('If the only argument passed to the Array constructor is an integer between 0
   expect(arr).toEqual([undefined, undefined, undefined, undefined, undefined]);
 });
 
-it('\w any character that is A-Z, a-z, or 0-9', () => {
+it('\\w any character that is A-Z, a-z, or 0-9', () => {
   let hideWords = function (string) {
     return string.replace(/\w/g, '#');
   };
@@ -528,7 +528,7 @@ describe('pointer', () => {
         }
       );
     }
-    var p = malloc(); // p points to a variable we just allocated from the heap
+    p = malloc(); // p points to a variable we just allocated from the heap
     p.value = 2; // write a 2 into it
     // Your magic trick works too:
 
