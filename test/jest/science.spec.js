@@ -2,7 +2,8 @@
 const math = require('../../dist/math');
 it('This is the only known solution to n! = a!b! apart from the general pattern, (n!)! = n!(n! - 1)!', () => {
   const calFactorial = num => {
-    const arr = new Array(num).fill().map((item, i) => i + 1);
+    const arr = Array.from(new Array(num), (val, index) => index + 1);
+
     return arr.reduce((acc, item) => {
       return acc * item;
     });
