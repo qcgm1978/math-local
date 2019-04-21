@@ -2,6 +2,34 @@
 const _ = require('lodash');
 const generateNewMatches = require('./matchers');
 generateNewMatches();
+it(` <derived class> or <base class>`, () => {
+  class Dog {
+    constructor() { }
+    bark() {
+      return 'bark'
+    }
+  }
+
+  class EnclosureSpace {
+    constructor({ surface }) {
+      this.surface = surface
+    }
+    getSurface() {
+      return this.surface
+    }
+  }
+  class House extends EnclosureSpace {
+    constructor(config) {
+      super(config)
+    }
+    dogBark() {
+      return new Dog().bark()
+    }
+  }
+  const house = new House({ surface: 4 })
+  expect(house.dogBark()).toBe('bark')
+  expect(house.getSurface()).toBe(4)
+});
 it('How to Capitalize a Word in JavaScript', () => {
   let name = 'samantha';
   let result = name.toUpperCase();
