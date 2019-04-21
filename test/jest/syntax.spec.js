@@ -2,6 +2,81 @@
 const _ = require('lodash');
 const generateNewMatches = require('./matchers');
 generateNewMatches();
+it(`Formatting dates with JavaScript`, () => {
+  const date = new Date(1555861886106); // current time & date
+
+  const month = date.getMonth();
+  expect(month).toBe(3);
+  expect(month >= 10 ? month.toString() : `0${month}`).toBe('03');
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+  ];
+  expect(months[month]).toBe('April')
+  expect(date.getFullYear()).toBe(2019); // Year
+  const dayOfMonth = date.getDate();
+  expect(dayOfMonth).toBe(21);
+  function getOrdinal(number) {
+    // using the % modulo operator to get the last digit of the number
+    const lastDigitOfNumber = number % 10;
+
+    switch (lastDigitOfNumber) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  }
+  expect(dayOfMonth < 10 ? `0${dayOfMonth}` : dayOfMonth.toString()).toBe('21');
+  expect(`${dayOfMonth}${getOrdinal(dayOfMonth)}`).toBe('21st');
+  const day = date.getDay();
+  expect(day).toBe(0);
+  const weekDays = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
+  expect(weekDays[day]).toBe('Sunday');
+  expect(date.getHours()).toBe(23);
+  expect(date.getMinutes()).toBe(51);
+  expect(date.getSeconds()).toBe(26);
+  const formatDetailTime = ({ date, is12Hour = true }) => {
+    let time = [date.getHours(), date.getMinutes(), date.getSeconds()]
+    let str = ''
+    time[0] = time[0] ? time[0] : 12
+    if (is12Hour) {
+      str = time[0] > 12 ? 'pm' : 'am'
+    }
+    const hour = is12Hour ? time[0] % 12 : time[0];
+    time[0] = hour ? hour : 12
+    time = time.map(item => item < 10 ? `0${item}` : item.toString())
+    return `${time[0]}:${time[1]}:${time[2]}${str}`
+  }
+  expect(formatDetailTime({ date })).toBe('11:51:26pm')
+  date.setHours(0)
+  expect(formatDetailTime({ date })).toBe('12:51:26am')
+  date.setMinutes(1)
+  expect(formatDetailTime({ date })).toBe('12:01:26am')
+
+});
 it(` <derived class> or <base class>`, () => {
   class Dog {
     constructor() { }
