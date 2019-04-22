@@ -26,6 +26,7 @@ it(`Formatting dates with JavaScript`, () => {
   expect(date.getFullYear()).toBe(2019); // Year
   const dayOfMonth = date.getDate();
   expect(dayOfMonth).toBe(21);
+  
   function getOrdinal(number) {
     const lastDigitOfNumber = number % 10;
     switch (lastDigitOfNumber) {
