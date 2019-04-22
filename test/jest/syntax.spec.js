@@ -29,7 +29,6 @@ it(`Formatting dates with JavaScript`, () => {
   function getOrdinal(number) {
     // using the % modulo operator to get the last digit of the number
     const lastDigitOfNumber = number % 10;
-
     switch (lastDigitOfNumber) {
       case 1:
         return 'st';
