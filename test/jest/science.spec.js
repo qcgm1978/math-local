@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 const math = require('../../dist/math');
 it('This is the only known solution to n! = a!b! apart from the general pattern, (n!)! = n!(n! - 1)!', () => {
   const calFactorial = num => {

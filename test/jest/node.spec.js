@@ -1,4 +1,5 @@
 // 通过require获取两个node内置模块
+
 const http = require("http");
 const nUrl = require("url");
 it(`Get local IP address in node.js`, () => {
@@ -16,7 +17,7 @@ it(`Get local IP address in node.js`, () => {
 
       if (alias >= 1) {
         // this single interface has multiple ipv4 addresses
-        console.log(ifname + ':' + alias, iface.address);
+        // console.log(ifname + ':' + alias, iface.address);
       } else {
         // this interface has only one ipv4 adress
         expect(ifname).toBe("en0")

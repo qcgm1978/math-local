@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 const _ = require('lodash');
 const generateNewMatches = require('./matchers');
 generateNewMatches();
