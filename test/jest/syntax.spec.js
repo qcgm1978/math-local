@@ -3,8 +3,7 @@ const _ = require('lodash');
 const generateNewMatches = require('./matchers');
 generateNewMatches();
 it(`Formatting dates with JavaScript`, () => {
-  const date = new Date(1555861886106); // current time & date
-
+  let date = new Date(new Date(1555861886106).toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
   const month = date.getMonth();
   expect(month).toBe(3);
   expect(month >= 10 ? month.toString() : `0${month}`).toBe('03');
