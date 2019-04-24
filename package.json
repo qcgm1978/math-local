@@ -184,6 +184,7 @@
     ]
   },
   "scripts": {
+    "wipe": "npm-wipe",
     "dev": "parcel index.html",
     "build-parcel": "parcel build index.html",
     "serve": "node test/server.js",
