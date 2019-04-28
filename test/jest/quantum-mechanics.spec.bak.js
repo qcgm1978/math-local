@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // const math = require("../../dist/math");
 const math = require("mathjs");
 const isEqual = require("../../lib/expression/isEqual.js");

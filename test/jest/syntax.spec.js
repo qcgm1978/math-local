@@ -1,13 +1,133 @@
+/* eslint-disable no-undef */
+
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
-it(`check and see if two separate data structures have the same content`, () => {
+it(`Formatting dates with JavaScript`, () => {
+  let date = new Date(
+    new Date(1555861886106).toLocaleString("en-US", {
+      timeZone: "Asia/Shanghai"
+    })
+  );
+  const month = date.getMonth();
+  expect(month).toBe(3);
+  expect(month >= 10 ? month.toString() : `0${month}`).toBe("03");
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  expect(months[month]).toBe("April");
+  expect(date.getFullYear()).toBe(2019); // Year
+  const dayOfMonth = date.getDate();
+  expect(dayOfMonth).toBe(21);
+  function getOrdinal(number) {
+    const lastDigitOfNumber = number % 10;
+    switch (lastDigitOfNumber) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  }
+  expect(dayOfMonth < 10 ? `0${dayOfMonth}` : dayOfMonth.toString()).toBe("21");
+  expect(`${dayOfMonth}${getOrdinal(dayOfMonth)}`).toBe("21st");
+  const day = date.getDay();
+  expect(day).toBe(0);
+  const weekDays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  expect(weekDays[day]).toBe("Sunday");
+  expect(date.getHours()).toBe(23);
+  expect(date.getMinutes()).toBe(51);
+  expect(date.getSeconds()).toBe(26);
+  const formatDetailTime = ({ date, is12Hour = true }) => {
+    let time = [date.getHours(), date.getMinutes(), date.getSeconds()];
+    let str = "";
+    time[0] = time[0] ? time[0] : 12;
+    if (is12Hour) {
+      str = time[0] > 12 ? "pm" : "am";
+    }
+    const hour = is12Hour ? time[0] % 12 : time[0];
+    time[0] = hour ? hour : 12;
+    time = time.map(item => (item < 10 ? `0${item}` : item.toString()));
+    return `${time[0]}:${time[1]}:${time[2]}${str}`;
+  };
+  expect(formatDetailTime({ date })).toBe("11:51:26pm");
+  date.setHours(0);
+  expect(formatDetailTime({ date })).toBe("12:51:26am");
+  date.setMinutes(1);
+  expect(formatDetailTime({ date })).toBe("12:01:26am");
+});
+it(` <derived class> or <base class>`, () => {
+  class Dog {
+    constructor() {}
+    bark() {
+      return "bark";
+    }
+  }
+
+  class EnclosureSpace {
+    constructor({ surface }) {
+      this.surface = surface;
+    }
+    getSurface() {
+      return this.surface;
+    }
+  }
+  class House extends EnclosureSpace {
+    constructor(config) {
+      super(config);
+    }
+    dogBark() {
+      return new Dog().bark();
+    }
+  }
+  const house = new House({ surface: 4 });
+  expect(house.dogBark()).toBe("bark");
+  expect(house.getSurface()).toBe(4);
+});
+it("How to Capitalize a Word in JavaScript", () => {
+  let name = "samantha";
+  let result = name.toUpperCase();
+  expect(result).toBe("SAMANTHA");
+  const arr = [null, undefined, ["hi"], 45];
+  arr.map(item => {
+    expect(_ => item.toUpperCase()).toThrow();
+  });
+  name = "samantha";
+  result = name.charAt(0);
+  expect(result.toUpperCase()).toBe("S");
+  const CapitalizeWordFirstLetter = word =>
+    word.charAt(0).toUpperCase() + word.slice(1);
+  expect(CapitalizeWordFirstLetter(name)).toBe("Samantha");
+});
+it("check and see if two separate data structures have the same content", () => {
   const arraysAreEqual = (array1, array2) => {
     return array1.every((el, index) => el === array2[index]);
   };
   expect(arraysAreEqual([1, 2, 3], [1, 2, 3])).toBeTruthy();
 });
-it(`Every odd integer is the difference of 2 squares`, () => {
+it("Every odd integer is the difference of 2 squares", () => {
   const num = Math.trunc(Math.random() * 10);
   expect(num)
     .toBeGreaterThanOrEqual(0)
@@ -44,11 +164,11 @@ it(`Every odd integer is the difference of 2 squares`, () => {
     .toBe(-559939584)
     .not.toBe(truncNum);
 });
-it(`Use "Math.trunc()" to truncate a floating point number and return its integer part. This function doesn't do any rounding, it simply removes all the digits following the decimal. Now you have a whole number, yay 🎊`, () => {
+it('Use "Math.trunc()" to truncate a floating point number and return its integer part. This function doesn\'t do any rounding, it simply removes all the digits following the decimal. Now you have a whole number, yay 🎊', () => {
   const number = 80.6;
   expect(Math.trunc(number)).toBe(80);
 });
-it(`extension methods are, they allow us to tack on methods to existing classes without extending the class directly`, () => {
+it("extension methods are, they allow us to tack on methods to existing classes without extending the class directly", () => {
   function Dog(name) {
     this.name = name;
   }
@@ -63,14 +183,14 @@ it(`extension methods are, they allow us to tack on methods to existing classes 
     .toBe(dog1.toString())
     .toBe("Gabby");
 });
-it(`macros allow us to modify the language directly by adding rules to the abstract syntax tree`, () => {
+it("macros allow us to modify the language directly by adding rules to the abstract syntax tree", () => {
   var de = false; // true when debugging
   function bug(msg) {
     return true;
   }
   expect(de && bug("hello world")).toBeFalsy();
 });
-it(`automatic properties are just shorthand for getters and setters in object oriented programming languages.`, () => {
+it("automatic properties are just shorthand for getters and setters in object oriented programming languages.", () => {
   let handler = {};
   let p = handler;
   p.a = 1;
@@ -91,7 +211,7 @@ it(`automatic properties are just shorthand for getters and setters in object or
   expect("c" in p).toBeFalsy();
   expect(p.c).toBe(42);
 });
-it(`The Math.log() function returns the natural logarithm (base e) of a number`, () => {
+it("The Math.log() function returns the natural logarithm (base e) of a number", () => {
   expect(Math.E.toFixed(2)).toBe("2.72");
   const num = Math.log(Math.E);
   const num2 = (2 * Math.log(Math.E)) / 2;
@@ -100,26 +220,26 @@ it(`The Math.log() function returns the natural logarithm (base e) of a number`,
   const num1 = Math.log(0.1220095068291097);
   expect(num1.toFixed(1)).toBe("-2.1");
 });
-it(`The Float32Array typed array represents an array of 32-bit floating point numbers (corresponding to the C float data type) in the platform byte order. `, () => {
+it("The Float32Array typed array represents an array of 32-bit floating point numbers (corresponding to the C float data type) in the platform byte order. ", () => {
   var float32 = new Float32Array(2);
   float32[0] = 42;
   expect(float32[0]).toBe(42); // 42
   expect(float32.length).toBe(2); // 2
   expect(float32.BYTES_PER_ELEMENT).toBe(4);
 });
-it(`The Math.random() function returns a floating-point, pseudo-random number in the range 0–1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range`, () => {
+it("The Math.random() function returns a floating-point, pseudo-random number in the range 0–1 (inclusive of 0, but not 1) with approximately uniform distribution over that range — which you can then scale to your desired range", () => {
   const num = Math.random();
   expect(num)
     .toBeGreaterThanOrEqual(0)
     .toBeLessThan(1);
-  expect(num.toString().length).toBeWithinRange(17, 21);
+  expect(num.toString().length).toBeWithinRange(15, 21);
 });
-it(`If the only argument passed to the Array constructor is an integer between 0 and 232-1 (inclusive), this returns a new JavaScript array with its length property set to that number `, () => {
+it("If the only argument passed to the Array constructor is an integer between 0 and 232-1 (inclusive), this returns a new JavaScript array with its length property set to that number ", () => {
   const arr = new Array(5);
   expect(arr).toEqual([undefined, undefined, undefined, undefined, undefined]);
 });
 
-it(`\w any character that is A-Z, a-z, or 0-9`, () => {
+it("\\w any character that is A-Z, a-z, or 0-9", () => {
   let hideWords = function(string) {
     return string.replace(/\w/g, "#");
   };
@@ -128,7 +248,7 @@ it(`\w any character that is A-Z, a-z, or 0-9`, () => {
 
   expect(hideWords(exampleSentence)).toBe("# ~ # ~ # ~");
 });
-it(`prefer the || operator`, () => {
+it("prefer the || operator", () => {
   let isHappyHour = "🍺";
   // Logical Operator
   let isHappyHour1 = isHappyHour || "🍵"; // '🍺'
@@ -146,7 +266,7 @@ it(`prefer the || operator`, () => {
     .toBe(isHappyHour3)
     .toBe("🍺");
 });
-it(`通过函数的call/apply方法间接调用, call/apply方法的第一个参数是调用上下文，在函数体内，通过this获得对它的引用`, () => {
+it("通过函数的call/apply方法间接调用, call/apply方法的第一个参数是调用上下文，在函数体内，通过this获得对它的引用", () => {
   var q = "window";
 
   function func() {
@@ -163,7 +283,7 @@ it(`通过函数的call/apply方法间接调用, call/apply方法的第一个参
   func.apply(obj); //obj
   func.call(obj);
 });
-it(`作为构造函数调用，构造函数试图初始化这个新创建的对象，并将这个对象作为其调用上下文，this 指向这个新创建的对象`, () => {
+it("作为构造函数调用，构造函数试图初始化这个新创建的对象，并将这个对象作为其调用上下文，this 指向这个新创建的对象", () => {
   var q = "window";
 
   function Func() {
@@ -175,7 +295,7 @@ it(`作为构造函数调用，构造函数试图初始化这个新创建的对�
 
   expect(this.q).toBeUndefined();
 });
-it(`作为对象的方法调用，该对象即为调用上下文，this指向该对象`, () => {
+it("作为对象的方法调用，该对象即为调用上下文，this指向该对象", () => {
   var q = "window";
   var func = function() {
     expect(this.q).toMatch(/obj|anotherObj/);
@@ -193,7 +313,7 @@ it(`作为对象的方法调用，该对象即为调用上下文，this指向该
   obj.func(); //obj
   obj.anotherObj.func();
 });
-it(`作为函数调用，this指向全局对象`, () => {
+it("作为函数调用，this指向全局对象", () => {
   var q = "window";
   var func = function() {
     expect(this.q).toBe();
@@ -202,8 +322,8 @@ it(`作为函数调用，this指向全局对象`, () => {
 
   func();
 });
-describe(`There are 2 types of array cloning: shallow & deep`, () => {
-  it(`Shallow copies only cover the 1st level of the array and the rest are referenced. If you want a true copy of nested arrays, you’ll need a deep clone`, () => {
+describe("There are 2 types of array cloning: shallow & deep", () => {
+  it("Shallow copies only cover the 1st level of the array and the rest are referenced. If you want a true copy of nested arrays, you’ll need a deep clone", () => {
     const numbers = [1, [2], [3, [4]], 5];
     // Using JavaScript
     const jsonCopy = JSON.parse(JSON.stringify(numbers));
@@ -213,7 +333,7 @@ describe(`There are 2 types of array cloning: shallow & deep`, () => {
       .toEqual(lodashCopy)
       .toEqual(numbers);
   });
-  it(`what you copied over is not the array itself but the pointer to the memory space the array occupies. `, () => {
+  it("what you copied over is not the array itself but the pointer to the memory space the array occupies. ", () => {
     let array = [1, 2, 3];
     let arrayCopy = array; // create copy
     expect(arrayCopy).toEqual([1, 2, 3]);
@@ -223,7 +343,7 @@ describe(`There are 2 types of array cloning: shallow & deep`, () => {
       .toEqual(array)
       .toEqual(["👻", 2, 3]);
   });
-  it(`So the solution is to copy over the value NOT the pointer`, () => {
+  it("So the solution is to copy over the value NOT the pointer", () => {
     let array = [1, 2, 3];
     let arrayCopy = [...array]; // create TRUE copy
     expect(arrayCopy).toEqual(array); // [1,2,3];
@@ -233,7 +353,7 @@ describe(`There are 2 types of array cloning: shallow & deep`, () => {
       .not.toEqual(array)
       .toEqual(["👻", 2, 3]);
   });
-  it(`spread ... to copy an array, I'm only creating a shallow copy. If the array is nested or multi-dimensional, it won't work`, () => {
+  it("spread ... to copy an array, I'm only creating a shallow copy. If the array is nested or multi-dimensional, it won't work", () => {
     let nestedArray = [1, [2], 3];
     let arrayCopy = [...nestedArray];
     // Make some changes
@@ -245,7 +365,7 @@ describe(`There are 2 types of array cloning: shallow & deep`, () => {
     // ❌ Nested array got affected
     expect(nestedArray).toEqual([1, ["💩"], 3]);
   });
-  it(`So the solution is to do a deep clone`, () => {
+  it("So the solution is to do a deep clone", () => {
     let nestedArray = [1, [2], 3];
     let arrayCopy = JSON.parse(JSON.stringify(nestedArray));
     // Make some changes
@@ -256,7 +376,7 @@ describe(`There are 2 types of array cloning: shallow & deep`, () => {
     expect(nestedArray).toEqual([1, [2], 3]);
   });
 });
-it(`Difference between Spread vs Concat`, () => {
+it("Difference between Spread vs Concat", () => {
   function combineArray(array1, array2) {
     return [...array1, ...array2];
   }
@@ -278,7 +398,7 @@ it(`Difference between Spread vs Concat`, () => {
   ]);
   expect(combineArrayByConcat(isArray, notArray)).toEqual([1, 2, 3, "random"]);
 });
-it(`push, it manipulates or changes the existing array. It does NOT create a new array`, () => {
+it("push, it manipulates or changes the existing array. It does NOT create a new array", () => {
   const cars = ["🚗", "🚙"];
   const trucks = ["🚚", "🚛"];
   const combined = cars.push(...trucks);
@@ -292,8 +412,8 @@ it(`push, it manipulates or changes the existing array. It does NOT create a new
   expect(cars).toEqual(["🚗", "🚙", "🚚", "🚛", ["🚚", "🚛"], "🚚", "🚛"]);
   // ✅ cars: [ '🚗', '🚙', '🚚', '🚛' ]
 });
-describe(`The async function declaration defines an asynchronous function, which returns an AsyncFunction object. An asynchronous function is a function which operates asynchronously via the event loop, using an implicit Promise to return its result. But the syntax and structure of your code using async functions is much more like using standard synchronous functions.`, () => {
-  it(`callback hell`, done => {
+describe("The async function declaration defines an asynchronous function, which returns an AsyncFunction object. An asynchronous function is a function which operates asynchronously via the event loop, using an implicit Promise to return its result. But the syntax and structure of your code using async functions is much more like using standard synchronous functions.", () => {
+  it("callback hell", done => {
     const a = 0,
       getData = callback => callback(a),
       getMoreData = (foo, callback) => setTimeout(_ => callback(++foo), 10);
@@ -310,7 +430,7 @@ describe(`The async function declaration defines an asynchronous function, which
       });
     });
   });
-  it(`Promise`, done => {
+  it("Promise", done => {
     const a = 0,
       getData = foo => new Promise(resolve => resolve(foo)),
       getMoreData = foo =>
@@ -325,7 +445,7 @@ describe(`The async function declaration defines an asynchronous function, which
         done();
       });
   });
-  it(`Promise without param`, done => {
+  it("Promise without param", done => {
     const getData = _ => new Promise(resolve => resolve(a)),
       getMoreData = foo =>
         new Promise(resolve => setTimeout(_ => resolve(++foo), 10));
@@ -340,7 +460,7 @@ describe(`The async function declaration defines an asynchronous function, which
         done();
       });
   });
-  it(`The async function keyword can be used to define async functions inside expressions.`, done => {
+  it("The async function keyword can be used to define async functions inside expressions.", done => {
     const getData = _ => new Promise(resolve => resolve(a)),
       getMoreData = foo =>
         new Promise(resolve => setTimeout(_ => resolve(++foo), 10));
@@ -387,8 +507,8 @@ We can catch that error using try..catch, the same way as a regular throw:`, don
     })();
   });
 });
-describe(`pointer`, () => {
-  it(`Within a function, one may change the contents of a passed object via that reference, but you cannot modify the reference that the caller had because your reference is only a copy`, () => {
+describe("pointer", () => {
+  it("Within a function, one may change the contents of a passed object via that reference, but you cannot modify the reference that the caller had because your reference is only a copy", () => {
     var foo = { bar: 1 };
 
     function tryToMungeReference(obj) {
@@ -414,7 +534,7 @@ describe(`pointer`, () => {
     changeObj(a);
     expect(a).toEqual({ a: { a: "a" } });
   });
-  it(` objects are pointers.`, () => {
+  it(" objects are pointers.", () => {
     const object2 = { a: 2 };
     //this will make object1 point to the memory location that object2 is pointing at
     const object1 = object2;
@@ -441,7 +561,7 @@ describe(`pointer`, () => {
   //   object = { one: { two: [{ three: 4 }] } };
   //   expect(jsPointer.get(object, "/one/two/0/three")).toBe(4);
   // });
-  it(`    Since the only thing you're using the pointer for is to dereference it to access another variable, you can just encapsulate it in a property.`, () => {
+  it("    Since the only thing you're using the pointer for is to dereference it to access another variable, you can just encapsulate it in a property.", () => {
     function createPointer(read, write) {
       return {
         get value() {
@@ -540,7 +660,7 @@ describe(`pointer`, () => {
         }
       );
     }
-    var p = malloc(); // p points to a variable we just allocated from the heap
+    p = malloc(); // p points to a variable we just allocated from the heap
     p.value = 2; // write a 2 into it
     // Your magic trick works too:
 
@@ -578,7 +698,7 @@ test("numeric ranges", () => {
   //     bananas: expect.not.toBeWithinRange(11, 20),
   // });
 });
-it(`The add() method appends a new element with a specified value to the end of a Set object.`, () => {
+it("The add() method appends a new element with a specified value to the end of a Set object.", () => {
   const set1 = new Set();
 
   set1.add(42);
@@ -594,7 +714,7 @@ it(`The add() method appends a new element with a specified value to the end of 
   mySet.add(5).add("some text"); // chainable
   expect(mySet).toEqual(new Set([1, 5, "some text"]));
 });
-it(`A higher order function is a function that takes another function as a parameter.`, () => {
+it("A higher order function is a function that takes another function as a parameter.", () => {
   const uppercaseNames = ["milu", "rantanplan"].map(name => name.toUpperCase());
   expect(uppercaseNames).toEqual(["MILU", "RANTANPLAN"]);
   const filteredNames = ["milu", "rantanplan"].filter(
@@ -665,7 +785,7 @@ describe("foo", () => {
   // });
 });
 
-it(`Tip: Get the unique values of an array in JavaScript.`, () => {
+it("Tip: Get the unique values of an array in JavaScript.", () => {
   const arr = ["Dan", "Sarah", "Sophie", "Sarah"];
   const uniqueArray = arr => [...new Set(arr)];
   const uniqueArray2 = arr => Array.from(new Set(arr));
@@ -693,7 +813,7 @@ it(`Tip: Get the unique values of an array in JavaScript.`, () => {
     .toEqual(uniqueArray5(arr))
     .toEqual(["Dan", "Sarah", "Sophie"]);
 });
-it(`Use the || operator to set a default value. Remember 0 is a falsy value. So the default value will kick in when it gets to 0.`, () => {
+it("Use the || operator to set a default value. Remember 0 is a falsy value. So the default value will kick in when it gets to 0.", () => {
   const generator = function* gen() {
     var i = 3;
     while (true) {
@@ -708,7 +828,7 @@ it(`Use the || operator to set a default value. Remember 0 is a falsy value. So 
     }
   }
 });
-it(`4 ways to combine strings in JavaScript 🤩`, () => {
+it("4 ways to combine strings in JavaScript 🤩", () => {
   const h = "hello",
     s = "🤩";
   expect(h + " " + s)
@@ -717,7 +837,7 @@ it(`4 ways to combine strings in JavaScript 🤩`, () => {
     .toBe(h.concat(" ").concat(s))
     .toBe([h, s].join(" "));
 });
-it(`2 ways to repeat strings in JavaScript 🎉`, () => {
+it("2 ways to repeat strings in JavaScript 🎉", () => {
   expect("🎉".repeat(3))
     .toBe(
       Array(3)
@@ -726,12 +846,12 @@ it(`2 ways to repeat strings in JavaScript 🎉`, () => {
     )
     .toBe("🎉🎉🎉");
 });
-it(`Why can’t programmers tell the difference between Halloween & Christmas?`, () => {
+it("Why can’t programmers tell the difference between Halloween & Christmas?", () => {
   expect(parseInt(31, 8))
     .toBe(parseInt(25, 10))
     .toBe(25);
 });
-describe(`5 Tips to Write Better Conditionals in JavaScript`, () => {
+describe("5 Tips to Write Better Conditionals in JavaScript", () => {
   it("1. Use Array.includes for Multiple Criteria", () => {
     const redFruits = ["apple", "strawberry", "cherry", "cranberries"];
     expect(redFruits.includes("cherry")).toBeTruthy();
@@ -755,7 +875,7 @@ describe(`5 Tips to Write Better Conditionals in JavaScript`, () => {
     expect(test("rice")).toBeUndefined();
     expect(test("apple", 11)).toBe("big quantity");
   });
-  it(`3. Use Default Function Parameters and Destructuring`, () => {
+  it("3. Use Default Function Parameters and Destructuring", () => {
     // Include lodash library, you will get _
     function test(fruit) {
       return _.get(fruit, "name", "unknown"); // get property name, if not available, assign default value 'unknown'
@@ -767,7 +887,7 @@ describe(`5 Tips to Write Better Conditionals in JavaScript`, () => {
       .toBe("unknown");
     expect(test({ name: "apple", color: "red" })).toBe("apple");
   });
-  it(`4. Favor Map / Object Literal than Switch Statement`, () => {
+  it("4. Favor Map / Object Literal than Switch Statement", () => {
     const fruits = [
       { name: "apple", color: "red" },
       { name: "strawberry", color: "red" },
@@ -789,7 +909,7 @@ describe(`5 Tips to Write Better Conditionals in JavaScript`, () => {
       ])
       .toHaveLength(2);
   });
-  it(`5. Use Array.every & Array.some for All / Partial Criteria`, () => {
+  it("5. Use Array.every & Array.some for All / Partial Criteria", () => {
     const fruits = [
       { name: "apple", color: "red" },
       { name: "banana", color: "yellow" },
