@@ -10,11 +10,39 @@ it(`check and see if two separate data structures have the same content`, () => 
 it(`Every odd integer is the difference of 2 squares`, () => {
   const num = Math.trunc(Math.random() * 10);
   expect(num)
-    .toBeGreaterThan(0)
+    .toBeGreaterThanOrEqual(0)
     .toBeLessThan(10);
   const odd = 2 * num + 1;
   const squaresDifference = (num + 1) ** 2 - num ** 2;
   expect(odd).toBe(squaresDifference);
+  expect(Math.trunc("80.1")).toBe(80); // 80
+  expect(parseInt("80.1")).toBe(80); // 80
+  expect(parseInt(80.1)).toBe(80); // 80
+  expect(Math.trunc("hello")).toBeNaN(); // NaN
+  expect(Math.trunc(NaN)).toBeNaN(); // NaN
+  expect(Math.trunc(undefined)).toBeNaN(); // NaN
+  expect(Math.trunc()).toBeNaN(); // NaN
+  // parseInt. When you pass in an argument that's not a string, in our case a number, it will first convert the value to a string using the toString() abstract operation.
+  const number = 1000000000000000000000.5;
+  const result = parseInt(number);
+  expect(result).toBe(1);
+  const str = number.toString();
+  expect(str).toBe("1e+21");
+  expect(parseInt(str))
+    .toBe(parseInt(number))
+    .toBe(1);
+  // Bitwise Operator Solutions
+  const truncNum = Math.trunc(number);
+  expect(truncNum)
+    .toBe(1e21)
+    .toBe(1000000000000000000000);
+  expect(~~80.6)
+    .toBe(80.6 | 0)
+    .toBe(80);
+  expect(~~number)
+    .toBe(number | 0)
+    .toBe(-559939584)
+    .not.toBe(truncNum);
 });
 it(`Use "Math.trunc()" to truncate a floating point number and return its integer part. This function doesn't do any rounding, it simply removes all the digits following the decimal. Now you have a whole number, yay 🎊`, () => {
   const number = 80.6;
