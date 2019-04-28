@@ -3,6 +3,30 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
+it(`The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.`, () => {
+  var a, b, rest;
+  [a, b] = [10, 20];
+  expect(a).toBe(10); // 10
+  expect(b).toBe(20); // 20
+
+  [a, b, ...rest] = [10, 20, 30, 40, 50];
+  expect(a).toBe(10); // 10
+  expect(b).toBe(20); // 20
+  expect(rest).toEqual([30, 40, 50]); // [30, 40, 50]
+
+  ({ a, b } = { a: 10, b: 20 });
+  expect(a).toBe(10); // 10
+  expect(b).toBe(20); // 20
+
+  // Stage 4(finished) proposal
+  ({ a, b, ...rest } = { a: 10, b: 20, c: 30, d: 40 });
+  expect(a).toBe(10); // 10
+  expect(b).toBe(20); // 20
+  expect(rest).toEqual({ c: 30, d: 40 });
+  // //swap variables
+  // let c = 1, d = 0;
+  // {c,d}={c:d,d:c}
+});
 it(`With Template Literals, it's super easy to create multi-line strings. Previously, we had to use "\n" which was messy and difficult to read`, () => {
   const str = "abc\ndef";
   const str1 = `abc
