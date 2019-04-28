@@ -3,13 +3,13 @@
 const http = require("http");
 const nUrl = require("url");
 it(`Get local IP address in node.js`, () => {
-  var os = require('os');
+  var os = require("os");
   var ifaces = os.networkInterfaces();
 
-  Object.keys(ifaces).forEach(function (ifname) {
+  Object.keys(ifaces).forEach(function(ifname) {
     var alias = 0;
-    ifaces[ifname].forEach(function (iface) {
-      if ('IPv4' !== iface.family || iface.internal !== false) {
+    ifaces[ifname].forEach(function(iface) {
+      if ("IPv4" !== iface.family || iface.internal !== false) {
         // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
         return;
       }
@@ -19,14 +19,14 @@ it(`Get local IP address in node.js`, () => {
         // console.log(ifname + ':' + alias, iface.address);
       } else {
         // this interface has only one ipv4 adress
-        expect(ifname).toBe("en0")
-        expect(iface.address).toBe("192.168.16.94");
-        var geoip = require('geoip-lite');
+        expect(ifname).toBe("en0");
+        expect(iface.address).toMatch(/192.168.16.94|10.3.0.27/);
+        var geoip = require("geoip-lite");
 
         let ip = iface.address;
         let geo = geoip.lookup(ip);
 
-        expect(geo).toBeNull()
+        expect(geo).toBeNull();
         ip = "207.97.227.239";
         geo = geoip.lookup(ip);
 
