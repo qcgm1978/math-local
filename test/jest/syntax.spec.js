@@ -3,6 +3,12 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 generateNewMatches();
+it(`With Template Literals, it's super easy to create multi-line strings. Previously, we had to use "\n" which was messy and difficult to read`, () => {
+  const str = "abc\ndef";
+  const str1 = `abc
+def`;
+  expect(str).toBe(str1);
+});
 it(`Formatting dates with JavaScript`, () => {
   let date = new Date(
     new Date(1555861886106).toLocaleString("en-US", {
