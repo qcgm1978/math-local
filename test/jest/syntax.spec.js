@@ -24,8 +24,11 @@ it(`The destructuring assignment syntax is a JavaScript expression that makes it
   expect(b).toBe(20); // 20
   expect(rest).toEqual({ c: 30, d: 40 });
   // //swap variables
-  // let c = 1, d = 0;
-  // {c,d}={c:d,d:c}
+  let c = 1,
+    d = 0;
+  [c, d] = [d, c];
+  expect(c).toBe(0);
+  expect(d).toBe(1);
 });
 it(`With Template Literals, it's super easy to create multi-line strings. Previously, we had to use "\n" which was messy and difficult to read`, () => {
   const str = "abc\ndef";
