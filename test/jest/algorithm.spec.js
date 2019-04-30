@@ -4,8 +4,16 @@ const {
   addTwoNumbers,
   getVal,
   getGenVal,
-  findMedianSortedArrays
+  findMedianSortedArrays,
+  intToRoman
 } = require("../to-jest/algorithm");
+it(``, () => {
+  //   expect(intToRoman(3)).toBe("III");
+  //   expect(intToRoman(4)).toBe("IV");
+  //   expect(intToRoman(9)).toBe("IX");
+  //   expect(intToRoman(8)).toBe("VIII");
+  //   expect(intToRoman(58)).toBe("LVIII");
+});
 it(`Given an array of integers, return indices of the two numbers such that they add up to a specific target.`, () => {
   expect(twoSum([2, 7, 11, 15], 9)).toEqual([0, 1]);
   expect(twoSum([3, 2, 4], 6)).toEqual([1, 2]);

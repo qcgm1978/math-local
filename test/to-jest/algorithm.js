@@ -1,4 +1,35 @@
 /**
+ * @param {number} num
+ * @return {string}
+ */
+var intToRoman = function(num) {
+  const obj = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
+  };
+  const arr = Object.values(obj).reverse();
+  const nextScale = arr.find(
+    (item, index) => num <= item && num >= arr[index + 1]
+  );
+  const prevScale = arr[arr.indexOf(nextScale) + 1];
+  const prop = getKeyByValue(obj, nextScale);
+    const unit = getKeyByValue(obj, 1) + "";
+    const remain = nextScale - prevScale;
+  if (remain < nextScale - prevScale) {
+    return unit.repeat(num);
+  } else {
+    return unit + prop;
+  }
+};
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+/**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
@@ -100,5 +131,6 @@ module.exports = {
   addTwoNumbers,
   getVal,
   getGenVal,
-  findMedianSortedArrays
+  findMedianSortedArrays,
+  intToRoman
 };
