@@ -18,8 +18,8 @@ var intToRoman = function(num) {
   );
   const prevScale = arr[arr.indexOf(nextScale) + 1];
   const prop = getKeyByValue(obj, nextScale);
-    const unit = getKeyByValue(obj, 1) + "";
-    const remain = nextScale - prevScale;
+  const unit = getKeyByValue(obj, 1) + "";
+  const remain = nextScale - prevScale;
   if (remain < nextScale - prevScale) {
     return unit.repeat(num);
   } else {
@@ -47,6 +47,29 @@ var twoSum = function(nums, target) {
     }
   });
   return [nums.indexOf(num), relativeIndex];
+};
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var threeSumClosest = function(nums, target) {
+  let tempOffset = Infinity,
+    tempThreeSum = 0;
+  for (let i = 0; i < nums.length; i++) {
+    for (let m = i + 1; m < nums.length; m++) {
+      const twoSum = nums[i] + nums[m];
+      for (let n = m + 1; n < nums.length; n++) {
+        const threeSum = twoSum + nums[n];
+        const offset = Math.abs(threeSum - target);
+        if (offset < tempOffset) {
+          tempOffset = offset;
+          tempThreeSum = threeSum;
+        }
+      }
+    }
+  }
+  return tempThreeSum;
 };
 let getVal = null;
 
@@ -132,5 +155,6 @@ module.exports = {
   getVal,
   getGenVal,
   findMedianSortedArrays,
-  intToRoman
+  intToRoman,
+  threeSumClosest
 };

@@ -5,8 +5,13 @@ const {
   getVal,
   getGenVal,
   findMedianSortedArrays,
-  intToRoman
+  intToRoman,
+  threeSumClosest
 } = require("../to-jest/algorithm");
+it(``, () => {
+  expect(threeSumClosest([-1, 2, 1, -4], 1)).toBe(2);
+  expect(threeSumClosest([1, 1, 1, 0], -100)).toBe(2);
+});
 it(``, () => {
   //   expect(intToRoman(3)).toBe("III");
   //   expect(intToRoman(4)).toBe("IV");
