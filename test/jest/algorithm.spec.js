@@ -6,11 +6,50 @@ const {
   getGenVal,
   findMedianSortedArrays,
   intToRoman,
-  threeSumClosest
+  threeSumClosest,
+  letterCombinations,
+  genCharArray,
+  getTelBtns,
+  fourSum
 } = require("../to-jest/algorithm");
+it(`Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.`, () => {
+  // expect(fourSum([1, 0, -1, 0, -2, 2], 0)).toEqual(3);
+  // expect(fourSum([1, 0, -1, 0, -2, 2], 0).length).toBe(3);
+});
 it(``, () => {
   expect(threeSumClosest([-1, 2, 1, -4], 1)).toBe(2);
   expect(threeSumClosest([1, 1, 1, 0], -100)).toBe(2);
+});
+it(``, () => {
+  expect(getTelBtns()).toMatchObject({});
+  expect(genCharArray("a", "z")).toEqual([
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z"
+  ]);
 });
 it(``, () => {
   //   expect(intToRoman(3)).toBe("III");

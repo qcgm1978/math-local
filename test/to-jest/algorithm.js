@@ -1,4 +1,76 @@
 /**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[][]}
+ */
+var fourSum = function(nums, target) {
+  const zeroNums = nums.map(item => item - target);
+  const natural = zeroNums.filter(item => item > 0);
+  const other = zeroNums.filter(item => item <= 0);
+  let big = [];
+  for (let i = 0; i < natural.length; i++) {
+    for (let m = i + 1; m < natural.length; m++) {
+      big.push({ [natural[i] + natural[m]]: [natural[i], natural[m]] });
+    }
+  }
+  let small = [];
+  for (let i = 0; i < other.length; i++) {
+    for (let m = i + 1; m < other.length; m++) {
+      small.push({ [natural[i] + natural[m]]: [natural[i], natural[m]] });
+    }
+  }
+  const smallKeys = Object.keys(small);
+  // console.table(big);
+  return big.reduce((acc, item) => {
+    // console.log("prop is %d", prop);
+    const key = Object.keys(item)[0];
+    const arr = small.filter(it => {
+      const itKey = Object.keys(it)[0];
+      return Math.abs(itKey) === Number(key);
+    });
+    return arr.length
+      ? acc.concat(
+          arr.map(t => {
+            return [...t[key], ...item[key]];
+          })
+        )
+      : acc;
+  }, []);
+};
+/**
+ * @param {string} digits
+ * @return {string[]}
+ */
+var letterCombinations = function(digits) {
+  const btns = 8;
+  const factorial = alphabet.reduce((acc, item, index) => {
+    const arr = alphabet.slice(index).map(it => item + it);
+    return acc.concat(arr);
+  }, []);
+  return factorial;
+};
+const getTelBtns = _ => {
+  const alphabet = genCharArray("a", "z");
+  let obj = {};
+  for (let i = 2, m = 0; i < 10; i++) {
+    if (i === 7 || i === 9) {
+      obj[i] = alphabet.slice(m, m + 4);
+    } else {
+      obj[i] = alphabet.slice(m, m + 3);
+    }
+  }
+  return obj;
+};
+function genCharArray(charA, charZ) {
+  var a = [],
+    i = charA.charCodeAt(0),
+    j = charZ.charCodeAt(0);
+  for (; i <= j; ++i) {
+    a.push(String.fromCharCode(i));
+  }
+  return a;
+}
+/**
  * @param {number} num
  * @return {string}
  */
@@ -26,6 +98,7 @@ var intToRoman = function(num) {
     return unit + prop;
   }
 };
+
 function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
@@ -156,5 +229,9 @@ module.exports = {
   getGenVal,
   findMedianSortedArrays,
   intToRoman,
-  threeSumClosest
+  threeSumClosest,
+  letterCombinations,
+  genCharArray,
+  getTelBtns,
+  fourSum
 };
