@@ -1,4 +1,72 @@
 /**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function(s) {
+  const arr = ["(", ")", "{", "}", "[", "]"];
+  const arrStr = s.split("");
+  if (arrStr.length % 2) {
+    return false;
+  }
+  return arrStr.every((item, ind) => {
+    const index = arr.indexOf(item);
+    if (index % 2) {
+      return true;
+    } else {
+      var closedSign = arr[index + 1];
+    }
+    const remaining = arrStr.slice(ind + 1);
+    if (remaining.length === 0) {
+      return false;
+    }
+    return findPairedStr({ remaining, item, closedSign, arr });
+  });
+};
+const findPairedStr = ({ remaining, item, closedSign, arr }) => {
+  if (remaining.length === 0) {
+    return true;
+  }
+  let isValid = false;
+  for (let i = 0, itemNum = 1, closedSignNum = 0; i < remaining.length; i++) {
+    const currentSign = remaining[i];
+    if (currentSign === item) {
+      itemNum++;
+    }
+    if (currentSign === closedSign) {
+      closedSignNum++;
+    }
+    if (itemNum === closedSignNum) {
+      if (i === 0) {
+        isValid = true;
+        break;
+      } else if (remaining.slice(0, i - 1).length)
+        isValid = findPairedStr({
+          remaining: remaining.slice(1, i - 1),
+          item: remaining[1],
+          closedSign: arr[arr.indexOf(remaining[1]) + 1],
+          arr
+        });
+      break;
+    }
+  }
+  return isValid;
+};
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+var removeNthFromEnd = function(head, n) {
+  return head.slice(0, head.length - n).concat(head.slice(head.length - n + 1));
+};
+/**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[][]}
@@ -233,5 +301,7 @@ module.exports = {
   letterCombinations,
   genCharArray,
   getTelBtns,
-  fourSum
+  fourSum,
+  removeNthFromEnd,
+  isValid
 };

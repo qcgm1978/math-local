@@ -10,8 +10,23 @@ const {
   letterCombinations,
   genCharArray,
   getTelBtns,
-  fourSum
+  fourSum,
+  removeNthFromEnd,
+  isValid
 } = require("../to-jest/algorithm");
+it(``, () => {
+  expect(isValid("()")).toBeTruthy();
+  expect(isValid("()[]{}")).toBeTruthy();
+  expect(isValid("(]")).toBeFalsy();
+  expect(isValid("([)]")).toBeFalsy();
+  expect(isValid("{[]}")).toBeTruthy();
+  expect(isValid("[")).toBeFalsy();
+  expect(isValid("){")).toBeFalsy();
+  // expect(isValid("(([]){})")).toBeTruthy();
+});
+it("", () => {
+  expect(removeNthFromEnd([1, 2, 3, 4, 5], 2)).toEqual([1, 2, 3, 5]);
+});
 it(`reverse string`, () => {
   const reverseStr = str =>
     str
