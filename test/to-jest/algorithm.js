@@ -1,3 +1,29 @@
+const getNarcissisticNumber = (range = [1, 39]) => {
+  if (range.length === 1) {
+    range = [range[0] - 1, range[0]];
+  }
+  const numsDecimal = getIntergerFromRange(0, 9);
+  let min = Math.floor(Math.pow(10, range[0] - 1));
+  min = min === 1 ? 0 : min;
+  const max = Math.pow(10, range[1]) - 1;
+  let ret = [];
+  console.log("min is %d, max is %d", min, max);
+  for (let i = min; i <= max; i++) {
+    const strI = i.toString();
+    const arr = strI.split("");
+    const powerNum = strI.length;
+    const sumOfDigits = arr.reduce(
+      (acc, item) => acc + Math.pow(item, powerNum),
+      0
+    );
+    if (sumOfDigits === i) {
+      ret.push(i);
+    }
+  }
+  return ret;
+};
+const getIntergerFromRange = (min, max) =>
+  Array.from(new Array(max - min + 1)).map((item, index) => index + min);
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -321,5 +347,7 @@ module.exports = {
   fourSum,
   removeNthFromEnd,
   isValid,
-  mergeTwoLists
+  mergeTwoLists,
+  getIntergerFromRange,
+  getNarcissisticNumber
 };

@@ -13,8 +13,18 @@ const {
   fourSum,
   removeNthFromEnd,
   isValid,
-  mergeTwoLists
+  mergeTwoLists,
+  getIntergerFromRange,
+  getNarcissisticNumber
 } = require("../to-jest/algorithm");
+it("get narcissistic numbers", () => {
+  expect(getNarcissisticNumber([0, 1])).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  expect(getNarcissisticNumber([1, 2])).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  expect(getNarcissisticNumber([3])).toEqual([153, 370, 371, 407]);
+});
+it(`get an array in range`, () => {
+  expect(getIntergerFromRange(0, 9)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+});
 it(`Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.`, () => {
   expect(mergeTwoLists([1, 2, 4], [1, 3, 4])).toEqual([1, 1, 2, 3, 4, 4]);
 });
