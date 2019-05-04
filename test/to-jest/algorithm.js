@@ -1,4 +1,21 @@
 /**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(l1, l2) {
+  return l1.reduce((acc, item, index) => {
+    return acc.concat(item, l2[index]);
+  }, []);
+};
+/**
  * @param {string} s
  * @return {boolean}
  */
@@ -303,5 +320,6 @@ module.exports = {
   getTelBtns,
   fourSum,
   removeNthFromEnd,
-  isValid
+  isValid,
+  mergeTwoLists
 };

@@ -12,8 +12,12 @@ const {
   getTelBtns,
   fourSum,
   removeNthFromEnd,
-  isValid
+  isValid,
+  mergeTwoLists
 } = require("../to-jest/algorithm");
+it(`Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.`, () => {
+  expect(mergeTwoLists([1, 2, 4], [1, 3, 4])).toEqual([1, 1, 2, 3, 4, 4]);
+});
 it(``, () => {
   expect(isValid("()")).toBeTruthy();
   expect(isValid("()[]{}")).toBeTruthy();
