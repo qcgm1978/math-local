@@ -21,6 +21,7 @@ it("get narcissistic numbers", () => {
   expect(getNarcissisticNumber([0, 1])).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   expect(getNarcissisticNumber([1, 2])).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   expect(getNarcissisticNumber([3])).toEqual([153, 370, 371, 407]);
+  expect(getNarcissisticNumber([4])).toEqual([1634, +8208, +9474]);
 });
 it(`get an array in range`, () => {
   expect(getIntergerFromRange(0, 9)).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);

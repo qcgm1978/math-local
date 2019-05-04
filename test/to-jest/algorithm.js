@@ -1,10 +1,15 @@
 const getNarcissisticNumber = (range = [1, 39]) => {
   if (range.length === 1) {
-    range = [range[0] - 1, range[0]];
+    range.unshift(undefined);
   }
   const numsDecimal = getIntergerFromRange(0, 9);
-  let min = Math.floor(Math.pow(10, range[0] - 1));
+  console.log(range[0]);
+  let min = isFinite(range[0])
+    ? Math.floor(Math.pow(10, range[0] - 1))
+    : Math.pow(10, range[1] - 1);
+  console.log(Math.pow(10, range[1] - 1));
   min = min === 1 ? 0 : min;
+  console.log(min);
   const max = Math.pow(10, range[1]) - 1;
   let ret = [];
   console.log("min is %d, max is %d", min, max);
