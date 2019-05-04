@@ -1,26 +1,23 @@
 const getNarcissisticNumber = (range = [1, 39]) => {
+  if (typeof range === "number") {
+    const sumOfDigits = getDigitsSum(range);
+    return sumOfDigits === range;
+  }
   if (range.length === 1) {
     range.unshift(undefined);
   }
-  const numsDecimal = getIntergerFromRange(0, 9);
   console.log(range[0]);
-  let min = isFinite(range[0])
-    ? Math.floor(Math.pow(10, range[0] - 1))
-    : Math.pow(10, range[1] - 1);
-  console.log(Math.pow(10, range[1] - 1));
+  let min = isNaN(range[0])
+    ? Math.pow(10, range[1] - 1)
+    : Math.floor(Math.pow(10, range[0] - 1));
+  console.log(min);
   min = min === 1 ? 0 : min;
   console.log(min);
   const max = Math.pow(10, range[1]) - 1;
   let ret = [];
   console.log("min is %d, max is %d", min, max);
   for (let i = min; i <= max; i++) {
-    const strI = i.toString();
-    const arr = strI.split("");
-    const powerNum = strI.length;
-    const sumOfDigits = arr.reduce(
-      (acc, item) => acc + Math.pow(item, powerNum),
-      0
-    );
+    const sumOfDigits = getDigitsSum(i);
     if (sumOfDigits === i) {
       ret.push(i);
     }
@@ -177,6 +174,17 @@ const getTelBtns = _ => {
   }
   return obj;
 };
+function getDigitsSum(i) {
+  const strI = i.toString();
+  const arr = strI.split("");
+  const powerNum = strI.length;
+  const sumOfDigits = arr.reduce(
+    (acc, item) => acc + Math.pow(item, powerNum),
+    0
+  );
+  return sumOfDigits;
+}
+
 function genCharArray(charA, charZ) {
   var a = [],
     i = charA.charCodeAt(0),
