@@ -15,8 +15,18 @@ const {
   isValid,
   mergeTwoLists,
   getIntergerFromRange,
-  getNarcissisticNumber
+  getNarcissisticNumber,
+  isMunchausenNumber
 } = require("../to-jest/algorithm");
+it(`Munchausen number`, () => {
+  expect(isMunchausenNumber(55)).toBeFalsy();
+  expect(isMunchausenNumber(3435)).toBeTruthy();
+  expect(isMunchausenNumber(438579088)).toBeFalsy();
+  expect(isMunchausenNumber(438579088, true)).toBeTruthy();
+  expect(isMunchausenNumber(1, true)).toBeTruthy();
+  expect(isMunchausenNumber(1)).toBeTruthy();
+  expect(isMunchausenNumber(0, true)).toBeTruthy();
+});
 it("get narcissistic numbers", () => {
   expect(getNarcissisticNumber([0, 1])).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
   expect(getNarcissisticNumber([1, 2])).toEqual([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);

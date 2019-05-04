@@ -1,3 +1,10 @@
+const isMunchausenNumber = (num, allowZero = false) => {
+  const arr = num.toString().split("");
+  const sum = arr.reduce((acc, item, index) => {
+    return acc + (item === "0" && allowZero ? 0 : Math.pow(item, item));
+  }, 0);
+  return sum === num;
+};
 const getNarcissisticNumber = (range = [1, 39]) => {
   if (typeof range === "number") {
     const sumOfDigits = getDigitsSum(range);
@@ -6,16 +13,16 @@ const getNarcissisticNumber = (range = [1, 39]) => {
   if (range.length === 1) {
     range.unshift(undefined);
   }
-  console.log(range[0]);
+
   let min = isNaN(range[0])
     ? Math.pow(10, range[1] - 1)
     : Math.floor(Math.pow(10, range[0] - 1));
-  console.log(min);
+
   min = min === 1 ? 0 : min;
-  console.log(min);
+
   const max = Math.pow(10, range[1]) - 1;
   let ret = [];
-  console.log("min is %d, max is %d", min, max);
+
   for (let i = min; i <= max; i++) {
     const sumOfDigits = getDigitsSum(i);
     if (sumOfDigits === i) {
@@ -135,7 +142,6 @@ var fourSum = function(nums, target) {
   const smallKeys = Object.keys(small);
   // console.table(big);
   return big.reduce((acc, item) => {
-    // console.log("prop is %d", prop);
     const key = Object.keys(item)[0];
     const arr = small.filter(it => {
       const itKey = Object.keys(it)[0];
@@ -362,5 +368,6 @@ module.exports = {
   isValid,
   mergeTwoLists,
   getIntergerFromRange,
-  getNarcissisticNumber
+  getNarcissisticNumber,
+  isMunchausenNumber
 };
