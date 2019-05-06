@@ -2,7 +2,13 @@
 
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
+const { getRandomInt } = require("../for-jest/algorithms");
 generateNewMatches();
+it(`Returns a random integer between min (inclusive) and max (inclusive)`, () => {
+  expect(getRandomInt(5, 10))
+    .toBeGreaterThanOrEqual(5)
+    .toBeLessThan(10);
+});
 it(`The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.`, () => {
   var a, b, rest;
   [a, b] = [10, 20];
