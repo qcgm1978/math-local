@@ -20,6 +20,27 @@ it(`considered to be a true constant, therefore it has to be written in SCREAMIN
     }
   }
 });
+it(`In most cases, numbers, strings, and individual objects are named with the most appropriate singular noun.Arrays and other collection-like data structures (such as Map and Set) are named with the most appropriate plural noun in camelCase`, () => {
+  const obj = {
+    usernameInputField: "username-field",
+    username: "usernameInputField.value",
+    hypotenuse: Math.sqrt(3 ** 2 + 4 ** 2),
+    profileData: {
+      name: "Presto",
+      type: "Dog"
+    },
+    dogs: ["Presto", "Lucky", "Sparkles"],
+
+    // Here, we can use collective nouns
+    // for better readability.
+    herdOfCows: ["Bessie", "Bertha", "Boris"]
+  };
+  for (let p in obj) {
+    if (p.endsWith("s")) {
+      expect(obj[p].length).toBeGreaterThan(1);
+    }
+  }
+});
 it(`Returns a random integer between min (inclusive) and max (inclusive)`, () => {
   expect(getRandomInt(5, 10))
     .toBeGreaterThanOrEqual(5)
