@@ -4,10 +4,26 @@ const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 const { getRandomInt } = require("../for-jest/algorithms");
 generateNewMatches();
+it(`considered to be a true constant, therefore it has to be written in SCREAMING_CASE. Otherwise, camelCase is used to denote mutable and immutable variables that store temporaries, aliases, calculations, and the output of a runtime variability`, () => {
+  // Immutable Variables
+  const obj = {
+    userInput: "42",
+    hasDevto: /dev\.to/g.test("dev.to"),
+
+    // True Constants
+    WEBSITE_NAME: "dev.to",
+    TAU: 2 * Math.PI
+  };
+  for (let p in obj) {
+    if (/[a-zA-Z_]+/.test(p)) {
+      expect(typeof obj[p]).toMatch(/number|string|boolean/);
+    }
+  }
+});
 it(`Returns a random integer between min (inclusive) and max (inclusive)`, () => {
   expect(getRandomInt(5, 10))
     .toBeGreaterThanOrEqual(5)
-    .toBeLessThan(10);
+    .toBeLessThan(11);
 });
 it(`The destructuring assignment syntax is a JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables.`, () => {
   var a, b, rest;

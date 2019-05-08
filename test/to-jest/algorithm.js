@@ -1,3 +1,20 @@
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var generateParenthesis = function(n) {
+  const ini = "(".repeat(n) + ")".repeat(n);
+  let arr = [ini];
+  for (let i = 0, temp = ""; i < n - 1; i++) {
+    const pos = n - (i + 1);
+    temp = ini
+      .slice(0, pos)
+      .concat(")")
+      .concat(ini.slice(pos, -1));
+    arr.push(temp);
+  }
+  return arr;
+};
 const isMunchausenNumber = (num, allowZero = false) => {
   const arr = num.toString().split("");
   const sum = arr.reduce((acc, item, index) => {
@@ -369,5 +386,6 @@ module.exports = {
   mergeTwoLists,
   getIntergerFromRange,
   getNarcissisticNumber,
-  isMunchausenNumber
+  isMunchausenNumber,
+  generateParenthesis
 };

@@ -16,8 +16,18 @@ const {
   mergeTwoLists,
   getIntergerFromRange,
   getNarcissisticNumber,
-  isMunchausenNumber
+  isMunchausenNumber,
+  generateParenthesis
 } = require("../to-jest/algorithm");
+it(`Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.`, () => {
+  // expect(generateParenthesis(3)).toEqual([
+  //   "((()))",
+  //   "(()())",
+  //   "(())()",
+  //   "()(())",
+  //   "()()()"
+  // ]);
+});
 it(`Munchausen number`, () => {
   expect(isMunchausenNumber(55)).toBeFalsy();
   expect(isMunchausenNumber(3435)).toBeTruthy();
