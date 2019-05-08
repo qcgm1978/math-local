@@ -33,11 +33,50 @@ it(`In most cases, numbers, strings, and individual objects are named with the m
 
     // Here, we can use collective nouns
     // for better readability.
-    herdOfCows: ["Bessie", "Bertha", "Boris"]
+    herdOfCows: ["Bessie", "Bertha", "Boris"],
+    // The names for booleans are usually in the form of a yes-or-no question, as if we are personally asking the boolean variable itself about its state
+    isDog: true,
+    hasJavaScriptEnabled: false,
+    canSupportSafari: false,
+    isAdmin: false,
+    hasPremium: true,
+
+    // Functions or methods that return booleans
+    // are also named in a similar fashion
+    isOdd(num) {
+      return Boolean(num % 2);
+    },
+    // Functions are written with the intent to associate them with actions. This is why they are usually named as a combination of two parts: a transitive verb and a direct object
+    getSum(a, b) {
+      return a + b;
+    },
+    findBanana(str) {
+      return str.indexOf("banana");
+    },
+    getAverage(numbers) {
+      const total = numbers.reduce((prev, curr) => prev + curr);
+      return total / numbers.length;
+    },
+    User: class {},
+    Admin: class {},
+    Player: class {}
   };
   for (let p in obj) {
     if (p.endsWith("s")) {
       expect(obj[p].length).toBeGreaterThan(1);
+    }
+    if (/^is|has|can/.test(p)) {
+      if (obj[p] instanceof Function) {
+        expect(typeof obj[p]()).toBe("boolean");
+      } else {
+        expect(typeof obj[p]).toBe("boolean");
+      }
+    }
+    if (/^get|find/.test(p)) {
+      expect(obj[p]).toBeInstanceOf(Function);
+    }
+    if (/^[A-Z]/.test(p)) {
+      expect(obj[p].constructor).toBeInstanceOf(Function);
     }
   }
 });
