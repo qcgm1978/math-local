@@ -3,7 +3,16 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 const { getRandomInt } = require("../for-jest/algorithms");
+const { getAnimal } = require("./pattern");
 generateNewMatches();
+it(``, () => {
+  const dog = getAnimal("dog");
+  const nullClass = getAnimal(null);
+  expect(dog.sound).toBeInstanceOf(Function);
+  expect(nullClass.sound).toBeInstanceOf(Function);
+  expect(dog.sound()).toBe("bark");
+  expect(nullClass.sound()).toBeNull();
+});
 it(`considered to be a true constant, therefore it has to be written in SCREAMING_CASE. Otherwise, camelCase is used to denote mutable and immutable variables that store temporaries, aliases, calculations, and the output of a runtime variability`, () => {
   // Immutable Variables
   const obj = {
