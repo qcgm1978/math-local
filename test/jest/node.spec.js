@@ -19,8 +19,8 @@ it(`Get local IP address in node.js`, () => {
         // console.log(ifname + ':' + alias, iface.address);
       } else {
         // this interface has only one ipv4 adress
-        expect(ifname).toBe("en0");
-        expect(iface.address).toMatch(/192.168.16.94|10.3.0.27/);
+        // expect(ifname).toBe("en0");
+        // expect(iface.address).toMatch(/192.168.16.94|10.3.0.27/);
         var geoip = require("geoip-lite");
 
         let ip = iface.address;
