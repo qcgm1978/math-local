@@ -17,8 +17,20 @@ const {
   getIntergerFromRange,
   getNarcissisticNumber,
   isMunchausenNumber,
-  generateParenthesis
+  generateParenthesis,
+  getPascalTriangle,
+  getPascalTriangleGraph
 } = require("../to-jest/algorithm");
+it(`Pascal's Triangle`, () => {
+  expect(getPascalTriangle(5)).toEqual([
+    [1],
+    [1, 1],
+    [1, 2, 1],
+    [1, 3, 3, 1],
+    [1, 4, 6, 4, 1]
+  ]);
+  expect(typeof getPascalTriangleGraph(5)).toBe("string");
+});
 it(`Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.`, () => {
   // expect(generateParenthesis(3)).toEqual([
   //   "((()))",

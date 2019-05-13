@@ -368,7 +368,40 @@ var findMedianSortedArrays = function(nums1 = [], nums2 = []) {
     : 0;
   return (mid1 + mid2) / (mid1 && mid2 ? 2 : 1);
 };
+const getPascalTriangle = n => {
+  let arr = [[1]];
+  for (let i = 1; i < n; i++) {
+    let temp = [],
+      prevArr = arr[i - 1];
+    temp.push(1);
+    const items = prevArr.length - 1;
+    if (items > 0) {
+      for (let m = 1; m <= items; m++) {
+        const numPrev = prevArr[m - 1];
+        const numSameIndex = prevArr[m];
+        temp.push(numPrev + numSameIndex);
+      }
+    }
+    temp.push(1);
+    arr.push(temp);
+  }
+  return arr;
+};
+const getPascalTriangleGraph = n => {
+  const arr = getPascalTriangle(n);
+  let str = "";
+  for (let i = 0, iniOffset = n; i < n && iniOffset >= 0; i++, iniOffset--) {
+    let pre = "";
+    if (iniOffset) {
+      pre = "  ".repeat(iniOffset);
+    }
+    str += pre + arr[i] + "\n";
+  }
+  return str;
+};
 module.exports = {
+  getPascalTriangle,
+  getPascalTriangleGraph,
   twoSum,
   addTwoGenNumbers,
   addTwoNumbers,
