@@ -5,6 +5,10 @@ const generateNewMatches = require("./matchers");
 const { getRandomInt } = require("../for-jest/algorithms");
 const { getAnimal } = require("./pattern");
 generateNewMatches();
+it(`Private Fields`, () => {});
+it(`90625 is the only 5-digit automorphic number not beginning with a 0 - its square ends in the same digits`, () => {
+  expect((90625 ** 2).toString()).toMatch(/90625$/);
+});
 it(``, () => {
   const dog = getAnimal("dog");
   const nullClass = getAnimal(null);
