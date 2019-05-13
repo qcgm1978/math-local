@@ -8,6 +8,13 @@ generateNewMatches();
 it(`Private Fields`, () => {});
 it(`90625 is the only 5-digit automorphic number not beginning with a 0 - its square ends in the same digits`, () => {
   expect((90625 ** 2).toString()).toMatch(/90625$/);
+  arr = [];
+  for (let i = 1e4; i < 1e5; i++) {
+    if ((i ** 2).toString().endsWith(i.toString())) {
+      arr.push(i);
+    }
+  }
+  expect(arr).toEqual([90625]);
 });
 it(``, () => {
   const dog = getAnimal("dog");
