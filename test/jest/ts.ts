@@ -17,7 +17,7 @@ class IncompleteOrder extends Order {
     // Do nothing...
   }
 }
-class OrderFactory {
+export class OrderFactory {
   public static makeOrder(accountId: number, items: any[]): Order {
     if (this._fraudWasDetected(accountId)) {
       return new OrderOnFraudulentAccount();
@@ -27,4 +27,3 @@ class OrderFactory {
     // and so on....
   }
 }
-module.exports = { OrderFactory };

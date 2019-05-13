@@ -91,6 +91,30 @@
     "zeros": "1.0.0"
   },
   "main": "./index",
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {
+          "pathRegex": "jest/.+\\.(js|ts)$"
+        }
+      }
+    },
+    "testURL": "http://localhost",
+    "setupTestFrameworkScriptFile": "jest-chain",
+    "preset": "jest-puppeteer",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "test/jest/.*.spec.(ts|js)",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "scripts": {
     "wipe": "npm-wipe",
     "dev": "parcel index.html",
