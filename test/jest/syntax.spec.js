@@ -2,7 +2,7 @@
 
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
-const { getRandomInt } = require("../for-jest/algorithms");
+const { getRandomInt } = require("../to-jest/algorithm");
 const { getAnimal } = require("./pattern");
 generateNewMatches();
 it(`Private Fields`, () => {});
