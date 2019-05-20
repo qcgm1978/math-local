@@ -3,8 +3,19 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 const { getRandomInt } = require("../to-jest/algorithm");
-const { getAnimal, AmdahlLaw, BrooksLaw, ConwayLaw } = require("./pattern");
+const {
+  getAnimal,
+  AmdahlLaw,
+  BrooksLaw,
+  ConwayLaw,
+  HofstadterLaw
+} = require("./pattern");
 generateNewMatches();
+it(`This principle suggests that actions resulting in a negative outcome were not a result of ill will. Instead the negative outcome is more likely attributed to those actions and/or the impact being not fully understood.`, () => {
+  const projectPredict = new HofstadterLaw();
+  projectPredict.setDevCycle(10);
+  expect(projectPredict.getDays()).toBeGreaterThan(10);
+});
 it(`This law suggests that the technical boundaries of a system will reflect the structure of the organisation. It is commonly referred to when looking at organisation improvements, Conway's Law suggests that if an organisation is structured into many small, disconnected units, the software it produces will be. If an organisation is built more around 'verticals' which are orientated around features or services, the software systems will also reflect this.`, () => {
   expect(new ConwayLaw().units).toBe(2);
 });

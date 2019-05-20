@@ -47,3 +47,11 @@ module.exports.ConwayLaw = class {
     return ["server", "web"].length;
   }
 };
+module.exports.HofstadterLaw = class {
+  setDevCycle(days) {
+    this.days = 2 * days;
+  }
+  getDays() {
+    return this.days;
+  }
+};
