@@ -35,3 +35,15 @@ module.exports.BrooksLaw = class {
     return date;
   }
 };
+module.exports.ConwayLaw = class {
+  construct() {}
+  server() {
+    return "backend";
+  }
+  web() {
+    return "frontend";
+  }
+  get units() {
+    return ["server", "web"].length;
+  }
+};

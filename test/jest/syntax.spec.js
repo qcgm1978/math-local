@@ -3,8 +3,11 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 const { getRandomInt } = require("../to-jest/algorithm");
-const { getAnimal, AmdahlLaw, BrooksLaw } = require("./pattern");
+const { getAnimal, AmdahlLaw, BrooksLaw, ConwayLaw } = require("./pattern");
 generateNewMatches();
+it(`This law suggests that the technical boundaries of a system will reflect the structure of the organisation. It is commonly referred to when looking at organisation improvements, Conway's Law suggests that if an organisation is structured into many small, disconnected units, the software it produces will be. If an organisation is built more around 'verticals' which are orientated around features or services, the software systems will also reflect this.`, () => {
+  expect(new ConwayLaw().units).toBe(2);
+});
 it(`Adding human resources to a late software development project makes it later.`, () => {
   const project = new BrooksLaw(3);
   project.addResource(2);
