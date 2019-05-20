@@ -3,8 +3,18 @@
 const _ = require("lodash");
 const generateNewMatches = require("./matchers");
 const { getRandomInt } = require("../to-jest/algorithm");
-const { getAnimal } = require("./pattern");
+const { getAnimal, AmdahlLaw, BrooksLaw } = require("./pattern");
 generateNewMatches();
+it(`Adding human resources to a late software development project makes it later.`, () => {
+  const project = new BrooksLaw(3);
+  project.addResource(2);
+  expect(project.getDeliverDate().getTime()).toBeGreaterThan(
+    new Date().getTime()
+  );
+});
+it(`Amdahl's Law is a formula which shows the potential speedup of a computational task which can be achieved by increasing the resources of a system. Normally used in parallel computing, it can predict the actual benefit of increasing the number of processors, which is limited by the parallelisability of the program.`, () => {
+  expect(AmdahlLaw(_ => 10, _ => 1, true, false)).toBeGreaterThan(10);
+});
 it(`Private Fields`, () => {});
 it(`90625 is the only 5-digit automorphic number not beginning with a 0 - its square ends in the same digits`, () => {
   expect((90625 ** 2).toString()).toMatch(/90625$/);
