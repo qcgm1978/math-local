@@ -10,8 +10,6 @@ class NullAnimal {
   }
 }
 
-function getAnimal(type) {
+module.exports.getAnimal = type => {
   return type === "dog" ? new Dog() : new NullAnimal();
-}
-
-module.exports = { getAnimal };
+};
