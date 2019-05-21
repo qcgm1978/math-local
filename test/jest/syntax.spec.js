@@ -10,9 +10,17 @@ const {
   ConwayLaw,
   HofstadterLaw,
   AmaraLaw,
-  HyrumLaw
+  HyrumLaw,
+  MooreLaw
 } = require("./pattern");
 generateNewMatches();
+it(`The number of transistors in an integrated circuit doubles approximately every two years.`, () => {
+  const progress = new MooreLaw();
+  progress.transistorsNum = 2019;
+  expect(progress.magnitudeOrder)
+    .toBe(14)
+    .toBeGreaterThan(progress.linearGrowth);
+});
 it(`With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviours of your system will be depended on by somebody.`, () => {
   const doSth = new HyrumLaw();
   expect(doSth.doSth)

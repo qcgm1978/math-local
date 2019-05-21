@@ -72,3 +72,31 @@ module.exports.HyrumLaw = class {
     throw new Error(Math.trunc(Math.random() * 10));
   }
 };
+module.exports.MooreLaw = class {
+  constructor() {
+    this.iniTransistors = 2300; //Intel 4004
+    this.ini = 1971;
+    this.normalExponent = 12 / 18;
+    this.slowStart = 2013;
+    this.slowExponent = 1 / 3;
+  }
+  set transistorsNum(year) {
+    this.year = year;
+    this.gap = this.year - this.ini;
+    const slowYears = this.year - this.slowStart;
+    const fastProgress =
+      slowYears > 0
+        ? this.iniTransistors *
+          (1 + this.normalExponent) ** (this.slowStart - this.ini)
+        : 0;
+    const slowProgress =
+      slowYears > 0 ? fastProgress * (1 + this.slowExponent) ** slowYears : 0;
+    this.total = fastProgress + slowProgress;
+  }
+  get magnitudeOrder() {
+    return Math.trunc(this.total).toString().length;
+  }
+  get linearGrowth() {
+    return (this.iniTransistors * this.gap).toString().length;
+  }
+};
