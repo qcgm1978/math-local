@@ -9,9 +9,16 @@ const {
   BrooksLaw,
   ConwayLaw,
   HofstadterLaw,
-  AmaraLaw
+  AmaraLaw,
+  HyrumLaw
 } = require("./pattern");
 generateNewMatches();
+it(`With a sufficient number of users of an API, it does not matter what you promise in the contract: all observable behaviours of your system will be depended on by somebody.`, () => {
+  const doSth = new HyrumLaw();
+  expect(doSth.doSth)
+    .toThrow()
+    .toThrowError(/\d/);
+});
 it(`We tend to overestimate the effect of a technology in the short run and underestimate the effect in the long run.`, () => {
   const progress = new AmaraLaw(1);
   const short = progress.getShortRunEffect(5);

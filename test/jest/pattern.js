@@ -66,3 +66,9 @@ module.exports.AmaraLaw = class {
     return this.ini ** period;
   }
 };
+module.exports.HyrumLaw = class {
+  constructor() {}
+  doSth() {
+    throw new Error(Math.trunc(Math.random() * 10));
+  }
+};
