@@ -55,3 +55,14 @@ module.exports.HofstadterLaw = class {
     return this.days;
   }
 };
+module.exports.AmaraLaw = class {
+  constructor(ini) {
+    this.ini = ini;
+  }
+  getShortRunEffect(period) {
+    return (this.ini += period);
+  }
+  getLongRunEffect(period) {
+    return this.ini ** period;
+  }
+};

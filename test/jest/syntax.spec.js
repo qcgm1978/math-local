@@ -8,9 +8,16 @@ const {
   AmdahlLaw,
   BrooksLaw,
   ConwayLaw,
-  HofstadterLaw
+  HofstadterLaw,
+  AmaraLaw
 } = require("./pattern");
 generateNewMatches();
+it(`We tend to overestimate the effect of a technology in the short run and underestimate the effect in the long run.`, () => {
+  const progress = new AmaraLaw(1);
+  const short = progress.getShortRunEffect(5);
+  const long = progress.getLongRunEffect(5);
+  expect(long).toBeGreaterThan(short);
+});
 it(`This principle suggests that actions resulting in a negative outcome were not a result of ill will. Instead the negative outcome is more likely attributed to those actions and/or the impact being not fully understood.`, () => {
   const projectPredict = new HofstadterLaw();
   projectPredict.setDevCycle(10);
