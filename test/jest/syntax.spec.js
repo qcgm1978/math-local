@@ -11,9 +11,40 @@ const {
   HofstadterLaw,
   AmaraLaw,
   HyrumLaw,
-  MooreLaw
+  MooreLaw,
+  transformData,
+  contentTypes,
+  nestedTernaries,
+  EntityRelationshipDiagrams
 } = require("./pattern");
 generateNewMatches();
+it(`An Entity-Relationship Diagram (ERD) is a way to visualise relationships between tables and the common keys between them`, () => {
+  const table1 = new EntityRelationshipDiagrams.Zones();
+  const table2 = new EntityRelationshipDiagrams.Boss();
+  expect(table1.speak()).toMatch("truths as work");
+  expect(table2.speak()).toMatch("barks in the meeting");
+});
+it(`I started deferring to ternaries and nested ternaries and I found I was able to quickly understand at a glance what was happening.`, () => {
+  expect(nestedTernaries(true, true)).toBe("A & B");
+  expect(nestedTernaries(true, false)).toBe("A");
+  expect(nestedTernaries(false, true)).toBe("Not A");
+  expect(nestedTernaries(false, false)).toBe("Not A");
+});
+it(` prefer using an object literal instead, here's why:
+
+don't have to worry about case or break
+easier to read and quickly understand what's happening
+object literals are easy enough to write
+less code`, () => {
+  const contentType = "video";
+  const createType = contentTypes[contentType] || contentTypes["default"];
+  expect(createType()).toBe("creatinga  video...");
+});
+it(` 'early exits' but some also refer to this as 'the Bouncer Pattern' or 'guard clauses'. Naming aside, this pattern takes the approach of checking for invalid use cases first and returning out from that function otherwise it continues onto the expected use case of the function and executes.`, () => {
+  expect(transformData()).toHaveLength(0);
+  expect(transformData([1])).toHaveLength(0);
+  expect(transformData([1, 2])).toHaveLength(2);
+});
 it(`The number of transistors in an integrated circuit doubles approximately every two years.`, () => {
   const progress = new MooreLaw();
   progress.transistorsNum = 2019;

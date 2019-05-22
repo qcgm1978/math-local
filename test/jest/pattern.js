@@ -100,3 +100,63 @@ module.exports.MooreLaw = class {
     return (this.iniTransistors * this.gap).toString().length;
   }
 };
+module.exports.transformData = rawData => {
+  // check if no data
+  if (!rawData) {
+    return [];
+  }
+
+  // check for specific case
+  if (rawData.length == 1) {
+    return [];
+  }
+
+  // actual function code goes here
+  return rawData.map(item => item);
+};
+module.exports.contentTypes = {
+  post: () => console.log("creating a post..."),
+  video: () => "creatinga  video...",
+  default: () => console.log("unrecognized content type")
+};
+module.exports.nestedTernaries = (conditionA, conditionB) =>
+  !conditionA ? "Not A" : conditionB ? "A & B" : "A";
+// Conceptual Data Model
+const EntityRelationshipDiagrams = {
+  Zones: class {
+    // Logical Data Model
+    constructor() {
+      this.ZoneId = EntityRelationshipDiagrams.PhysicalDataModel.getId(105);
+      this.voice = "truths";
+    }
+    // Physical Data Model
+    speak() {
+      return `${this.ZoneId} ${this.voice} as work`;
+    }
+  },
+  Boss: class {
+    // Logical Data Model
+    constructor() {
+      this.BossId = EntityRelationshipDiagrams.PhysicalDataModel.getId(0);
+      this.voice = "barks";
+    }
+    // Physical Data Model
+    speak() {
+      return `${this.BossId} ${this.voice} in the meeting`;
+    }
+  },
+  // external Physical Data Model
+  PhysicalDataModel: {
+    getId(num) {
+      return num < 100
+        ? this.getRandomInt(0, 100)
+        : this.getRandomInt(num, 1000);
+    },
+    getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+  }
+};
+module.exports.EntityRelationshipDiagrams = EntityRelationshipDiagrams;
