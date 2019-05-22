@@ -15,9 +15,16 @@ const {
   transformData,
   contentTypes,
   nestedTernaries,
-  EntityRelationshipDiagrams
+  EntityRelationshipDiagrams,
+  ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+it(`Work expands so as to fill the time available for its completion.`, () => {
+  const workload = new ParkinsonLaw(10);
+  workload.processingDays = 5;
+  expect(workload.processingDays).toBe(5);
+  expect(workload.actualWorkload).toBeGreaterThan(10);
+});
 it(`An Entity-Relationship Diagram (ERD) is a way to visualise relationships between tables and the common keys between them`, () => {
   const table1 = new EntityRelationshipDiagrams.Zones();
   const table2 = new EntityRelationshipDiagrams.Boss();

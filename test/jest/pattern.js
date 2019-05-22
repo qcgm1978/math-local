@@ -160,3 +160,23 @@ const EntityRelationshipDiagrams = {
   }
 };
 module.exports.EntityRelationshipDiagrams = EntityRelationshipDiagrams;
+module.exports.ParkinsonLaw = class {
+  constructor(workload) {
+    this.workload = workload;
+    this.processingDays = 0;
+    this.startTime = new Date();
+  }
+  // set processingDays(days) {
+  //   console.log(days);
+  //   return days;
+  // }
+
+  get actualWorkload() {
+    console.log(this.processingDays);
+    const now = new Date(
+      this.processingDays * 3600 * 1000 + this.startTime.getTime()
+    );
+    const duration = now.getTime() - this.startTime.getTime();
+    return this.workload + duration;
+  }
+};
