@@ -4,29 +4,35 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
-<!--<![endif]-->
+  <!--<![endif]-->
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-</head>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/qunit/qunit-2.9.2.css"
+    />
+  </head>
 
-<body>
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
     <script src="../../node_modules/@tensorflow/tfjs/dist/tf.js"></script>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+
     <script>
+      QUnit.test("hello test", function(assert) {
+        assert.ok(1 == "1", "Passed!");
         const a = tf.tensor1d([1, 2, 3]);
 
         // a.softmax().print();  // or tf.softmax(a)∫
-        console.log(a.softmax().print())  // or tf.softmax(a)∫
+        assert.ok(a.softmax()); // or tf.softmax(a)∫
+      });
     </script>
-</body>
-
+  </body>
 </html>
