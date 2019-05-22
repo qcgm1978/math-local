@@ -13,18 +13,19 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="" />
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://code.jquery.com/qunit/qunit-2.9.2.css"
-    />
+    /> -->
+    <link rel="stylesheet" href="../../node_modules/qunit/qunit/qunit.css" />
   </head>
 
   <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
-    <script src="../../node_modules/@tensorflow/tfjs/dist/tf.js"></script>
-    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
-
+    <script src="./node_modules/@tensorflow/tfjs/dist/tf.js"></script>
+    <!-- <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script> -->
+    <script src="./node_modules/qunit/qunit/qunit.js"></script>
     <script>
       QUnit.test("hello test", function(assert) {
         assert.ok(1 == "1", "Passed!");
@@ -33,6 +34,16 @@
         // a.softmax().print();  // or tf.softmax(a)∫
         assert.ok(a.softmax()); // or tf.softmax(a)∫
       });
+      QUnit.test(
+        "Creates a tf.Tensor with values sampled from a normal distribution.",
+        function(assert) {
+          const a = tf.randomNormal([2, 2]);
+
+          // a.softmax().print();  // or tf.softmax(a)∫
+          assert.ok(a.softmax()); // or tf.softmax(a)∫
+          assert.equal(a.dataSync().length, 4);
+        }
+      );
     </script>
   </body>
 </html>
