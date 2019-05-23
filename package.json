@@ -30,6 +30,8 @@
     "babel-eslint": "^10.0.1",
     "complex.js": "2.0.11",
     "cookie-parser": "^1.4.3",
+    "d3": "^5.9.2",
+    "d3-array": "^2.1.0",
     "decimal.js": "10.0.1",
     "escape-latex": "1.2.0",
     "fraction.js": "4.0.10",
