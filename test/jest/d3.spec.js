@@ -1,5 +1,5 @@
-const d3 = require("d3-array");
-// const d3 = require("https://d3js.org/d3-array.v2.min.js");
+const d3 = require("d3");
+const d3Array = require("d3-array");
 it(`It returns a map from key to the corresponding array of values from the input`, () => {
   const athletes = [
     {
@@ -53,8 +53,14 @@ it(`It returns a map from key to the corresponding array of values from the inpu
       earnings: 59.5
     }
   ];
-  const athletesBySport = d3.group(athletes, d => d.sport);
+  const athletesBySport = d3Array.group(athletes, d => d.sport);
   const sports = athletes.map(item => item.sport);
   expect(athletesBySport).toBeInstanceOf(Map);
   //   expect(athletesBySport).toEqual(new Map(sports));
+});
+it(`Returns a function for generating random numbers with a normal (Gaussian) distribution. The expected value of the generated numbers is mu, with the given standard deviation sigma. If mu is not specified, it defaults to 0; if sigma is not specified, it defaults to 1.`, () => {
+  const random = d3.randomNormal(); // Try randomUniform?
+  expect(random())
+    .toBeGreaterThan(-1)
+    .toBeLessThan(2);
 });
