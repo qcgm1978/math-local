@@ -1,6 +1,28 @@
 /* eslint-disable no-undef */
 
 const math = require("../../dist/math");
+it(`The gigawatt (GW) is equal to one billion (109) watts or 1 gigawatt = 1000 megawatts`, () => {
+  const energyPerMeter2 = {
+    energy: [2000, 3000],
+    orderWatt: 1e3,
+    unit: "kilowatt hours/square meter/year"
+  };
+  const areaSahara = {
+    number: 9,
+    order: 1e6,
+    areaUnit: 1e9, // 1km2/1m2
+    unit: "km2"
+  };
+  const energyPerYear =
+    energyPerMeter2.energy[1] *
+    areaSahara.number *
+    areaSahara.order *
+    areaSahara.areaUnit;
+  const gigawatt = 1e9;
+  expect(+energyPerYear.toString().length).toBe(
+    (22 * 1e9 * gigawatt).toFixed(0).length
+  );
+});
 it(`N a scale of temperatures in which 32° represents the melting point of ice and 212° represents the boiling point of pure water under standard atmospheric pressure 华氏温标
 `, () => {
   const FahrenheitToCelsius = fahr => {
