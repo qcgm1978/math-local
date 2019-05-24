@@ -172,7 +172,7 @@ module.exports.ParkinsonLaw = class {
   // }
 
   get actualWorkload() {
-    console.log(this.processingDays);
+    // console.log(this.processingDays);
     const now = new Date(
       this.processingDays * 3600 * 1000 + this.startTime.getTime()
     );
