@@ -1,3 +1,21 @@
+it(` interrupt mode. In this mode, the output of the box is always 1, no matter what its input.`, () => {
+  expect(+true).toBe(1);
+  expect(+false).toBe(0);
+  expect(1 & 1).toBe(1);
+  expect(+!(1 & 1)).toBe(0);
+  expect(0 & 1).toBe(0);
+  expect(+!(0 & 1)).toBe(1);
+  expect(+!(1 & 0)).toBe(1);
+  expect(+!(1 & 0)).toBe(1);
+  // so a Turing connection-modifier is:
+  const getTuringConectMod = (first, second) => {
+    return +!(first & second);
+  };
+  expect(getTuringConectMod(1, 1)).toBe(0);
+  expect(getTuringConectMod(1, 0)).toBe(1);
+  expect(getTuringConectMod(0, 1)).toBe(1);
+  expect(getTuringConectMod(0, 0)).toBe(1);
+});
 it("Salary", () => {
   const notTaxIncome = 5000;
   const taxRate = [
