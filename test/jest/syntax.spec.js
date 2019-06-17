@@ -19,6 +19,20 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+it(`5 Ways to Convert a Value to a String`, () => {
+  let toConvert = 10;
+  expect(toConvert + "")
+    .toBe(`${toConvert}`)
+    .toBe(toConvert.toString())
+    .toBe(JSON.stringify(toConvert))
+    .toBe(String(toConvert))
+    .toBe("10");
+  // Carefull when using JSON.stringify, that will change a string into a string with quotes
+  toConvert = { a: 1 };
+  expect(JSON.stringify(toConvert))
+    .toBe('{"a":1}')
+    .not.toBe(`{ a: 1 }`);
+});
 it(`Work expands so as to fill the time available for its completion.`, () => {
   const workload = new ParkinsonLaw(10);
   workload.processingDays = 5;
