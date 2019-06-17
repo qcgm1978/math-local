@@ -1,3 +1,29 @@
+it(`Unwanted connections are destroyed by switching their attached modifiers to interrupt mode`, () => {
+  class BTypeTraining {
+    constructor(A, B) {
+      this.A = A;
+      this.B = B;
+    }
+    // get AIsInterrupt() {
+    //   return false;
+    // }
+    // get BIsInterrupt() {
+    //   return false;
+    // }
+    set interuptMod(nutron) {
+      this[nutron + "IsInterrupt"] = true;
+    }
+    getTuringConectMod() {
+      const a = this.AIsInterrupt ? 1 : this.A;
+      const b = this.BIsInterrupt ? 1 : this.B;
+      return +!(a & b);
+    }
+  }
+  const bType = new BTypeTraining(1, 0);
+  expect(bType.getTuringConectMod()).toBe(1);
+  bType.interuptMod = "B";
+  expect(bType.getTuringConectMod()).toBe(0);
+});
 it(` interrupt mode. In this mode, the output of the box is always 1, no matter what its input.`, () => {
   expect(+true).toBe(1);
   expect(+false).toBe(0);
@@ -15,6 +41,25 @@ it(` interrupt mode. In this mode, the output of the box is always 1, no matter 
   expect(getTuringConectMod(1, 0)).toBe(1);
   expect(getTuringConectMod(0, 1)).toBe(1);
   expect(getTuringConectMod(0, 0)).toBe(1);
+});
+it(`the network computes what logicians call the inclusive disjunction of the inputs.`, () => {
+  const getInclusiveDisjunction = (A, B) => {
+    return +(A | B);
+  };
+  expect(getInclusiveDisjunction(1, 1)).toBe(1);
+  expect(getInclusiveDisjunction(0, 1)).toBe(1);
+  expect(getInclusiveDisjunction(1, 0)).toBe(1);
+  expect(getInclusiveDisjunction(0, 0)).toBe(0);
+});
+it(`the output takes the same value as A, no matter what the value of B`, () => {
+  const getBInterruptMod = (A, B = B => 1) => {
+    return +A;
+  };
+  expect(getBInterruptMod(1)).toBe(1);
+  expect(getBInterruptMod(1, 0)).toBe(1);
+  expect(getBInterruptMod(1, 1)).toBe(1);
+  expect(getBInterruptMod(0, 1)).toBe(0);
+  expect(getBInterruptMod(0, 0)).toBe(0);
 });
 it("Salary", () => {
   const notTaxIncome = 5000;
