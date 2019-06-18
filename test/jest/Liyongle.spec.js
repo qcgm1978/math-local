@@ -4,12 +4,6 @@ it(`Unwanted connections are destroyed by switching their attached modifiers to 
       this.A = A;
       this.B = B;
     }
-    // get AIsInterrupt() {
-    //   return false;
-    // }
-    // get BIsInterrupt() {
-    //   return false;
-    // }
     set interuptMod(nutron) {
       this[nutron + "IsInterrupt"] = true;
     }

@@ -19,6 +19,42 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+it(``, () => {
+  function formatTitle(title) {
+    const articles = ["a", "an", "the"];
+    let titleWords = title.split(/\s+/);
+    let firstWord = titleWords.shift();
+    if (articles.includes(firstWord.toLowerCase())) {
+      let formattedTitle = `${titleWords.join(" ")}`;
+      return formattedTitle;
+    } else {
+      return title;
+    }
+  }
+  const movies = ["The Shawshank Redemption", "The Godfather"];
+  const formattedMovies = movies.map(formatTitle);
+  expect(formattedMovies).toEqual(["Shawshank Redemption", "Godfather"]);
+});
+it(`Dot notation vs Bracket notation`, () => {
+  const obj = {
+    "123": "digit",
+    "123name": "start with digit",
+    name123: "does not start with digit",
+    $name: "$ sign",
+    "name-123": "hyphen",
+    NAME: "upper case",
+    name: "lower case"
+  };
+  const variable = "cookie";
+  const snack = {
+    cookie: "🍪"
+  };
+  // ✅ Dot: access property
+  expect(snack.cookie)
+    .toBe(snack[variable])
+    .toBe("🍪");
+  expect(_ => obj).not.toThrow();
+});
 it(`5 Ways to Convert a Value to a String`, () => {
   let toConvert = 10;
   expect(toConvert + "")
