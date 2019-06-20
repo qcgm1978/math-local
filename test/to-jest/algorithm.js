@@ -411,6 +411,32 @@ const getPascalTriangleGraph = n => {
   }
   return str;
 };
+const getTotal = ({ n }) => {
+  const arr = new Array(3).fill("");
+  let str = arr.reduce((acc, item, index) => {
+    return `${acc ? acc + " + " : ""}1 / ${index + 1}^${n}`;
+  }, "");
+  let solution = new Array(8).fill("").reduce((acc, item, index) => {
+    const pre = acc ? acc + " + " : "";
+    let leftParethese = "",
+      rightParethese = "";
+    let current = index + 1;
+    const log = Math.log2(index);
+    if (index > 1 && Number.isInteger(log)) {
+      leftParethese = "(";
+      current += log;
+    }
+    if (index === 3) {
+      rightParethese = " ) ";
+    }
+    return `${pre}${leftParethese}1 / ${current}^${n}${rightParethese}`;
+  }, "");
+  return {
+    expression: str + ` + ... + 1 / n^${n}`,
+    sum: Infinity,
+    solution
+  };
+};
 module.exports = {
   getPascalTriangle,
   getPascalTriangleGraph,
@@ -433,5 +459,6 @@ module.exports = {
   getNarcissisticNumber,
   isMunchausenNumber,
   generateParenthesis,
-  getRandomInt
+  getRandomInt,
+  getTotal
 };

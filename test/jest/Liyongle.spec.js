@@ -1,16 +1,19 @@
-const {
-  getPascalTriangle,
-  getPascalTriangleGraph
-} = require("../to-jest/algorithm");
+const utils = require("../to-jest/algorithm");
+it(`harmonic series`, () => {
+  const ret = utils.getTotal({ n: 1 });
+  expect(ret.expression).toBe("1 / 1^1 + 1 / 2^1 + 1 / 3^1 + ... + 1 / n^1");
+  expect(ret.sum).toBe(Infinity);
+  expect(ret.solution).toBe(Infinity);
+});
 it(`Pascal's Triangle`, () => {
-  expect(getPascalTriangle(5)).toEqual([
+  expect(utils.getPascalTriangle(5)).toEqual([
     [1],
     [1, 1],
     [1, 2, 1],
     [1, 3, 3, 1],
     [1, 4, 6, 4, 1]
   ]);
-  expect(typeof getPascalTriangleGraph(5)).toBe("string");
+  expect(typeof utils.getPascalTriangleGraph(5)).toBe("string");
 });
 it(`Unwanted connections are destroyed by switching their attached modifiers to interrupt mode`, () => {
   class BTypeTraining {
