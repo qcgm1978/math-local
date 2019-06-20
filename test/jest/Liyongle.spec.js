@@ -1,3 +1,17 @@
+const {
+  getPascalTriangle,
+  getPascalTriangleGraph
+} = require("../to-jest/algorithm");
+it(`Pascal's Triangle`, () => {
+  expect(getPascalTriangle(5)).toEqual([
+    [1],
+    [1, 1],
+    [1, 2, 1],
+    [1, 3, 3, 1],
+    [1, 4, 6, 4, 1]
+  ]);
+  expect(typeof getPascalTriangleGraph(5)).toBe("string");
+});
 it(`Unwanted connections are destroyed by switching their attached modifiers to interrupt mode`, () => {
   class BTypeTraining {
     constructor(A, B) {
