@@ -3,7 +3,9 @@ it(`harmonic series`, () => {
   const ret = utils.getTotal({ n: 1 });
   expect(ret.expression).toBe("1 / 1^1 + 1 / 2^1 + 1 / 3^1 + ... + 1 / n^1");
   expect(ret.sum).toBe(Infinity);
-  expect(ret.solution).toBe(Infinity);
+  expect(ret.solution).toBe(
+    "1 / 1^1 + 1 / 2^1 + (1 / 4^1 + 1 / 4^1 )  + (1 / 7^1 + 1 / 6^1 + 1 / 7^1 + 1 / 8^1"
+  );
 });
 it(`Pascal's Triangle`, () => {
   expect(utils.getPascalTriangle(5)).toEqual([
