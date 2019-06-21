@@ -19,6 +19,19 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+it(`Testing a regex`, () => {
+  let testString = "My test string";
+  let testRegex = /string/;
+  expect(testRegex.test(testString)).toBeTruthy();
+  // Testing multiple patterns
+  const regex = /yes|no|maybe/;
+  expect(regex.test("yes"))
+    .toBe(regex.test("no"))
+    .toBeTruthy();
+  // Extracting the first match to a variable
+  const match = "Hello World!".match(/hello/i);
+  expect(match[0]).toBe("Hello");
+});
 it(``, () => {
   function formatTitle(title) {
     const articles = ["a", "an", "the"];
