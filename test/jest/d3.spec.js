@@ -62,7 +62,7 @@ it(`Returns a function for generating random numbers with a normal (Gaussian) di
   const random = d3.randomNormal(); // Try randomUniform?
   expect(random())
     .toBeGreaterThan(-3)
-    .toBeLessThan(2);
+    .toBeLessThan(3);
 });
 it(`d3.bisect to maintain an array of circles sorted by their x-coordinate, and array.splice to insert the circle into the array after computing its desired y-coordinate and index.`, () => {
   const dodger = radius => {

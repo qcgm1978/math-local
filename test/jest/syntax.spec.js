@@ -19,6 +19,35 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+// import timeago from "https://cdn.pika.dev/epoch-timeago/v1";
+// import hash from "https://cdn.pika.dev/@emotion/hash/v0.7";
+it(`If a library is ES Module ready and on npm, you can use it like:
+
+import {Component, render} from '(link: https://cdn.pika.dev/preact/v8) cdn.pika.dev/preact/v8';`, () => {
+  // const timeToRelative = "2013-01-01";
+  // expect(
+  //   `timeago("${timeToRelative}") <br/>➡️ ${timeago(new Date(timeToRelative))}`
+  // ).toBe();
+});
+it(`"currying" functions or functions that return other functions until they eventually give final functions`, () => {
+  const modBy = x => y => y % x === 0;
+  expect(modBy(3)(6)).toBeTruthy();
+  expect(modBy(6)(3)).toBeFalsy();
+});
+it(`Chain Array Prototype Methods`, () => {
+  const double = item => item * 2,
+    higherThanFive = item => item > 5,
+    array = [2, 4, 6],
+    doubledArray = array.map(double).filter(higherThanFive);
+  expect(doubledArray).toEqual([8, 12]);
+});
+it(`write the doubling function separately to make the code even more functional`, () => {
+  const double = item => item * 2,
+    array = [2, 4, 6],
+    doubledArray = array.map(double);
+  expect(array).toEqual([2, 4, 6]);
+  expect(doubledArray).toEqual([2 * 2, 4 * 2, 6 * 2]);
+});
 it(`Testing a regex`, () => {
   let testString = "My test string";
   let testRegex = /string/;

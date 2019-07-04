@@ -44,6 +44,13 @@
           assert.equal(a.dataSync().length, 4);
         }
       );
+      QUnit.test("Computes the log softmax.", function(assert) {
+        const a = tf.tensor1d([1, 2, 3]);
+
+        const log = a.logSoftmax(); // or tf.logSoftmax(a)
+
+        assert.ok(log.notEqual);
+      });
     </script>
   </body>
 </html>
