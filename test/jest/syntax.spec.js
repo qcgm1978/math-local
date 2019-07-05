@@ -21,6 +21,51 @@ const {
 generateNewMatches();
 // import timeago from "https://cdn.pika.dev/epoch-timeago/v1";
 // import hash from "https://cdn.pika.dev/@emotion/hash/v0.7";
+it(`使用reduce同时实现map和filter`, () => {
+  const numbers = [10, 20, 30, 40];
+  const doubledOver50 = numbers.reduce((finalList, num) => {
+    num = num * 2;
+
+    if (num > 50) {
+      finalList.push(num);
+    }
+    return finalList;
+  }, []);
+  expect(doubledOver50).toEqual([60, 80]);
+});
+it(`使用reduce匹配圆括号`, () => {
+  //Returns 0 if balanced.
+  const isParensBalanced = str => {
+    return str.split("").reduce((counter, char) => {
+      if (counter < 0) {
+        //matched ")" before "("
+        return counter;
+      } else if (char === "(") {
+        return ++counter;
+      } else if (char === ")") {
+        return --counter;
+      } else {
+        //matched some other char
+        return counter;
+      }
+    }, 0); //<-- starting value of the counter
+  };
+  expect(isParensBalanced("(())")).toBe(0);
+  expect(isParensBalanced("(asdfds)")).toBe(0);
+  expect(isParensBalanced("(()")).toBe(1);
+  expect(isParensBalanced(")(")).toBe(-1);
+  expect(isParensBalanced("))(")).toBe(-1);
+});
+it(``, () => {
+  const required = () => {
+    throw new Error("Missing parameter");
+  };
+
+  const add = (a = required(), b = required()) => a + b;
+
+  expect(add(1, 2)).toBe(3);
+  expect(_ => add(1)).toThrow();
+});
 it(`If a library is ES Module ready and on npm, you can use it like:
 
 import {Component, render} from '(link: https://cdn.pika.dev/preact/v8) cdn.pika.dev/preact/v8';`, () => {
