@@ -36,25 +36,26 @@ it(`使用reduce同时实现map和filter`, () => {
 it(`使用reduce匹配圆括号`, () => {
   //Returns 0 if balanced.
   const isParensBalanced = str => {
-    return str.split("").reduce((counter, char) => {
+    return str.split("").reduce((counter, char, index) => {
       if (counter < 0) {
-        //matched ")" before "("
-        return counter;
+        return false;
       } else if (char === "(") {
-        return ++counter;
+        ++counter;
       } else if (char === ")") {
-        return --counter;
+        --counter;
+      }
+      if (index === str.length - 1) {
+        return !counter;
       } else {
-        //matched some other char
         return counter;
       }
     }, 0); //<-- starting value of the counter
   };
-  expect(isParensBalanced("(())")).toBe(0);
-  expect(isParensBalanced("(asdfds)")).toBe(0);
-  expect(isParensBalanced("(()")).toBe(1);
-  expect(isParensBalanced(")(")).toBe(-1);
-  expect(isParensBalanced("))(")).toBe(-1);
+  expect(isParensBalanced("(())")).toBeTruthy();
+  expect(isParensBalanced("(asdfds)")).toBeTruthy();
+  expect(isParensBalanced("(()")).toBeFalsy();
+  expect(isParensBalanced(")(")).toBeFalsy();
+  expect(isParensBalanced("))(")).toBeFalsy();
 });
 it(``, () => {
   const required = () => {
