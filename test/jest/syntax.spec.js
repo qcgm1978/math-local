@@ -21,6 +21,24 @@ const {
 generateNewMatches();
 // import timeago from "https://cdn.pika.dev/epoch-timeago/v1";
 // import hash from "https://cdn.pika.dev/@emotion/hash/v0.7";
+it(`统计数组中相同项的个数`, () => {
+  var cars = ["BMW", "Benz", "Benz", "Tesla", "BMW", "Toyota"];
+  const obj = cars.reduce(
+    (acc, item) => ({
+      ...acc,
+      [item]: acc[item] ? ++acc[item] : 1
+    }),
+    {}
+  );
+  expect(obj).toMatchObject(
+    {
+      BMW: 2,
+      Benz: 2,
+      Tesla: 1,
+      Toyota: 1
+    }
+  );
+});
 it(`使用reduce同时实现map和filter`, () => {
   const numbers = [10, 20, 30, 40];
   const doubledOver50 = numbers.reduce((finalList, num) => {
@@ -38,16 +56,16 @@ it(`使用reduce匹配圆括号`, () => {
   const isParensBalanced = str => {
     return str.split("").reduce((counter, char, index) => {
       if (counter < 0) {
-        return false;
+        return false; //matched ")" before "(", must non-balanced
       } else if (char === "(") {
         ++counter;
       } else if (char === ")") {
         --counter;
       }
       if (index === str.length - 1) {
-        return !counter;
+        return !counter; //return whether balanced after loop, balcanced if counter is 0
       } else {
-        return counter;
+        return counter; //return counter number for the next loop
       }
     }, 0); //<-- starting value of the counter
   };
