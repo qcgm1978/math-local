@@ -21,6 +21,69 @@ const {
 generateNewMatches();
 // import timeago from "https://cdn.pika.dev/epoch-timeago/v1";
 // import hash from "https://cdn.pika.dev/@emotion/hash/v0.7";
+it(`接收函数返回的多个结果`, done => {
+  var promise1 = Promise.resolve(3);
+  var promise2 = 42;
+  var promise3 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 100, "foo");
+  });
+  async function getFullPost() {
+    return await Promise.all([promise1, promise2, promise3]);
+  }
+  // const [post, comments] = getFullPost();
+  done();
+});
+it(`数值交换`, () => {
+  let param1 = 1;
+  let param2 = 2;
+  //swap and assign param1 & param2 each others values
+  [param1, param2] = [param2, param1];
+  expect(param1)
+    .toBe(param2 * 2)
+    .toBe(2);
+});
+it(`合并对象`, () => {
+  let object1 = { a: 1, b: 2, c: 3 };
+  let object2 = { b: 30, c: 40, d: 50 };
+  let merged = { ...object1, ...object2 };
+  expect(merged).toMatchObject({
+    a: 1,
+    b: 30,
+    c: 40,
+    d: 50
+  });
+});
+it(`在函数参数中解构嵌套对象`, () => {
+  var car = {
+    model: "bmw 2018",
+    engine: {
+      v6: true,
+      turbo: true,
+      vin: 12345
+    }
+  };
+  const modelAndVIN = ({ model, engine: { vin } }) => {
+    return `model: ${model} vin: ${vin}`;
+  };
+  expect(modelAndVIN(car)).toBe("model: bmw 2018 vin: 12345");
+});
+it(`删除不需要的属性`, () => {
+  const obj = {
+    el3: 3
+  };
+  let { _internal, tooBig, ...cleanObject } = {
+    el1: "1",
+    _internal: "secret",
+    el2: "2",
+    el3: "3",
+    ...obj
+  };
+  expect(cleanObject).toMatchObject({
+    el1: "1",
+    el2: "2",
+    el3: 3
+  });
+});
 it(`统计数组中相同项的个数`, () => {
   var cars = ["BMW", "Benz", "Benz", "Tesla", "BMW", "Toyota"];
   const obj = cars.reduce(
@@ -30,14 +93,12 @@ it(`统计数组中相同项的个数`, () => {
     }),
     {}
   );
-  expect(obj).toMatchObject(
-    {
-      BMW: 2,
-      Benz: 2,
-      Tesla: 1,
-      Toyota: 1
-    }
-  );
+  expect(obj).toMatchObject({
+    BMW: 2,
+    Benz: 2,
+    Tesla: 1,
+    Toyota: 1
+  });
 });
 it(`使用reduce同时实现map和filter`, () => {
   const numbers = [10, 20, 30, 40];
