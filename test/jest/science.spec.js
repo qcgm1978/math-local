@@ -1,6 +1,32 @@
 /* eslint-disable no-undef */
 
 const math = require("../../dist/math");
+it(`A golygon is any polygon with all right angles whose sides are consecutive integer lengths.`, () => {
+  const getGolygon = num => {
+    let { odds, evens } = getOddsEvens(num);
+    if (odds.length % 4 || evens.length % 4) {
+      return false;
+    }
+    const oddsPare = odds.reduce((acc, item, index) => {
+      if (index < odds.length / 2) {
+        acc.push([item, odds[odds.length - index - 1]]);
+      }
+      return acc;
+    }, []);
+    const evensPare = evens.reduce((acc, item, index) => {
+      if (index < evens.length / 2) {
+        acc.push([item, evens[evens.length - index - 1]]);
+      }
+      return acc;
+    }, []);
+    return [oddsPare, evensPare];
+  };
+  expect(getOddsEvens(8)).toMatchObject({
+    evens: [2, 4, 6, 8],
+    odds: [1, 3, 5, 7]
+  });
+  expect(getGolygon(8)).toEqual([[[1, 7], [3, 5]], [[2, 8], [4, 6]]]);
+});
 it(`The gigawatt (GW) is equal to one billion (109) watts or 1 gigawatt = 1000 megawatts`, () => {
   const energyPerMeter2 = {
     energy: [2000, 3000],
@@ -79,3 +105,13 @@ it("Cyclomatic complexity measures the number of linearly independent paths thro
     .toBe(9)
     .toBeLessThanOrEqual(maxPaths);
 });
+function getOddsEvens(num) {
+  let odds = [],
+    evens = [];
+  Array(num)
+    .fill()
+    .map((item, index) => {
+      (index % 2 ? evens : odds).push(index + 1);
+    });
+  return { odds, evens };
+}
