@@ -19,8 +19,66 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
-// import timeago from "https://cdn.pika.dev/epoch-timeago/v1";
-// import hash from "https://cdn.pika.dev/@emotion/hash/v0.7";
+it(``, () => {
+  function test_prime(n) {
+    if (n === 1) {
+      return false;
+    } else if (n === 2) {
+      return true;
+    } else {
+      let arr = [];
+      for (var x = 2; x < Math.sqrt(n); x++) {
+        if (n % x === 0) {
+          arr.push(x);
+        }
+      }
+      return arr.length ? arr : true;
+    }
+  }
+  expect(test_prime(11)).toBeTruthy();
+  expect(test_prime(195907)).toBeTruthy();
+  const arr = test_prime(800000);
+  expect(arr).toEqual([
+    2,
+    4,
+    5,
+    8,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    64,
+    80,
+    100,
+    125,
+    128,
+    160,
+    200,
+    250,
+    256,
+    320,
+    400,
+    500,
+    625,
+    640,
+    800
+  ]);
+  expect(arr.reduce((acc, item) => acc + item)).toBe(4860);
+});
+it(`With padEnd, it adds characters to the end of a string so it reaches a specified length. This is great for us to add some padding to display our strings in a tabular format.`, () => {
+  const str = "Day: Monday".padEnd(20) + "Drink: 🍵";
+  const strStart = "Day: Monday         ";
+  const strNew = strStart + "Drink: 🍵";
+  expect(str).toBe(strNew);
+  expect(strStart).toHaveLength(20);
+  expect("hi".padEnd(10, "!")).toBe("hi!!!!!!!!");
+  expect("hello ".padEnd(10, "👋")).toBe("hello 👋👋");
+  expect(" hello".padStart(10, "👋")).toBe("👋👋 hello");
+  expect("hello ".padEnd(11, "👋")).not.toBe("hello 👋👋�");
+});
 it(`If a library is ES Module ready and on npm, you can use it like:
 
 import {Component, render} from '(link: https://cdn.pika.dev/preact/v8) cdn.pika.dev/preact/v8';`, () => {

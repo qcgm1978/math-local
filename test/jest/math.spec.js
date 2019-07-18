@@ -1,3 +1,9 @@
+it(`2,520 is the smallest number that can be exactly divided by all the numbers 1 to 10`, () => {
+  const arr = Array(10)
+    .fill()
+    .map((item, index) => index + 1);
+  expect(arr).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+});
 it("Every 3rd number is a multiple of 3, Every 2nd number is multiple of 2,  pᵖ is neither of these since p is not a multiple of 2 and 3, exception p=3(29 case). Hence pᵖ+2 is always multiple of 3.", () => {
   /**
    * Returns a random integer between min (inclusive) and max (inclusive).

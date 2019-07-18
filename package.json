@@ -25,8 +25,6 @@
     "unit"
   ],
   "dependencies": {
-    "@tensorflow/tfjs": "^1.0.3",
-    "@tensorflow/tfjs-node": "^0.3.2",
     "babel-eslint": "^10.0.1",
     "complex.js": "2.0.11",
     "cookie-parser": "^1.4.3",
@@ -85,6 +83,7 @@
     "puppeteer": "^1.11.0",
     "q": "1.5.1",
     "qunit": "^2.9.2",
+    "sleep": "^6.1.0",
     "standard": "^12.0.1",
     "sylvester": "^0.0.21",
     "tar": "4.4.0",
@@ -106,7 +105,7 @@
     },
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
-    "preset": "jest-puppeteer",
+    "env": "node",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },

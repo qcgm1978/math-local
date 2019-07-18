@@ -50,6 +50,12 @@ it("But the LHCb experiment has now managed to observe such an asymmetry in part
   expect(asymmetryStatFulctuate).toBe(5e-8);
 });
 
+it(`Brain-machine interfaces(BMIs)`, () => {
+  const packages = 3072,
+    area = [23, 18.5, 2];
+  const pack_per_mm = packages / area.reduce((acc, item) => acc * item);
+  expect(+pack_per_mm.toFixed(1)).toBe(3.6);
+});
 it("Cyclomatic complexity measures the number of linearly independent paths through a program’s source code. This rule allows setting a cyclomatic complexity threshold.", () => {
   const edge = 30,
     node = 23,
