@@ -17,7 +17,7 @@ function getRandomInt(min, max) {
 var generateParenthesis = function(n) {
   const ini = "(".repeat(n) + ")".repeat(n);
   let arr = [ini];
-  for (let i = 0, temp = ""; i < n - 1; i++) {
+  for (let i = n, temp = ""; i < 2n; i++) {
     const pos = n - (i + 1);
     temp = ini
       .slice(0, pos)

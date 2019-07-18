@@ -79,6 +79,133 @@ it(`With padEnd, it adds characters to the end of a string so it reaches a speci
   expect(" hello".padStart(10, "👋")).toBe("👋👋 hello");
   expect("hello ".padEnd(11, "👋")).not.toBe("hello 👋👋�");
 });
+// import timeago from "https://cdn.pika.dev/epoch-timeago/v1";
+// import hash from "https://cdn.pika.dev/@emotion/hash/v0.7";
+it(`接收函数返回的多个结果`, done => {
+  var promise1 = Promise.resolve(3);
+  var promise2 = 42;
+  var promise3 = new Promise(function(resolve, reject) {
+    setTimeout(resolve, 100, "foo");
+  });
+  async function getFullPost() {
+    return await Promise.all([promise1, promise2, promise3]);
+  }
+  // const [post, comments] = getFullPost();
+  done();
+});
+it(`数值交换`, () => {
+  let param1 = 1;
+  let param2 = 2;
+  //swap and assign param1 & param2 each others values
+  [param1, param2] = [param2, param1];
+  expect(param1)
+    .toBe(param2 * 2)
+    .toBe(2);
+});
+it(`合并对象`, () => {
+  let object1 = { a: 1, b: 2, c: 3 };
+  let object2 = { b: 30, c: 40, d: 50 };
+  let merged = { ...object1, ...object2 };
+  expect(merged).toMatchObject({
+    a: 1,
+    b: 30,
+    c: 40,
+    d: 50
+  });
+});
+it(`在函数参数中解构嵌套对象`, () => {
+  var car = {
+    model: "bmw 2018",
+    engine: {
+      v6: true,
+      turbo: true,
+      vin: 12345
+    }
+  };
+  const modelAndVIN = ({ model, engine: { vin } }) => {
+    return `model: ${model} vin: ${vin}`;
+  };
+  expect(modelAndVIN(car)).toBe("model: bmw 2018 vin: 12345");
+});
+it(`删除不需要的属性`, () => {
+  const obj = {
+    el3: 3
+  };
+  let { _internal, tooBig, ...cleanObject } = {
+    el1: "1",
+    _internal: "secret",
+    el2: "2",
+    el3: "3",
+    ...obj
+  };
+  expect(cleanObject).toMatchObject({
+    el1: "1",
+    el2: "2",
+    el3: 3
+  });
+});
+it(`统计数组中相同项的个数`, () => {
+  var cars = ["BMW", "Benz", "Benz", "Tesla", "BMW", "Toyota"];
+  const obj = cars.reduce(
+    (acc, item) => ({
+      ...acc,
+      [item]: acc[item] ? ++acc[item] : 1
+    }),
+    {}
+  );
+  expect(obj).toMatchObject({
+    BMW: 2,
+    Benz: 2,
+    Tesla: 1,
+    Toyota: 1
+  });
+});
+it(`使用reduce同时实现map和filter`, () => {
+  const numbers = [10, 20, 30, 40];
+  const doubledOver50 = numbers.reduce((finalList, num) => {
+    num = num * 2;
+
+    if (num > 50) {
+      finalList.push(num);
+    }
+    return finalList;
+  }, []);
+  expect(doubledOver50).toEqual([60, 80]);
+});
+it(`使用reduce匹配圆括号`, () => {
+  //Returns 0 if balanced.
+  const isParensBalanced = str => {
+    return str.split("").reduce((counter, char, index) => {
+      if (counter < 0) {
+        return false; //matched ")" before "(", must non-balanced
+      } else if (char === "(") {
+        ++counter;
+      } else if (char === ")") {
+        --counter;
+      }
+      if (index === str.length - 1) {
+        return !counter; //return whether balanced after loop, balcanced if counter is 0
+      } else {
+        return counter; //return counter number for the next loop
+      }
+    }, 0); //<-- starting value of the counter
+  };
+  expect(isParensBalanced("(())")).toBeTruthy();
+  expect(isParensBalanced("(asdfds)")).toBeTruthy();
+  expect(isParensBalanced("(()")).toBeFalsy();
+  expect(isParensBalanced(")(")).toBeFalsy();
+  expect(isParensBalanced("))(")).toBeFalsy();
+});
+it(``, () => {
+  const required = () => {
+    throw new Error("Missing parameter");
+  };
+
+  const add = (a = required(), b = required()) => a + b;
+
+  expect(add(1, 2)).toBe(3);
+  expect(_ => add(1)).toThrow();
+});
 it(`If a library is ES Module ready and on npm, you can use it like:
 
 import {Component, render} from '(link: https://cdn.pika.dev/preact/v8) cdn.pika.dev/preact/v8';`, () => {

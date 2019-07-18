@@ -1,4 +1,4 @@
-const { Vector, Matrix, Line, Plane, Sylvester } = require("Sylvester");
+const { Vector, Matrix, Line, Plane, Sylvester } = require("Sylvester-es6");
 class QuantumCompute {
   constructor() {}
   isQubitState(matrix) {
