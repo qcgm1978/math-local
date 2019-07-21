@@ -19,6 +19,10 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+it(`"Spread" and "Object.assign" will do a shallow copy. The "JSON" will do a deep copy`, () => {
+  const obj = { a: 1 };
+  expect(obj).toMatchObject({ ...obj }).toMatchObject(Object.assign({},obj)).toMatchObject(JSON.parse(JSON.stringify(obj))).toMatchObject({a:1});
+});
 it(``, () => {
   function test_prime(n) {
     if (n === 1) {
