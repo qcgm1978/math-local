@@ -109,7 +109,6 @@
     },
     "testURL": "http://localhost",
     "setupTestFrameworkScriptFile": "jest-chain",
-    "env": "node",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
