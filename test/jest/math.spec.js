@@ -1,3 +1,13 @@
+const math = require("mathjs");
+it(``, () => {
+  // expect(
+  //   math.complex("cosœ+i*sinœ", {
+  //     cosœ: Math.cos(45),
+  //     sinœ: Math.sin(45)
+  //   })
+  // ).toMatchObject(math.complex(0, math.pow(Math.e, math.i * math.PI)));
+  // expect(math.complex(math.cos(45),))
+});
 it(`2,520 is the smallest number that can be exactly divided by all the numbers 1 to 10`, () => {
   const arr = Array(10)
     .fill()
