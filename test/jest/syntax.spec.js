@@ -19,9 +19,46 @@ const {
   ParkinsonLaw
 } = require("./pattern");
 generateNewMatches();
+it(`输完搜索内容时，会发生几次请求，不仅用户体验不好，就连对服务器的的压力也会变大。 我们大多数的解决方案就是引入一个函数防抖（debounce）`, done => {
+  function debounce(fn) {
+    let tag = null;
+    return function() {
+      clearTimeout(tag);
+      tag = setTimeout(() => {
+        fn.apply(this, arguments);
+      }, 500);
+    };
+  }
+  let m = 0;
+  let arr = [];
+  for (let i = 0; i < 10; i++) {
+    arr.push(
+      new Promise(resolve => {
+        debounce(_ => {
+          ++m;
+          resolve();
+        })();
+      })
+    );
+  }
+  Promise.all(arr).then(_ => {
+    expect(m).toBe(10);
+    done();
+  });
+});
+it(`x >> 1 是位运算中的右移运算，表示右移一位，等同于 x 除以 2 再取整，即 x >> 1 === Math.floor(x / 2) `, () => {
+  expect(5 >> 1)
+    .toBe(Math.floor(5 / 2))
+    .toBe(Math.trunc(5 / 2))
+    .toBe(2);
+});
 it(`"Spread" and "Object.assign" will do a shallow copy. The "JSON" will do a deep copy`, () => {
   const obj = { a: 1 };
-  expect(obj).toMatchObject({ ...obj }).toMatchObject(Object.assign({},obj)).toMatchObject(JSON.parse(JSON.stringify(obj))).toMatchObject({a:1});
+  expect(obj)
+    .toMatchObject({ ...obj })
+    .toMatchObject(Object.assign({}, obj))
+    .toMatchObject(JSON.parse(JSON.stringify(obj)))
+    .toMatchObject({ a: 1 });
 });
 it(``, () => {
   function test_prime(n) {
