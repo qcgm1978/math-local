@@ -18,7 +18,24 @@ const {
   EntityRelationshipDiagrams,
   ParkinsonLaw
 } = require("./pattern");
+const math = require("mathjs");
 generateNewMatches();
+it(`allowing negative perfect cubes (the cube of a negative integer) gives the smallest solution as 91 (which is a divisor of 1729)`, () => {
+  expect(91)
+    .toBe(math.eval("6^3 + (-5)^3"))
+    .toBe(math.eval("4^3 + 3^3"));
+});
+it(`it is a very interesting number; it is the smallest number expressible as the sum of two cubes in two different ways`, () => {
+  expect(1729)
+    .toBe(math.eval("1^3 + 12^3"))
+    .toBe(math.eval("9^3 + 10^3"));
+});
+it(`map, filter`, () => {
+  const array = [1, 5, 6, 7, 8, 12, 15]; //Our beloved starting array
+
+  const newArr = array.filter(num => num % 2 === 0).map(num => num * 10); //newArr = [60, 80, 120]
+  expect(newArr).toEqual([60, 80, 120]);
+});
 it(`输完搜索内容时，会发生几次请求，不仅用户体验不好，就连对服务器的的压力也会变大。 我们大多数的解决方案就是引入一个函数防抖（debounce）`, done => {
   function debounce(fn) {
     let tag = null;
