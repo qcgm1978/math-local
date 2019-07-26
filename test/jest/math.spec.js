@@ -1,4 +1,9 @@
 const math = require("mathjs");
+it(`am-gm inequality`, () => {
+  const a = math.random(),
+    b = math.random();
+  expect((a + b) / 2).toBeGreaterThanOrEqual(math.sqrt(a * b));
+});
 it(``, () => {
   // expect(
   //   math.complex("cosœ+i*sinœ", {
