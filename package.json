@@ -43,6 +43,7 @@
     "js-pointer": "^3.0.1",
     "mathjs": "^5.4.0",
     "perf_hooks": "^0.0.1",
+    "qunit": "^2.9.2",
     "seed-random": "2.2.0",
     "source-map-support": "^0.5.9",
     "sylvester": "^0.2.0",

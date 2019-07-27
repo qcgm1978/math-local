@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started with ml5.js and p5.js</title>
+    <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css" />
+    <script src="https://unpkg.com/ml5@0.3.1/dist/ml5.min.js"></script>
+  </head>
+
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="../node_modules/qunit/qunit/qunit.js"></script>
+    <script>
+      QUnit.test("hello test", function(assert) {
+        assert.ok(1 == "1", "Passed!");
+        // const a = tf.tensor1d([1, 2, 3]);
+
+        // a.softmax().print();  // or tf.softmax(a)∫
+        assert.equal(ml5.version, "0.3.1"); // or tf.softmax(a)∫
+      });
+      // QUnit.test(
+      //     "Creates a tf.Tensor with values sampled from a normal distribution.",
+      //     function (assert) {
+      //         const a = tf.randomNormal([2, 2]);
+
+      //         // a.softmax().print();  // or tf.softmax(a)∫
+      //         assert.ok(a.softmax()); // or tf.softmax(a)∫
+      //         assert.equal(a.dataSync().length, 4);
+      //     }
+      // );
+      // QUnit.test("Computes the log softmax.", function (assert) {
+      //     const a = tf.tensor1d([1, 2, 3]);
+
+      //     const log = a.logSoftmax(); // or tf.logSoftmax(a)
+
+      //     assert.ok(log.notEqual);
+      // });
+    </script>
+  </body>
+</html>
