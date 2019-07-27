@@ -20,6 +20,61 @@ const {
 } = require("./pattern");
 const math = require("mathjs");
 generateNewMatches();
+it(`A closure is a stateful function that is returned by another function. It acts as a container to remember variables and parameters from its parent scope even if the parent function has finished executing`, () => {
+  function sayHello() {
+    const greeting = "Hello World";
+
+    return function() {
+      // anonymous function/nameless function
+      return greeting;
+    };
+  }
+
+  const hello = sayHello();
+  expect(hello()).toBe("Hello World");
+  //it can keep your variables private.
+  function counter() {
+    let count = 0;
+    return function() {
+      count += 1;
+      return count;
+    };
+  }
+
+  const increment = counter();
+  const increment1 = counter();
+  expect(increment()).toBe(1);
+  expect(increment()).toBe(2);
+  expect(increment1()).toBe(1);
+  // Module design pattern
+  let Dog1 = (function() {
+    let privateName = "Suzy";
+
+    const getName = () => {
+      return privateName;
+    };
+
+    const changeName = newName => {
+      privateName = newName;
+    };
+
+    return {
+      getName: getName,
+      changeName: changeName
+    };
+  })();
+  expect(typeof privateName).toBe("undefined");
+  expect(Dog1.getName()).toBe("Suzy");
+  Dog1.changeName("John");
+  expect(Dog1.getName()).toBe("John");
+  for (var i = 0; i < 5; i++) {
+    (function(index) {
+      return function() {
+        expect(index).toBe(i);
+      };
+    })(i)();
+  }
+});
 it(`allowing negative perfect cubes (the cube of a negative integer) gives the smallest solution as 91 (which is a divisor of 1729)`, () => {
   expect(91)
     .toBe(math.eval("6^3 + (-5)^3"))

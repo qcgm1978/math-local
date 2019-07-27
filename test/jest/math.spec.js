@@ -1,8 +1,51 @@
 const math = require("mathjs");
-it(`am-gm inequality`, () => {
-  const a = math.random(),
-    b = math.random();
-  expect((a + b) / 2).toBeGreaterThanOrEqual(math.sqrt(a * b));
+it(`132 is the sum of all the 2-digit numbers made from its digits. It is the smallest such number.`, () => {
+  const getTotalByDigits = num => {
+    const arrNum = num.toString().split("");
+    let arr = [];
+    for (let i = 0; i < arrNum.length; i++) {
+      arrNum.slice(i + 1).map(item => {
+        arr.push(arrNum[i] + item, item + arrNum[i]);
+      });
+    }
+    return {
+      sum: arr.reduce((acc, item) => +acc + +item),
+      arr
+    };
+  };
+  const getAllSumNum = digit => {
+    const range = [math.pow(10, digit - 1), math.pow(10, digit) - 1];
+    let arr = [];
+    for (let i = range[0]; i <= range[1]; i++) {
+      const sumObj = getTotalByDigits(i);
+      if (sumObj.sum === i) {
+        arr.push(i);
+      }
+    }
+    return arr;
+  };
+  expect(getTotalByDigits(132).sum).toBe(132);
+  expect(getTotalByDigits(1188).sum).toBe(594);
+  expect(getTotalByDigits(99999).sum).toBe(1980);
+  expect(getTotalByDigits(999999).sum).toBe(2970);
+  expect(getTotalByDigits(9999).sum)
+    .toBe(99 * 12)
+    .toBe(1188);
+  expect(getTotalByDigits(1099).sum)
+    .toBe(627)
+    .toBeLessThan(1188);
+  expect(getTotalByDigits(132).arr).toEqual([
+    "13",
+    "31",
+    "12",
+    "21",
+    "32",
+    "23"
+  ]);
+  expect(getAllSumNum(3)).toEqual([132, 264, 396]);
+  expect(getAllSumNum(2)).toEqual([]);
+  expect(getAllSumNum(4)).toEqual([]);
+  expect(getAllSumNum(5)).toEqual([]);
 });
 it(``, () => {
   // expect(
