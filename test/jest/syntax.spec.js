@@ -20,6 +20,18 @@ const {
 } = require("./pattern");
 const math = require("mathjs");
 generateNewMatches();
+it(`The final argument(s) are the elements you want to add`, () => {
+  let content = ["post", "tweet", "video", "talk"];
+  content.splice(1, 0, "dev", "ten mile");
+  expect(content).toEqual([
+    "post",
+    "dev",
+    "ten mile",
+    "tweet",
+    "video",
+    "talk"
+  ]);
+});
 it(`A closure is a stateful function that is returned by another function. It acts as a container to remember variables and parameters from its parent scope even if the parent function has finished executing`, () => {
   function sayHello() {
     const greeting = "Hello World";
