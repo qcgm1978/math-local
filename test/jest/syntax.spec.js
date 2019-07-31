@@ -31,6 +31,10 @@ it(`The final argument(s) are the elements you want to add`, () => {
     "video",
     "talk"
   ]);
+  content = ["post", "tweet", "video", "talk"];
+  let removed = content.splice(1, 2, "dev", "ten mile");
+  expect(content).toEqual(["post", "dev", "ten mile", "talk"]);
+  expect(removed).toEqual(["tweet", "video"]);
 });
 it(`A closure is a stateful function that is returned by another function. It acts as a container to remember variables and parameters from its parent scope even if the parent function has finished executing`, () => {
   function sayHello() {
