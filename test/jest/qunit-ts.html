@@ -51,6 +51,21 @@
 
         assert.ok(log.notEqual);
       });
+      QUnit.test("Camera", function(assert) {
+        assert.ok(navigator.mediaDevices.getUserMedia);
+      });
+
+      // Promise.all([
+      //     this.emojiScavengerMobileNet.load().then(() => this.warmUpModel()),
+      //     camera.setupCamera().then((value: CameraDimentions) => {
+      //       camera.setupVideoDimensions(value[0], value[1]);
+      //     }),
+      //   ]).then(values => {
+      //     // Both the camera and model are loaded, we can start predicting
+      //     this.predict();
+      //   }).catch(error => {
+      //     // Some errors occurred and we need to handle them
+      //   });
     </script>
   </body>
 </html>
