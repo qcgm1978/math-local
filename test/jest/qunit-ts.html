@@ -77,7 +77,35 @@
 
       QUnit.test("Camera", function(assert) {
         assert.ok(navigator.mediaDevices.getUserMedia);
+        var done = assert.async();
+        async function getMedia() {
+          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            const stream = await navigator.mediaDevices.getUserMedia({
+              audio: false,
+              video: { facingMode: "environment" }
+            });
+            window.stream = stream;
+            assert.ok(stream.active);
+            done();
+            // this.videoElement.srcObject = stream;
+          }
+        }
+        getMedia();
       });
+      QUnit.test(
+        `implemented the SpeechSynthesis API to read aloud what the Model “thinks”`,
+        function(assert) {
+          if ("speechSynthesis" in window) {
+            let msgSpeak = new SpeechSynthesisUtterance();
+            // msgSpeak.voice = this.sleuthVoice["activeVoice"];
+
+            msgSpeak.text = "msg";
+            assert.equal(msgSpeak.voice, null);
+            // speechSynthesis.speak(msgSpeak);
+          }
+          assert.ok(navigator.mediaDevices.getUserMedia);
+        }
+      );
 
       // Promise.all([
       //     this.emojiScavengerMobileNet.load().then(() => this.warmUpModel()),
