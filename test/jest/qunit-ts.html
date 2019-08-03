@@ -27,6 +27,29 @@
     <!-- <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script> -->
     <script src="../../node_modules/qunit/qunit/qunit.js"></script>
     <script>
+      QUnit.test(
+        "Executes the provided function fn and after it is executed, cleans up all intermediate tensors allocated by fn except those returned by fn",
+        function(assert) {
+          const y = tf.tidy(() => {
+            // a, b, and one will be cleaned up when the tidy ends.
+            const one = tf.scalar(1);
+            const a = tf.scalar(2);
+            const b = a.square();
+
+            assert.equal(tf.memory().numTensors, 3);
+
+            // The value returned inside the tidy function will return
+            // through the tidy, in this case to the variable y.
+            return b.add(one);
+          });
+
+          assert.ok(tf.tidy);
+          assert.equal(tf.memory().numTensors, 1);
+          assert.propEqual(y.dataSync(), {
+            "0": 5
+          });
+        }
+      );
       QUnit.test("hello test", function(assert) {
         assert.ok(1 == "1", "Passed!");
         const a = tf.tensor1d([1, 2, 3]);
@@ -51,6 +74,7 @@
 
         assert.ok(log.notEqual);
       });
+
       QUnit.test("Camera", function(assert) {
         assert.ok(navigator.mediaDevices.getUserMedia);
       });
