@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Image classification using MobileNet and p5.js</title>
-
+    <link href="form.css" rel="stylesheet" type="text/css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/addons/p5.dom.min.js"></script>
     <script src="../ml5.min.js"></script>
@@ -11,6 +11,27 @@
 
   <body>
     <h1>Image classification using MobileNet and p5.js</h1>
+    <!-- Learn about this code on MDN: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file -->
+
+    <form method="post" enctype="multipart/form-data">
+      <div>
+        <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+        <input
+          type="file"
+          id="image_uploads"
+          name="image_uploads"
+          accept=".jpg, .jpeg, .png"
+          multiple
+        />
+      </div>
+      <div class="preview">
+        <p>No files currently selected for upload</p>
+      </div>
+      <div>
+        <button>Submit</button>
+      </div>
+    </form>
     <script src="sketch.js"></script>
+    <script src="form.js"></script>
   </body>
 </html>
