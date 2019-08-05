@@ -5,7 +5,9 @@ let classifier;
 let img;
 
 function preload() {
-  classifier = ml5.imageClassifier("MobileNet");
+  if (!classifier) {
+    classifier = ml5.imageClassifier("MobileNet");
+  }
   img = loadImage("images/breast.jpg");
 }
 

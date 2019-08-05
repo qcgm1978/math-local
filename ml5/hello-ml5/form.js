@@ -9,6 +9,9 @@ function updateImageDisplay() {
   }
 
   var curFiles = input.files;
+  const path = `images/${curFiles[0].name}`;
+  img = loadImage(path);
+  setup();
   if (curFiles.length === 0) {
     var para = document.createElement("p");
     para.textContent = "No files currently selected for upload";
