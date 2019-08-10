@@ -13,8 +13,11 @@ function preload() {
 
 function setup() {
   createCanvas(400, 400);
-  classifier.classify(img, gotResult);
-  image(img, 0, 0);
+  classifier.classify(img).then(results => {
+    //If no callback is provided to any asynchronous function then a Promise is returned.
+    image(img, 0, 0);
+    gotResult(null, results);
+  });
 }
 
 // A function to run when we get any errors and the results
