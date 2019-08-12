@@ -1,19 +1,5 @@
 const math = require("mathjs");
-it(`Pathagora's theorem`, () => {
-  const a = 3,
-    b = 4,
-    c = 5;
-  expect(a ** 2 + b ** 2)
-    .toBe(c ** 2)
-    .toBe(25);
-});
-it(`Logarithms`, () => {
-  const n = 10;
-  const a = math.log10(n * n);
-  expect(a)
-    .toBe(math.log10(n) + math.log10(n))
-    .toBe(2);
-});
+
 it(`132 is the sum of all the 2-digit numbers made from its digits. It is the smallest such number.`, () => {
   const getTotalByDigits = num => {
     const arrNum = num.toString().split("");
